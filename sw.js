@@ -1,5 +1,5 @@
-/* COAT FORGE service worker v1 */
-const CACHE = "coat-forge-v1";
+/* COAT FORGE service worker v1.1 */
+const CACHE = "coat-forge-cache-v2";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest"];
 
 self.addEventListener("install", (e) => {

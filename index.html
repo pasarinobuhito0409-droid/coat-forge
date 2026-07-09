@@ -229,6 +229,21 @@
   .trynote { margin-top: 10px; text-align: center; font-size: 13px; color: #93a5b3; line-height: 1.65; }
   .micro-on .sliderrow, .micro-on .extra { display: none; }
 
+  /* 📷 現場の目モーダル（v1.1） */
+  #photoModal { display: none; position: fixed; inset: 0; z-index: 60; background: rgba(8,10,14,.87); align-items: center; justify-content: center; padding: 14px; }
+  .pm-sheet { position: relative; width: min(560px, 100%); max-height: 92vh; overflow-y: auto; background: #171b21; border: 1px solid #2c333d; border-radius: 16px; padding: 14px 14px 18px; }
+  #pmClose { position: absolute; top: 8px; right: 8px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid #3a424e; background: #20262e; color: #cfd6df; font-size: 15px; z-index: 2; }
+  #pmTitle { font-weight: 800; font-size: 15px; color: #ffd9a3; margin: 2px 40px 10px 2px; }
+  #pmFig { position: relative; border-radius: 12px; overflow: hidden; background: #0d1014; }
+  #pmFig img { display: block; width: 100%; height: auto; }
+  .pm-marker { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 6px; pointer-events: none; }
+  .pm-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #58c8d8; background: rgba(88,200,216,.25); animation: pmPulse 1.6s infinite; flex: none; }
+  .pm-label { background: rgba(10,13,17,.85); border: 1px solid #58c8d8; color: #dff5f8; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 999px; max-width: 52vw; line-height: 1.4; }
+  @keyframes pmPulse { 0% { box-shadow: 0 0 0 0 rgba(88,200,216,.6); } 70% { box-shadow: 0 0 0 12px rgba(88,200,216,0); } 100% { box-shadow: 0 0 0 0 rgba(88,200,216,0); } }
+  #pmCap { color: #c6cdd6; font-size: 12.5px; line-height: 1.75; margin: 10px 2px 4px; }
+  .pm-video { display: inline-block; margin: 8px 0 2px; padding: 9px 14px; border-radius: 999px; background: #b8352f; color: #fff; font-weight: 800; font-size: 12.5px; text-decoration: none; }
+  #pmCredit { color: #7b838d; font-size: 10.5px; margin-top: 8px; }
+
   .result-banner {
     border: 1.5px solid rgba(126,196,140,0.6); border-radius: 14px; padding: 13px;
     background: rgba(126,196,140,0.07); text-align: center;
@@ -394,7 +409,8 @@
       <div class="sliderrow"><span id="sliderLabel"></span><input type="range" id="loadRange" min="0" max="100" value="0"><span class="val" id="loadVal">0</span></div>
       <div class="extra" id="extraCtrls"></div>
       <div class="trynote" id="expNote"></div>
-      <button class="cta alt" id="btnMicro">🔬 膜の目</button>
+      <button class="cta alt" id="btnMicro">🔬 分子の目</button>
+      <button class="cta alt" id="btnPhoto">📷 現場の目</button>
       <button class="cta" id="btnToReveal" disabled>答え合わせ →</button>
     </div>
 
@@ -510,13 +526,26 @@
 
 </div>
 
+<!-- 📷 現場の目：本物写真モーダル（v1.1） -->
+<div id="photoModal">
+  <div class="pm-sheet">
+    <button id="pmClose" aria-label="閉じる">✕</button>
+    <div id="pmTitle"></div>
+    <div id="pmFig"></div>
+    <div id="pmCap"></div>
+    <a id="pmVideo" class="pm-video" target="_blank" rel="noopener">▶ 動画で見る（ユーチューブ検索へ）</a>
+    <div id="pmCredit"></div>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
 <script>
 "use strict";
 
 /* ================================================================
-   COAT FORGE v1.0 ── 第1章「塗装のきそ」
+   COAT FORGE v1.1 ── 第1章「塗装のきそ」
+   v1.1: 🔬分子の目（分子レベル見え化）＋📷現場の目（実物写真＋動画リンク）
    FORGE家族6作目。gear-forgeのエンジン（ミッション→実験→答え合わせ→
    カード→クイズ→クリア、CARD_SCENES、判断ドリル、復習キュー、
    マスターマップ、育つヒーロー、打刻スプラッシュ）を踏襲。
@@ -2265,69 +2294,147 @@ const BUILDERS = { l1: buildL1, l2: buildL2, l3: buildL3, l4: buildL4, l5: build
    🔬「膜の目」サブビュー（塗膜断面のミクロ世界・標準1シーン＋モードフラグ）
 ================================================================ */
 function buildMicroScene(lessonId) {
-  const steel = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.3, 0.9), steelMatOf({ color: 0x767d86 }));
-  steel.position.y = -0.55;
-  steel.castShadow = true;
-  ST.group.add(steel);
-  const conv = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.02, 0.9), new THREE.MeshStandardMaterial({ color: 0xb8c2a0, metalness: 0.3, roughness: 0.6 }));
-  conv.position.y = -0.39;
-  ST.group.add(conv);
-  const prime = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.06, 0.9), new THREE.MeshStandardMaterial({ color: 0x8a8f96, roughness: 0.7 }));
-  prime.position.y = -0.35;
-  ST.group.add(prime);
-  const base = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.09, 0.9), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
-  base.position.y = -0.29;
-  ST.group.add(base);
-  const pigColors = [0xffffff, 0x2a2d33, 0xffb648];
-  for (let i = 0; i < 8; i++) {
-    const s = new THREE.Mesh(new THREE.SphereGeometry(0.02, 6, 5), new THREE.MeshStandardMaterial({ color: pigColors[i % pigColors.length] }));
-    s.position.set((Math.random() - 0.5) * 1.6, -0.29 + (Math.random() - 0.5) * 0.06, (Math.random() - 0.5) * 0.8);
-    ST.group.add(s);
+  /* v1.1 分子の目：鉄原子の格子＋樹脂の網目（架橋）＋顔料分子＋H2O水分子。
+     モード: l1=バリア（左だけ塗装・裸側は錆化）／l2=硬化（架橋が伸び溶剤が抜ける）／
+             l5=密着アンカー（鉄と手をつなぐ）／他=標準（網目＋顔料の明滅） */
+  const sphGeo = new THREE.SphereGeometry(1, 10, 8);
+  const mkBall = (r, mat) => { const m = new THREE.Mesh(sphGeo, mat); m.scale.setScalar(r); return m; };
+  const feMat = new THREE.MeshStandardMaterial({ color: 0x9aa2ad, metalness: 0.9, roughness: 0.35 });
+  const resMat = new THREE.MeshStandardMaterial({ color: 0xffb648, roughness: 0.35, emissive: 0x442b06, emissiveIntensity: 0.5 });
+  const pigMat = new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.3, emissive: 0x1a5f6b, emissiveIntensity: 0.7 });
+  const oMat = new THREE.MeshStandardMaterial({ color: 0x6fb7ff, roughness: 0.4, emissive: 0x123a66, emissiveIntensity: 0.6 });
+  const hMat = new THREE.MeshStandardMaterial({ color: 0xf2f6fa, roughness: 0.5 });
+  const rustMat = new THREE.MeshStandardMaterial({ color: 0xb35a24, roughness: 0.9 });
+  const solvMat = new THREE.MeshStandardMaterial({ color: 0xdfffff, emissive: 0x4fb8c8, emissiveIntensity: 0.8, transparent: true, opacity: 1 });
+
+  /* 鉄原子の格子（下2段） */
+  for (let row = 0; row < 2; row++) for (let i = 0; i < 11; i++) {
+    const a = mkBall(0.085, feMat);
+    a.position.set(-1.0 + i * 0.2 + (row % 2) * 0.1, -0.62 + row * 0.17, (row % 2) * 0.05 - 0.02);
+    ST.group.add(a);
   }
-  const clear = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.05, 0.9), new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.25, roughness: 0.08, metalness: 0.1 }));
-  clear.position.y = -0.235;
-  ST.group.add(clear);
 
-  const layers = [
-    { top: 10, label: "鋼素地" },
-    { top: 26, label: "化成処理（極薄）" },
-    { top: 42, label: "プライマー" },
-    { top: 58, label: "ベース（顔料粒）" },
-    { top: 74, label: "クリア（艶）" }
-  ];
-  let chipsHtml = "";
-  layers.forEach((L) => { chipsHtml += '<div class="chip" style="left:6%; top:' + L.top + '%">' + L.label + "</div>"; });
+  /* 樹脂の網目（硬化した塗膜＝分子の網）。L1は左半分だけ塗装 */
+  const netHalf = lessonId === "l1";
+  const nodes = [];
+  const NN = 26;
+  for (let i = 0; i < NN; i++) {
+    const x = netHalf ? (-1.0 + Math.random() * 1.0) : (-1.0 + Math.random() * 2.0);
+    const n = mkBall(0.055, resMat);
+    n.position.set(x, -0.32 + Math.random() * 0.75, (Math.random() - 0.5) * 0.5);
+    ST.group.add(n);
+    nodes.push(n);
+  }
+  /* 顔料分子（大きめ＝色のもと） */
+  const pigs = [];
+  for (let i = 0; i < 4; i++) {
+    const p = mkBall(0.1, pigMat.clone());
+    const src = nodes[(i * 6) % NN].position;
+    p.position.set(src.x, src.y, src.z + 0.05);
+    ST.group.add(p);
+    pigs.push(p);
+  }
+  /* 架橋（近い分子同士の結合線） */
+  const bondPos = [];
+  for (let i = 0; i < NN; i++) for (let j = i + 1; j < NN; j++) {
+    const a = nodes[i].position, b = nodes[j].position;
+    if (a.distanceTo(b) < 0.45) bondPos.push(a.x, a.y, a.z, b.x, b.y, b.z);
+  }
+  const bondGeo = new THREE.BufferGeometry();
+  bondGeo.setAttribute("position", new THREE.Float32BufferAttribute(bondPos, 3));
+  const bonds = new THREE.LineSegments(bondGeo, new THREE.LineBasicMaterial({ color: 0xffc46e, transparent: true, opacity: 0.75 }));
+  ST.group.add(bonds);
+  const bondTotal = bondPos.length / 6;
 
+  /* L5: 密着アンカー（いちばん下の樹脂分子が鉄と手をつなぐ） */
+  if (lessonId === "l5") {
+    const anchPos = [];
+    nodes.slice().sort((a, b) => a.position.y - b.position.y).slice(0, 6).forEach((n) => {
+      anchPos.push(n.position.x, n.position.y, n.position.z, n.position.x, -0.5, n.position.z * 0.5);
+    });
+    const ag = new THREE.BufferGeometry();
+    ag.setAttribute("position", new THREE.Float32BufferAttribute(anchPos, 3));
+    ST.group.add(new THREE.LineSegments(ag, new THREE.LineBasicMaterial({ color: 0x7ec48c, transparent: true, opacity: 0.9 })));
+  }
+
+  /* 水分子 H2O（青のO＋白のH×2）が降ってくる */
+  const waters = [];
+  for (let i = 0; i < 6; i++) {
+    const g = new THREE.Group();
+    const o = mkBall(0.05, oMat); g.add(o);
+    const h1 = mkBall(0.028, hMat); h1.position.set(0.055, 0.045, 0); g.add(h1);
+    const h2 = mkBall(0.028, hMat); h2.position.set(-0.055, 0.045, 0); g.add(h2);
+    const x = netHalf
+      ? (Math.random() < 0.5 ? -0.85 + Math.random() * 0.8 : 0.15 + Math.random() * 0.75)
+      : (-0.9 + Math.random() * 1.8);
+    g.position.set(x, 0.9 + Math.random() * 0.8, (Math.random() - 0.5) * 0.4);
+    ST.group.add(g);
+    waters.push({ g, x, vy: -(0.25 + Math.random() * 0.2) });
+  }
+
+  /* L2: 溶剤分子（上へ抜けて消える） */
   const solv = [];
   if (lessonId === "l2") {
-    for (let i = 0; i < 8; i++) {
-      const s = new THREE.Mesh(new THREE.SphereGeometry(0.02, 6, 5), new THREE.MeshStandardMaterial({ color: 0xdfffff, emissive: 0x4fb8c8, emissiveIntensity: 0.6, transparent: true }));
-      s.position.set((Math.random() - 0.5) * 1.6, -0.29, (Math.random() - 0.5) * 0.8);
+    for (let i = 0; i < 9; i++) {
+      const s = mkBall(0.035, solvMat.clone());
+      s.position.set(-0.9 + Math.random() * 1.8, -0.2 + Math.random() * 0.4, (Math.random() - 0.5) * 0.4);
       ST.group.add(s);
-      solv.push({ mesh: s, baseY: -0.29, phase: Math.random() * 6.28 });
+      solv.push({ mesh: s, baseY: s.position.y, phase: Math.random() * 6.28 });
     }
-    chipsHtml += '<div class="chip" style="right:5%; top:90%">💨 溶剤が蒸発していく</div>';
+    bondGeo.setDrawRange(0, 0);
   }
-  if (lessonId === "l5") {
-    for (let i = 0; i < 5; i++) {
-      const tickMesh = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.02, 0.9), new THREE.MeshBasicMaterial({ color: 0xffe9a3 }));
-      tickMesh.position.set(-0.98, -0.55 + i * 0.08, 0);
-      ST.group.add(tickMesh);
-    }
-    chipsHtml += '<div class="chip" style="right:5%; top:90%">📏 μm定規（1目盛≈16μm）</div>';
-  }
+
+  const rust = [];
+
+  let chipsHtml =
+    '<div class="chip" style="left:6%; top:8%">🧪 橙の玉＝樹脂の分子（網目＝硬化した膜）</div>' +
+    '<div class="chip" style="left:6%; top:86%">⚙ 銀の玉＝鉄の原子</div>';
+  if (lessonId === "l1") chipsHtml += '<div class="chip" style="right:5%; top:26%">💧 水分子は網を通れない／裸の鉄は🟠錆に</div>';
+  else if (lessonId === "l2") chipsHtml += '<div class="chip" style="right:5%; top:26%">💨 溶剤分子が抜け→網がつながる＝硬化</div>';
+  else if (lessonId === "l5") chipsHtml += '<div class="chip" style="right:5%; top:26%">🤝 緑の線＝鉄と手をつなぐ密着アンカー</div>';
+  else chipsHtml += '<div class="chip" style="right:5%; top:26%">🎨 大きい玉＝顔料分子（色のもと）</div>';
   setChips(chipsHtml);
-  ST.setView(0, 0.1, 4.4);
+
+  ST.setView(0, 0.12, 3.6);
   let t2 = 0;
   ST.sceneApi = {
     tick(dt) {
       t2 += dt;
-      ST.setView(Math.sin(t2 * 0.12) * 0.35, 0.1 + Math.sin(t2 * 0.08) * 0.05, 4.4 - Math.sin(t2 * 0.1) * 0.3);
-      solv.forEach((s) => {
-        const p = Math.sin(t2 * 0.8 + s.phase) * 0.5 + 0.5;
-        s.mesh.position.y = s.baseY + p * 0.4;
-        s.mesh.material.opacity = 1 - p;
+      ST.setView(Math.sin(t2 * 0.1) * 0.4, 0.12 + Math.sin(t2 * 0.07) * 0.06, 3.6 - Math.sin(t2 * 0.09) * 0.25);
+      waters.forEach((w) => {
+        w.g.position.y += w.vy * dt;
+        w.g.rotation.z += dt * 1.5;
+        const overNet = !netHalf || w.x < 0.05;
+        const floor = overNet ? 0.5 : -0.42;
+        if (w.g.position.y <= floor) {
+          if (overNet) {
+            w.vy = Math.abs(w.vy) * 0.9; /* 網に弾かれる */
+          } else {
+            if (rust.length < 14) {
+              const r = mkBall(0.05 + Math.random() * 0.04, rustMat);
+              r.position.set(w.x + (Math.random() - 0.5) * 0.1, -0.42, (Math.random() - 0.5) * 0.3);
+              ST.group.add(r);
+              rust.push(r);
+            } else {
+              rust.forEach((r) => ST.group.remove(r));
+              rust.length = 0;
+            }
+            w.g.position.y = 0.9 + Math.random() * 0.8;
+            w.vy = -(0.25 + Math.random() * 0.2);
+          }
+        }
+        if (overNet && w.vy > 0 && w.g.position.y > 1.4) w.vy = -(0.25 + Math.random() * 0.2);
       });
+      if (lessonId === "l2") {
+        const cyc = (t2 % 6) / 6;
+        bondGeo.setDrawRange(0, Math.floor(bondTotal * Math.min(1, cyc * 1.4)) * 2);
+        solv.forEach((s) => {
+          const p = Math.min(1, cyc * 1.2 + Math.sin(s.phase) * 0.08);
+          s.mesh.position.y = s.baseY + p * 1.0;
+          s.mesh.material.opacity = 1 - p;
+        });
+      }
+      pigs.forEach((p, i) => { p.material.emissiveIntensity = 0.5 + Math.sin(t2 * 1.4 + i) * 0.35; });
     }
   };
 }
@@ -3055,7 +3162,7 @@ function openLesson(i) {
   cur = LESSONS[i];
   missionPick = -1;
   microActive = false;
-  $("btnMicro").textContent = "🔬 膜の目";
+  $("btnMicro").textContent = "🔬 分子の目";
   $("phExp").classList.remove("micro-on");
   showView("viewLesson");
   $("lsTag").textContent = cur.tag;
@@ -3094,8 +3201,9 @@ function startExp() {
   $("loadRange").value = 0;
   $("loadVal").textContent = cur.val(0);
   microActive = false;
-  $("btnMicro").textContent = "🔬 膜の目";
+  $("btnMicro").textContent = "🔬 分子の目";
   $("phExp").classList.remove("micro-on");
+  $("btnPhoto").style.display = PHOTOS[cur.id] ? "" : "none";
   const btn = $("btnToReveal");
   btn.disabled = true;
   ensureStage();
@@ -3120,7 +3228,7 @@ $("btnMicro").addEventListener("click", () => {
     buildMicroScene(cur.id);
     ST.resize();
   } else {
-    btn.textContent = "🔬 膜の目";
+    btn.textContent = "🔬 分子の目";
     $("phExp").classList.remove("micro-on");
     ST.clearScene();
     ST.resetView();
@@ -3129,6 +3237,77 @@ $("btnMicro").addEventListener("click", () => {
     ST.resize();
   }
 });
+
+/* ================================================================
+   📷 現場の目（v1.1）：本物の写真＋動くラベル＋動画リンク。
+   写真はウィキメディア・コモンズの自由ライセンス素材（クレジット表示） */
+const PHOTOS = {
+  l1: { img: "assets/photo/l1.jpg", title: "塗装が切れた鉄の末路",
+    cap: "塗膜の寿命が来た廃車。色あせ→ツヤ消え→そして錆。錆は「守りが切れたサイン」で、始まりはいつも塗膜の切れ目から。",
+    points: [{ x: 52, y: 30, t: "塗膜が粉になり色あせ（チョーキング）" }, { x: 25, y: 58, t: "🟠 守りが切れて錆" }],
+    credit: "写真: Sean Stratton（CC0／Wikimedia Commons）",
+    vq: "自動車 錆 防錆 塗装 仕組み" },
+  l2: { img: "assets/photo/l2.jpg", title: "本物のスプレーブース",
+    cap: "天井フィルタから清浄な空気が降り、ミストを床へ押し流して排気する部屋。溶剤が飛ぶ場所だから照明も防爆仕様、人は防毒マスク＋保護服。",
+    points: [{ x: 50, y: 12, t: "天井フィルタ＝空気のシャワー" }, { x: 26, y: 50, t: "防毒マスク＋保護服" }],
+    credit: "写真: Windywocket（CC BY-SA 4.0／Wikimedia Commons）",
+    vq: "スプレーブース 塗装 工程" },
+  l3: { img: "assets/photo/l3.jpg", title: "ゆず肌は映り込みでバレる",
+    cap: "黒い車のドア。映り込んだ景色がボコボコ波打っている＝表面がゆず肌。プロは色ではなく「映り込みの歪み」で肌を検査する。",
+    points: [{ x: 72, y: 28, t: "波打つ映り込み＝ゆず肌の凹凸" }],
+    credit: "写真: Stephen Nesbit（CC BY-SA 2.0／Wikimedia Commons）",
+    vq: "ゆず肌 塗装 原因 対策" },
+  l4: { img: "assets/photo/l4.jpg", title: "本物の色見本帳",
+    cap: "扇形にめくる色見本帳（写真は欧州のRAL規格。日本では日塗工見本帳やマンセル値）。図面には「見た目の言葉」でなくこの番号を書く。",
+    points: [{ x: 70, y: 38, t: "1枚1色＋番号つき" }, { x: 30, y: 60, t: "扇にめくって現物と見比べる" }],
+    credit: "写真: Hannes Grobe（CC BY-SA 4.0／Wikimedia Commons）",
+    vq: "日塗工 色見本帳 マンセル 使い方" },
+  l5: { img: "assets/photo/l5.jpg", title: "本物の膜厚計",
+    cap: "当てるだけでμm（ミクロン）が出る膜厚計。画面の単位がμmなのに注目。図面に「膜厚◯μm以上」と書けば、この道具で検査できる。",
+    points: [{ x: 47, y: 68, t: "表示単位はμm" }, { x: 27, y: 66, t: "プローブを塗面に当てる" }],
+    credit: "写真: Hannes4597（CC0／Wikimedia Commons）",
+    vq: "膜厚計 使い方 塗装 検査" },
+  l6: { img: "assets/photo/l6.jpg", title: "現場のマスキング",
+    cap: "マスキングテープを貼る手元。テープの縁がそのまま見切り線になる。まっすぐ貼れる場所（角・溝）を設計者が用意しておくと現場が楽。",
+    points: [{ x: 55, y: 42, t: "テープの縁＝見切り線" }],
+    credit: "写真: Trimacoinc（CC BY-SA 4.0／Wikimedia Commons）",
+    vq: "マスキング 塗装 コツ 見切り" }
+};
+
+function openPhoto() {
+  const P = cur ? PHOTOS[cur.id] : null;
+  if (!P) return;
+  vib(10);
+  $("pmTitle").textContent = "📷 " + P.title;
+  $("pmCap").textContent = P.cap;
+  $("pmCredit").textContent = P.credit;
+  const fig = $("pmFig");
+  fig.innerHTML = "";
+  const img = document.createElement("img");
+  img.src = P.img;
+  img.alt = P.title;
+  fig.appendChild(img);
+  P.points.forEach((pt, i) => {
+    const m = document.createElement("div");
+    m.className = "pm-marker";
+    m.style.left = pt.x + "%";
+    m.style.top = pt.y + "%";
+    const dot = document.createElement("span");
+    dot.className = "pm-dot";
+    dot.style.animationDelay = (i * 0.5) + "s";
+    const lab = document.createElement("span");
+    lab.className = "pm-label";
+    lab.textContent = pt.t;
+    m.appendChild(dot);
+    m.appendChild(lab);
+    fig.appendChild(m);
+  });
+  $("pmVideo").href = "https://www.youtube.com/results?search_query=" + encodeURIComponent(P.vq);
+  $("photoModal").style.display = "flex";
+}
+$("btnPhoto").addEventListener("click", openPhoto);
+$("pmClose").addEventListener("click", () => { $("photoModal").style.display = "none"; });
+$("photoModal").addEventListener("click", (e) => { if (e.target === $("photoModal")) $("photoModal").style.display = "none"; });
 
 function onLoadInput() {
   const v = +$("loadRange").value;
@@ -3141,7 +3320,7 @@ $("loadRange").addEventListener("input", onLoadInput);
 
 $("btnToReveal").addEventListener("click", () => {
   microActive = false;
-  $("btnMicro").textContent = "🔬 膜の目";
+  $("btnMicro").textContent = "🔬 分子の目";
   $("phExp").classList.remove("micro-on");
   const m = cur.mission;
   const hit = missionPick === m.ans;
