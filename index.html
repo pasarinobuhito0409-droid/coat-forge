@@ -1,0 +1,3467 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>COAT FORGE ── 塗装 朝15分道場</title>
+<meta name="theme-color" content="#15181d">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxOTIgMTkyJz48cmVjdCB3aWR0aD0nMTkyJyBoZWlnaHQ9JzE5Micgcng9JzM2JyBmaWxsPScjMTUxODFkJy8+PHJlY3QgeD0nNzgnIHk9JzU0JyB3aWR0aD0nMzYnIGhlaWdodD0nOTInIHJ4PSc4JyBmaWxsPScjM2EzZTQ1JyBzdHJva2U9JyM4YThmOTYnIHN0cm9rZS13aWR0aD0nMycvPjxyZWN0IHg9Jzg2JyB5PSc0MCcgd2lkdGg9JzIwJyBoZWlnaHQ9JzE4JyByeD0nNCcgZmlsbD0nIzhhOGY5NicvPjxyZWN0IHg9JzkyJyB5PScyNCcgd2lkdGg9JzgnIGhlaWdodD0nMTgnIHJ4PSczJyBmaWxsPScjNThjOGQ4Jy8+PGNpcmNsZSBjeD0nOTYnIGN5PScxNTAnIHI9JzQnIGZpbGw9JyNmZmI2NDgnLz48Y2lyY2xlIGN4PScxNDAnIGN5PSc3MCcgcj0nNicgZmlsbD0nIzU4YzhkOCcgb3BhY2l0eT0nMC44NScvPjxjaXJjbGUgY3g9JzE1MicgY3k9JzkwJyByPSc0JyBmaWxsPScjNThjOGQ4JyBvcGFjaXR5PScwLjY1Jy8+PGNpcmNsZSBjeD0nMTQ2JyBjeT0nMTEyJyByPSc1JyBmaWxsPScjZmZiNjQ4JyBvcGFjaXR5PScwLjcnLz48Y2lyY2xlIGN4PScxNjAnIGN5PSc2MCcgcj0nMycgZmlsbD0nIzU4YzhkOCcgb3BhY2l0eT0nMC41Jy8+PC9zdmc+Cg==">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxOTIgMTkyJz48cmVjdCB3aWR0aD0nMTkyJyBoZWlnaHQ9JzE5Micgcng9JzM2JyBmaWxsPScjMTUxODFkJy8+PHJlY3QgeD0nNzgnIHk9JzU0JyB3aWR0aD0nMzYnIGhlaWdodD0nOTInIHJ4PSc4JyBmaWxsPScjM2EzZTQ1JyBzdHJva2U9JyM4YThmOTYnIHN0cm9rZS13aWR0aD0nMycvPjxyZWN0IHg9Jzg2JyB5PSc0MCcgd2lkdGg9JzIwJyBoZWlnaHQ9JzE4JyByeD0nNCcgZmlsbD0nIzhhOGY5NicvPjxyZWN0IHg9JzkyJyB5PScyNCcgd2lkdGg9JzgnIGhlaWdodD0nMTgnIHJ4PSczJyBmaWxsPScjNThjOGQ4Jy8+PGNpcmNsZSBjeD0nOTYnIGN5PScxNTAnIHI9JzQnIGZpbGw9JyNmZmI2NDgnLz48Y2lyY2xlIGN4PScxNDAnIGN5PSc3MCcgcj0nNicgZmlsbD0nIzU4YzhkOCcgb3BhY2l0eT0nMC44NScvPjxjaXJjbGUgY3g9JzE1MicgY3k9JzkwJyByPSc0JyBmaWxsPScjNThjOGQ4JyBvcGFjaXR5PScwLjY1Jy8+PGNpcmNsZSBjeD0nMTQ2JyBjeT0nMTEyJyByPSc1JyBmaWxsPScjZmZiNjQ4JyBvcGFjaXR5PScwLjcnLz48Y2lyY2xlIGN4PScxNjAnIGN5PSc2MCcgcj0nMycgZmlsbD0nIzU4YzhkOCcgb3BhY2l0eT0nMC41Jy8+PC9zdmc+Cg==">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    background:
+      radial-gradient(ellipse 70% 40% at 18% 0%, rgba(88,200,216,0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 88% 100%, rgba(255,182,72,0.07), transparent),
+      #0b0d10;
+    color: #e6ecf2;
+    font-family: "Yu Gothic UI", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+    overscroll-behavior-y: contain;
+  }
+  #bgfx { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+  #app { position: relative; z-index: 1; max-width: 470px; margin: 0 auto; padding: 18px 16px 40px; min-height: 100%; }
+
+  /* ===== 打刻スプラッシュ「マスキング剥がし」 ===== */
+  #splash {
+    position: fixed; inset: 0; z-index: 90; background: #101216;
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 14px;
+    transition: opacity 0.45s; overflow: hidden;
+  }
+  #splash.off { opacity: 0; pointer-events: none; }
+  #spmist { position: absolute; inset: 0; pointer-events: none; }
+  .lwrap { position: relative; padding: 12px 30px; }
+  .stitle {
+    font-size: 36px; font-weight: 900; letter-spacing: 6px; color: #ffb648;
+    text-shadow: 0 0 22px rgba(255,182,72,0.55); opacity: 0.15; transition: opacity 0.32s;
+    position: relative;
+  }
+  .stitle b { color: #58c8d8; text-shadow: 0 0 22px rgba(88,200,216,0.6); }
+  .stitle.painted { opacity: 1; }
+  .tape {
+    position: absolute; inset: -6px -16px; z-index: 3; border-radius: 4px;
+    background: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0 7px, transparent 7px 14px), #cfc39a;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+    transform-origin: right top;
+    transition: transform 0.65s cubic-bezier(0.4,0,0.7,1), opacity 0.65s;
+  }
+  .tape::before, .tape::after { content: ""; position: absolute; top: 0; bottom: 0; width: 11px; background: rgba(255,255,255,0.28); }
+  .tape::before { left: 0; } .tape::after { right: 0; }
+  .tape.peel { transform: rotate(-24deg) translate(48%, -135%) skewX(-8deg); opacity: 0; }
+  .ssub { font-size: 11.5px; color: #8a97a5; letter-spacing: 2px; opacity: 0; transition: opacity 0.45s; }
+  .ssub.lit { opacity: 1; }
+  .sskip { margin-top: 4px; font-size: 10.5px; color: #3d4550; opacity: 0; transition: opacity 0.45s; }
+  .sskip.lit { opacity: 1; }
+
+  .goalbanner {
+    margin-top: 14px; padding: 10px 13px; border-radius: 12px; text-align: center;
+    border: 1px solid rgba(88,200,216,0.5); background: rgba(88,200,216,0.07);
+    font-size: 12.5px; font-weight: 800; color: #bfe9f0;
+  }
+
+  /* ===== 育つ塗装パネル（ホームヒーロー） ===== */
+  .painthero { margin-top: 12px; border-radius: 14px; overflow: hidden; border: 1px solid #232830; background: linear-gradient(165deg, #14171c, #0e1114); }
+  .painthero .pstage { position: relative; height: 172px; touch-action: none; cursor: grab; }
+  .painthero .pstage canvas { display: block; }
+  .painthero .pfallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #6b7a89; font-size: 12px; text-align: center; padding: 0 20px; }
+  .painthero .pline { padding: 9px 14px 11px; font-size: 12.5px; color: #a8b5c2; text-align: center; }
+  .painthero .pline b { color: #bfe9f0; font-size: 13.5px; }
+  .painthero .pbar { margin: 7px 3px 0; height: 8px; border-radius: 5px; background: #12151a; overflow: hidden; }
+  .painthero .pbar div { height: 100%; width: 0%; background: linear-gradient(90deg, #58c8d8, #ffb648); transition: width 0.8s; }
+
+  /* ===== FORGE PASSPORT ===== */
+  .passport { margin-top: 14px; border: 1.5px solid rgba(255,182,72,0.55); border-radius: 13px; padding: 11px 12px; background: rgba(255,182,72,0.05); }
+  .passport .pt { font-size: 12px; font-weight: 900; color: #ffd191; margin-bottom: 8px; }
+  .pbadges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pbadge { flex: 1; min-width: 76px; text-align: center; border: 1px solid #2a3340; border-radius: 10px; padding: 7px 3px; background: #12161c; font-size: 10px; color: #8a97a5; text-decoration: none; }
+  .pbemoji { font-size: 15px; line-height: 1; }
+  .pbname { margin-top: 3px; font-size: 10px; font-weight: 800; color: #a8b5c2; }
+  .pbpct { margin-top: 2px; font-size: 11.5px; font-weight: 900; color: #8fd8e4; }
+  .pbbar { margin-top: 4px; height: 4px; border-radius: 3px; background: #1c222b; overflow: hidden; }
+  .pbbar div { height: 100%; background: linear-gradient(90deg, #58c8d8, #ffb648); }
+
+  /* ===== 復習キューカード ===== */
+  .rqcard {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    margin-top: 12px; padding: 12px 14px; border-radius: 13px;
+    border: 1.5px solid rgba(255,182,72,0.7); background: rgba(255,182,72,0.08);
+    cursor: pointer; font: inherit;
+  }
+  .rqcard .rqt { font-size: 14px; font-weight: 900; color: #ffd9a3; }
+  .rqcard .rqs { font-size: 10.5px; color: #c9a86a; margin-top: 2px; }
+  .rqcard .rqarrow { font-size: 18px; color: #ffd9a3; }
+
+  #stageWrap { display: none; }
+  #stageWrap.mini .stage3d { height: 30vh; max-height: 230px; min-height: 180px; }
+
+  .teaser {
+    margin-top: 16px; padding: 13px 15px; border-radius: 13px; text-align: left;
+    border: 1px solid rgba(88,200,216,0.45); background: rgba(88,200,216,0.06);
+    font-size: 14px; color: #d8eef2; line-height: 1.75;
+  }
+  .teaser b { color: #74d4e2; }
+
+  .cta {
+    display: block; width: 100%; margin-top: 14px; padding: 14px; border: none; border-radius: 13px;
+    font: inherit; font-weight: 900; font-size: 16px; color: #082026; cursor: pointer;
+    background: linear-gradient(135deg, #58c8d8, #8fe2ee);
+    box-shadow: 0 0 18px rgba(88,200,216,0.3);
+  }
+  .cta.alt {
+    color: #fff3e2; border: 1.5px solid rgba(255,182,72,0.65);
+    background: linear-gradient(135deg, rgba(255,182,72,0.28), rgba(88,200,216,0.14));
+    box-shadow: 0 0 14px rgba(255,182,72,0.25);
+  }
+  .cta:disabled { opacity: 0.35; box-shadow: none; }
+  .opt {
+    display: block; width: 100%; margin-top: 10px; padding: 15px 16px; border-radius: 13px;
+    border: 1.5px solid #2a3340; background: #12161c; color: #dfeaf0;
+    font: inherit; font-size: 16px; font-weight: 700; text-align: left; cursor: pointer;
+  }
+  .opt.correct { border-color: #7ec48c; color: #dcffE7; background: rgba(126,196,140,0.10); box-shadow: 0 0 14px rgba(126,196,140,0.25); }
+  .opt.wrong { border-color: #e47869; color: #ffd9d0; background: rgba(228,120,105,0.08); }
+  .opt.dim { opacity: 0.45; }
+
+  .home-logo {
+    text-align: center; font-size: 29px; font-weight: 900; letter-spacing: 5px; color: #ffb648;
+    margin-top: 12px; text-shadow: 0 0 16px rgba(255,182,72,0.7), 0 0 40px rgba(255,182,72,0.25);
+  }
+  .home-logo b { color: #58c8d8; text-shadow: 0 0 16px rgba(88,200,216,0.7), 0 0 40px rgba(88,200,216,0.25); }
+  .home-sub { text-align: center; font-size: 13px; color: #a8b5c2; margin: 6px 0 18px; }
+  .resume {
+    display: block; width: 100%; padding: 15px; border: 1px solid rgba(88,200,216,0.6); border-radius: 14px;
+    background: linear-gradient(135deg, rgba(88,200,216,0.20), rgba(255,182,72,0.12));
+    color: #eef8fa; font: inherit; font-weight: 900; font-size: 16px; cursor: pointer;
+    box-shadow: 0 0 20px rgba(88,200,216,0.2); text-align: center;
+  }
+  .resume small { display: block; font-weight: 600; font-size: 11.5px; color: #bfe9f0; margin-top: 3px; }
+  .prog-row { display: flex; align-items: center; gap: 10px; margin: 16px 0 6px; font-size: 12px; color: #8a97a5; }
+  .prog-bar { flex: 1; height: 9px; border-radius: 5px; background: #12151a; overflow: hidden; }
+  .prog-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #58c8d8, #ffb648); border-radius: 5px; transition: width 0.6s; }
+  .chap-title { font-size: 13.5px; font-weight: 800; color: #bcd0d8; margin: 16px 0 10px; }
+  .chap-title span { color: #6b7a89; font-weight: 600; font-size: 11px; }
+  .nodes { display: flex; flex-wrap: wrap; gap: 12px 14px; }
+  .node { width: 56px; text-align: center; cursor: pointer; border: none; background: none; font: inherit; padding: 0; }
+  .node .dot {
+    width: 44px; height: 44px; margin: 0 auto; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 800; border: 2px solid #2a3340; color: #5a6a78; background: #12161c;
+  }
+  .node .lbl { font-size: 10px; color: #6b7a89; margin-top: 4px; }
+  .node.done .dot { border-color: #58c8d8; color: #06222a; background: #58c8d8; box-shadow: 0 0 12px rgba(88,200,216,0.5); }
+  .node.done .lbl { color: #bfe9f0; }
+  .node.now .dot { border-color: #ffb648; color: #ffe3bd; background: rgba(255,182,72,0.15); animation: pulse 1.6s infinite; }
+  .node.now .lbl { color: #ffcf94; font-weight: 800; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,182,72,0.55); } 55% { box-shadow: 0 0 0 10px rgba(255,182,72,0); } }
+  .node.lock { opacity: 0.35; cursor: default; }
+  .chap2 {
+    margin-top: 18px; padding: 13px 14px; border-radius: 13px;
+    border: 1px dashed #2a3340; color: #7b8896; font-size: 13px; line-height: 1.7;
+  }
+  .btnrow2 { display: flex; gap: 9px; margin-top: 14px; }
+  .btnrow2 .bb {
+    flex: 1; text-align: center; padding: 13px 6px; border-radius: 13px; font-size: 13.5px; font-weight: 900;
+    border: 1.5px solid rgba(255,182,72,0.6); color: #ffd9a3; background: rgba(255,182,72,0.08); cursor: pointer; font-family: inherit;
+  }
+  .btnrow2 .bb.map { border-color: rgba(88,200,216,0.6); color: #a8e6ee; background: rgba(88,200,216,0.08); }
+  .streak { margin-top: 16px; text-align: center; font-size: 12.5px; color: #58c8d8; }
+  .installhint { margin-top: 20px; text-align: center; font-size: 10.5px; color: #3d4550; }
+  .verline { margin-top: 6px; text-align: center; font-size: 10px; color: #2c333c; }
+
+  .lesson-top { display: flex; align-items: center; gap: 9px; margin-bottom: 14px; font-size: 15px; font-weight: 800; color: #eaf6f8; }
+  .backbtn {
+    border: 1.5px solid #2a3340; background: #12161c; color: #bfe9f0; font: inherit; font-size: 16px;
+    width: 38px; height: 38px; border-radius: 11px; cursor: pointer; flex: none;
+  }
+  .tag {
+    background: rgba(88,200,216,0.14); border: 1px solid rgba(88,200,216,0.5);
+    color: #bfe9f0; padding: 3px 9px; border-radius: 7px; font-size: 12px; white-space: nowrap;
+  }
+
+  .mission-card {
+    border: 1.5px solid rgba(88,200,216,0.7); border-radius: 16px; padding: 18px 16px;
+    background: linear-gradient(160deg, rgba(88,200,216,0.10), rgba(10,12,16,0.2));
+    box-shadow: 0 0 22px rgba(88,200,216,0.15);
+  }
+  .mno { font-size: 12px; color: #58c8d8; font-weight: 800; letter-spacing: 2px; }
+  .mq { font-size: 20px; font-weight: 900; color: #f2fafc; line-height: 1.65; margin-top: 9px; }
+  .mhint { margin-top: 12px; font-size: 13.5px; color: #7f96a3; }
+
+  .stage3d {
+    position: relative; border-radius: 15px; overflow: hidden;
+    border: 1px solid #202830; background: #14171c; height: 46vh; max-height: 340px; min-height: 250px;
+  }
+  .stage3d canvas { display: block; touch-action: none; cursor: grab; }
+  .stage3d::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 75% 70% at 50% 45%, transparent 55%, rgba(0,0,0,0.38) 100%);
+  }
+  .chip {
+    position: absolute; z-index: 4; pointer-events: none;
+    padding: 4px 10px; border-radius: 7px; font-size: 11.5px; font-weight: 800;
+    color: #eef4f6; background: rgba(10,12,16,0.82); border: 1.5px solid rgba(210,230,235,0.75);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .chip.ng { color: #ffd9d0; border-color: rgba(228,120,105,0.9); background: rgba(70,20,14,0.85); }
+  .chip.ok { color: #d9ffE7; border-color: rgba(126,196,140,0.9); background: rgba(12,50,22,0.85); }
+  .chip.mapview { top: 9px; left: 9px; }
+  .hint3d {
+    position: absolute; top: 9px; right: 9px; z-index: 4; font-size: 10.5px; color: #cfe8f0;
+    background: rgba(10,12,16,0.72); padding: 4px 10px; border-radius: 999px;
+    border: 1px solid rgba(200,230,240,0.25); pointer-events: none;
+  }
+  .guessline { font-size: 13px; color: #8fd8e4; margin-bottom: 8px; font-weight: 700; }
+  .boom {
+    position: absolute; inset: 0; z-index: 5; display: none; align-items: center; justify-content: center;
+    flex-direction: column; gap: 6px; background: rgba(120,50,10,0.18); pointer-events: none;
+  }
+  .boom.show { display: flex; }
+  .boom .b1 { font-size: 28px; font-weight: 900; color: #ffe2da; text-shadow: 0 0 22px rgba(255,120,60,0.95); transform: rotate(-8deg); }
+  .boom .b2 { font-size: 13px; font-weight: 800; color: #cfe8f0; text-shadow: 0 1px 6px #000; }
+  .flash { position: absolute; inset: 0; z-index: 6; background: #fff; opacity: 0; pointer-events: none; }
+  .legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px 12px; margin-top: 10px; font-size: 12.5px; color: #bcccda; }
+  .sliderrow { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 14.5px; color: #d0e4ea; }
+  .sliderrow input[type=range] { flex: 1; accent-color: #58c8d8; min-width: 0; height: 32px; }
+  .sliderrow .val { min-width: 70px; text-align: right; font-weight: 800; color: #bfe9f0; font-size: 16px; }
+  .extra { margin-top: 10px; }
+  .readout { margin-top: 9px; text-align: center; font-size: 14px; color: #8fd8e4; font-weight: 700; }
+  .trynote { margin-top: 10px; text-align: center; font-size: 13px; color: #93a5b3; line-height: 1.65; }
+  .micro-on .sliderrow, .micro-on .extra { display: none; }
+
+  .result-banner {
+    border: 1.5px solid rgba(126,196,140,0.6); border-radius: 14px; padding: 13px;
+    background: rgba(126,196,140,0.07); text-align: center;
+    font-size: 15.5px; font-weight: 900; color: #d9ffE7;
+  }
+  .result-banner small { display: block; font-weight: 600; font-size: 11.5px; color: #8fd8a4; margin-top: 4px; }
+  .minicard {
+    border: 1px solid #202830; border-radius: 15px; padding: 24px 18px; margin-top: 14px;
+    background: linear-gradient(165deg, #14171c, #0e1114);
+    font-size: 19px; color: #e2eef2; line-height: 1.85; min-height: 160px;
+    display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 600;
+  }
+  .minicard b { color: #8fd8e4; }
+  .minicard em { font-style: normal; color: #ff9d8f; }
+  .dots { text-align: center; margin-top: 12px; letter-spacing: 6px; color: #2a3340; font-size: 13px; }
+  .dots span { color: #58c8d8; }
+
+  .qhead { font-size: 13px; font-weight: 800; color: #ffb648; letter-spacing: 1px; margin-bottom: 8px; }
+  .q { font-size: 18px; font-weight: 800; color: #eaf6f8; line-height: 1.7; }
+  .expl {
+    margin-top: 13px; padding: 13px 14px; border-left: 3px solid #7ec48c; border-radius: 7px;
+    background: rgba(126,196,140,0.06); font-size: 14.5px; color: #c6e4d0; line-height: 1.75;
+  }
+
+  .center { text-align: center; }
+  .stamp {
+    display: inline-block; margin-top: 34px; padding: 25px 22px; border: 3.5px solid #58c8d8; border-radius: 50%;
+    color: #8fd8e4; font-weight: 900; font-size: 21px; transform: rotate(-11deg);
+    text-shadow: 0 0 14px rgba(88,200,216,0.8);
+    box-shadow: 0 0 26px rgba(88,200,216,0.35), inset 0 0 16px rgba(88,200,216,0.15);
+    animation: stampin 0.45s cubic-bezier(0.2, 2.2, 0.4, 1);
+  }
+  @keyframes stampin { 0% { transform: rotate(-11deg) scale(2.2); opacity: 0; } 100% { transform: rotate(-11deg) scale(1); opacity: 1; } }
+  .stamp small { display: block; font-size: 11px; font-weight: 700; }
+  .clearmsg { margin-top: 18px; font-size: 15px; color: #b3c0cc; line-height: 1.85; }
+  .bossscore { margin-top: 30px; font-size: 42px; font-weight: 900; color: #eef8fa; text-shadow: 0 0 18px rgba(88,200,216,0.7); }
+
+  /* ===== ドリル画面 ===== */
+  .drillcard {
+    border: 1.5px solid rgba(255,182,72,0.6); border-radius: 16px; padding: 18px 16px;
+    background: linear-gradient(160deg, rgba(255,182,72,0.08), rgba(10,12,16,0.2));
+  }
+  .drillhead { font-size: 12px; color: #ffcf94; font-weight: 800; letter-spacing: 1px; }
+  .drillq { font-size: 17.5px; font-weight: 800; color: #f2fafc; line-height: 1.7; margin-top: 10px; }
+  .drilltag { display: inline-block; margin-top: 8px; font-size: 11px; color: #93a5b3; }
+  .okngrow { display: flex; gap: 10px; margin-top: 16px; }
+  .okngrow button {
+    flex: 1; padding: 18px 6px; border-radius: 14px; font: inherit; font-weight: 900; font-size: 18px; cursor: pointer;
+    border: 2px solid #2a3340; background: #12161c; color: #dfeaf0;
+  }
+  .okngrow button.pickOK { border-color: #7ec48c; color: #7ec48c; }
+  .okngrow button.pickNG { border-color: #e47869; color: #e47869; }
+  .okngrow button.correct { background: rgba(126,196,140,0.15); box-shadow: 0 0 14px rgba(126,196,140,0.3); }
+  .okngrow button.wrong { background: rgba(228,120,105,0.15); box-shadow: 0 0 14px rgba(228,120,105,0.3); }
+  .okngrow button.dim { opacity: 0.4; }
+  .drillexp {
+    margin-top: 14px; padding: 12px 14px; border-radius: 10px; border-left: 3px solid #ffcf94;
+    background: rgba(255,182,72,0.08); font-size: 14px; color: #ffe3c4; line-height: 1.7;
+  }
+  .drillresultrow { display: flex; justify-content: center; gap: 8px; margin: 20px 0 6px; }
+  .drillresultrow span { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 900; }
+  .drillresultrow span.o { background: rgba(126,196,140,0.18); color: #7ec48c; border: 1.5px solid #7ec48c; }
+  .drillresultrow span.x { background: rgba(228,120,105,0.18); color: #e47869; border: 1.5px solid #e47869; }
+  .weaklist { margin-top: 16px; font-size: 13px; color: #93a5b3; line-height: 1.9; text-align: left; }
+  .weaklist b { color: #ffcf94; }
+
+  /* ===== 塗装街道マスターマップ ===== */
+  .mapstage { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .mapstagebox { border-radius: 14px; padding: 13px 14px; border: 1px solid #202830; background: linear-gradient(165deg, #14171c, #0e1114); }
+  .mapstagebox.current { border-color: rgba(88,200,216,0.7); box-shadow: 0 0 16px rgba(88,200,216,0.2); }
+  .mapstagebox .msTitle { font-size: 13.5px; font-weight: 900; color: #eaf6f8; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .mapstagebox .msYear { font-size: 10.5px; color: #6b7a89; font-weight: 600; }
+  .mapstagebox .mspin { color: #ffcf94; font-size: 13px; }
+  .mapstagebox .msDesc { margin-top: 6px; font-size: 12px; color: #93a5b3; line-height: 1.6; }
+  .mapchaps { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .mapchap { font-size: 11px; padding: 5px 9px; border-radius: 7px; border: 1px solid #2a3340; color: #7f96a3; background: #12161c; }
+  .mapchap.done { border-color: #58c8d8; color: #bfe9f0; background: rgba(88,200,216,0.1); }
+  .mapchap.now { border-color: #ffb648; color: #ffd9a3; background: rgba(255,182,72,0.14); }
+  .mapbros { margin-top: 18px; padding-top: 14px; border-top: 1px dashed #2a3340; }
+  .mapbros .mbTitle { font-size: 12px; color: #6b7a89; font-weight: 800; margin-bottom: 8px; }
+  .mapbroslink { display: block; padding: 10px 12px; margin-top: 7px; border-radius: 10px; border: 1px solid #202830; background: #12161c; color: #8a97a5; font-size: 12.5px; text-decoration: none; }
+  .mapbroslink b { color: #bfe9f0; }
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <canvas id="spmist"></canvas>
+  <div class="lwrap">
+    <div class="stitle" id="stitle">COAT <b>FORGE</b></div>
+    <div class="tape" id="tape"></div>
+  </div>
+  <div class="ssub" id="ssub">塗装 ── 原理から塗装指示まで・朝15分道場</div>
+  <div class="sskip" id="sskip">タップでスキップ</div>
+</div>
+
+<canvas id="bgfx"></canvas>
+<div id="app">
+
+  <!-- ============ ホーム ============ -->
+  <section id="viewHome" style="display:block">
+    <div class="home-logo">COAT <b>FORGE</b></div>
+    <div class="home-sub">塗装 ── 朝15分・触って選んで覚える道場</div>
+
+    <button class="rqcard" id="btnRQ" style="display:none">
+      <div><div class="rqt" id="rqTitle">⚡ 今日の復習 0問</div><div class="rqs">忘れかけた頃に再登場（2分）</div></div>
+      <div class="rqarrow">→</div>
+    </button>
+
+    <div class="painthero">
+      <div class="pstage" id="paintStage"></div>
+      <div class="pline"><b id="paintTitle">工程 1/8：素地（黒皮のまま）</b><div class="pbar"><div id="paintBar"></div></div></div>
+    </div>
+
+    <div class="passport">
+      <div class="pt">🛂 FORGE PASSPORT ── 兄弟アプリの進捗が1画面に</div>
+      <div class="pbadges" id="passportBadges"></div>
+    </div>
+
+    <button class="resume" id="btnResume"></button>
+    <div class="goalbanner">🎯 ゴール：図面で正しい塗装指示（色番号・艶・膜厚・マスキング）を書ける設計者</div>
+    <div class="prog-row"><span id="progText"></span><div class="prog-bar"><div class="prog-fill" id="progFill"></div></div><span>クリア</span></div>
+    <div class="chap-title">第1章 塗装のきそ <span>（原理から設計指示まで・全6回＋ボス）</span></div>
+    <div class="nodes" id="nodes1"></div>
+    <div class="btnrow2">
+      <button class="bb" id="btnDrillHome">⚔ 判断ドリル<br><small style="font-weight:600">（5問・2分）</small></button>
+      <button class="bb map" id="btnMapHome">🛣 塗装街道<br><small style="font-weight:600">マスターマップ</small></button>
+    </div>
+    <div class="chap2">🔒 第2章 粉体塗装と電着へ（ラインの世界）<br>第1章クリアで解放（次のアップデートで配信）</div>
+    <div class="streak" id="streakLine"></div>
+    <div class="installhint">スマホ：ブラウザの共有メニュー →「ホーム画面に追加」でアプリになる</div>
+    <div class="verline">COAT FORGE v1.0 ─ 第1章（ARC/FORCE/VOLT/BEND/GEARの兄弟）</div>
+  </section>
+
+  <!-- ============ レッスン ============ -->
+  <section id="viewLesson" style="display:none">
+    <div class="lesson-top">
+      <button class="backbtn" id="btnBack">←</button>
+      <span class="tag" id="lsTag"></span><span id="lsTitle"></span>
+    </div>
+
+    <div id="stageWrap">
+      <div class="stage3d" id="stage3d">
+        <div id="stageChips"></div>
+        <div class="hint3d" id="hint3d">👆 タップ＝操作／ドラッグ＝回転</div>
+        <div class="flash" id="flash"></div>
+        <div class="boom" id="boom"><span class="b1" id="boomText">パリッ!!</span><span class="b2">🎨 画面タップでやり直し</span></div>
+      </div>
+    </div>
+
+    <div id="phMission" style="display:none">
+      <div class="mission-card">
+        <div class="mno" id="msNo"></div>
+        <div class="mq" id="msQ"></div>
+      </div>
+      <div id="msOpts"></div>
+      <div class="mhint">↑ 予想してタップ（外れてもOK。実験で確かめる）</div>
+    </div>
+
+    <div id="phExp" style="display:none">
+      <div class="guessline" id="guessLine"></div>
+      <div class="legend" id="expLegend"></div>
+      <div class="sliderrow"><span id="sliderLabel"></span><input type="range" id="loadRange" min="0" max="100" value="0"><span class="val" id="loadVal">0</span></div>
+      <div class="extra" id="extraCtrls"></div>
+      <div class="trynote" id="expNote"></div>
+      <button class="cta alt" id="btnMicro">🔬 膜の目</button>
+      <button class="cta" id="btnToReveal" disabled>答え合わせ →</button>
+    </div>
+
+    <div id="phReveal" style="display:none">
+      <div class="result-banner" id="rvBanner"></div>
+      <div class="minicard" id="rvCard"></div>
+      <div class="dots" id="rvDots"></div>
+      <button class="cta" id="btnCardNext">つぎ →</button>
+    </div>
+
+    <div id="phQuiz" style="display:none">
+      <div class="qhead">ミニクイズ ── 1問だけ</div>
+      <div class="q" id="qzQ"></div>
+      <div id="qzOpts"></div>
+      <div class="expl" id="qzExp" style="display:none"></div>
+      <button class="cta" id="btnQuizDone" style="display:none">クリア！ →</button>
+    </div>
+
+    <div id="phClear" class="center" style="display:none">
+      <div class="stamp" id="clearStamp"></div>
+      <div class="teaser" id="teaserBox"></div>
+      <div class="clearmsg" id="clearMsg"></div>
+      <button class="cta" id="btnGoHome">マップへもどる</button>
+    </div>
+  </section>
+
+  <!-- ============ ボス戦 ============ -->
+  <section id="viewBoss" style="display:none">
+    <div class="lesson-top">
+      <button class="backbtn" id="btnBackB">←</button>
+      <span class="tag">L7</span><span>塗装係長の最終試験 ── 7問</span>
+    </div>
+    <div id="bossPlay">
+      <div class="qhead" id="bsProgress"></div>
+      <div class="q" id="bsQ"></div>
+      <div id="bsOpts"></div>
+      <div class="expl" id="bsExp" style="display:none"></div>
+      <button class="cta" id="btnBossNext" style="display:none">つぎ →</button>
+    </div>
+    <div id="bossResult" class="center" style="display:none">
+      <div class="bossscore" id="bsScore"></div>
+      <div class="clearmsg" id="bsMsg"></div>
+      <button class="cta" id="btnBossHome">マップへもどる</button>
+    </div>
+  </section>
+
+  <!-- ============ 判断ドリル ============ -->
+  <section id="viewDrill" style="display:none">
+    <div class="lesson-top">
+      <button class="backbtn" id="btnBackD">←</button>
+      <span class="tag">⚔ DRILL</span><span>塗装設計判断ドリル</span>
+    </div>
+    <div id="drillPlay">
+      <div class="drillcard">
+        <div class="drillhead" id="dqProgress"></div>
+        <div class="drillq" id="dqText"></div>
+        <div class="drilltag" id="dqTag"></div>
+      </div>
+      <div class="okngrow" id="dqOpts">
+        <button id="btnOK">OK</button>
+        <button id="btnNG">NG</button>
+      </div>
+      <div class="drillexp" id="dqExp" style="display:none"></div>
+      <button class="cta" id="btnDrillNext" style="display:none">つぎ →</button>
+    </div>
+    <div id="drillResult" class="center" style="display:none">
+      <div class="bossscore" id="dResultScore"></div>
+      <div class="drillresultrow" id="dResultRow"></div>
+      <div class="weaklist" id="dWeak"></div>
+      <button class="cta" id="btnDrillResultHome">マップへもどる</button>
+    </div>
+  </section>
+
+  <!-- ============ 復習キュー ============ -->
+  <section id="viewReview" style="display:none">
+    <div class="lesson-top">
+      <button class="backbtn" id="btnBackRQ">←</button>
+      <span class="tag">⚡ REVIEW</span><span>今日の復習</span>
+    </div>
+    <div id="reviewPlay">
+      <div class="drillcard">
+        <div class="drillhead" id="rqProgress"></div>
+        <div class="drillq" id="rqText"></div>
+      </div>
+      <div id="rqOpts"></div>
+      <div class="drillexp" id="rqExp" style="display:none"></div>
+      <button class="cta" id="btnRQNext" style="display:none">つぎ →</button>
+    </div>
+    <div id="reviewResult" class="center" style="display:none">
+      <div class="bossscore" id="rqResultScore"></div>
+      <div class="clearmsg">🔥 忘れかけた記憶をしっかり固定した</div>
+      <button class="cta" id="btnRQHome">マップへもどる</button>
+    </div>
+  </section>
+
+  <!-- ============ 塗装街道マスターマップ ============ -->
+  <section id="viewMap" style="display:none">
+    <div class="lesson-top">
+      <button class="backbtn" id="btnBackMap">←</button>
+      <span class="tag">🛣 MAP</span><span>塗装街道マスターマップ</span>
+    </div>
+    <div class="teaser" style="margin-top:0">原理から始まり、図面で<b>正しい塗装指示</b>が書ける設計者になるまでの道。</div>
+    <div class="mapstage" id="mapStage"></div>
+    <div class="mapbros">
+      <div class="mbTitle">別街道（兄弟アプリ）</div>
+      <a class="mapbroslink" href="https://pasarinobuhito0409-droid.github.io/arc-forge/" target="_blank" rel="noopener"><b>ARC FORGE</b> ── 溶接×設計</a>
+      <a class="mapbroslink" href="https://pasarinobuhito0409-droid.github.io/force-forge/" target="_blank" rel="noopener"><b>FORCE FORGE</b> ── 力学×CAE</a>
+      <a class="mapbroslink" href="https://pasarinobuhito0409-droid.github.io/volt-forge/" target="_blank" rel="noopener"><b>VOLT FORGE</b> ── 電気設計</a>
+      <a class="mapbroslink" href="https://pasarinobuhito0409-droid.github.io/bend-forge/" target="_blank" rel="noopener"><b>BEND FORGE</b> ── 板金設計</a>
+      <a class="mapbroslink" href="https://pasarinobuhito0409-droid.github.io/gear-forge/" target="_blank" rel="noopener"><b>GEAR FORGE</b> ── 機械設計</a>
+    </div>
+  </section>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
+<script>
+"use strict";
+
+/* ================================================================
+   COAT FORGE v1.0 ── 第1章「塗装のきそ」
+   FORGE家族6作目。gear-forgeのエンジン（ミッション→実験→答え合わせ→
+   カード→クイズ→クリア、CARD_SCENES、判断ドリル、復習キュー、
+   マスターマップ、育つヒーロー、打刻スプラッシュ）を踏襲。
+   演出（打刻・背景・ヒーロー・カード3D）はすべて塗装オリジナル。
+================================================================ */
+
+/* ===== 起動スプラッシュ「マスキング剥がし」：タップでスキップ／同日2回目は短縮 ===== */
+(function splash() {
+  const sp = document.getElementById("splash");
+  if (!sp) return;
+  const cv = document.getElementById("spmist");
+  const ctx = cv.getContext("2d");
+  function rs() { cv.width = Math.max(2, innerWidth); cv.height = Math.max(2, innerHeight); }
+  rs();
+  window.addEventListener("resize", rs);
+
+  const SPLASH_KEY = "coat-forge-splash-day";
+  let already = false;
+  try {
+    const today = new Date().toDateString();
+    already = localStorage.getItem(SPLASH_KEY) === today;
+    localStorage.setItem(SPLASH_KEY, today);
+  } catch (e) {}
+  const SPEED = already ? 1.9 : 1.0; /* 2回目以降は約1.9倍速の短縮版 */
+  let vibed = false;
+  let closed = false;
+  function close() {
+    if (closed) return;
+    closed = true;
+    sp.classList.add("off");
+    setTimeout(() => { if (sp.parentNode) sp.parentNode.removeChild(sp); }, 480);
+  }
+  sp.addEventListener("pointerdown", close);
+
+  const parts = [];
+  let t0 = null;
+  function frame(now) {
+    if (closed) return;
+    if (!t0) t0 = now;
+    const t = ((now - t0) / 1000) * SPEED;
+    if (ctx) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      /* 0.2〜1.3s：ミストが左右からブシューッと吹き付けられる */
+      if (t > 0.2 && t < 1.3) {
+        for (let k = 0; k < 14; k++) {
+          const fromLeft = Math.random() < 0.5;
+          parts.push({
+            x: fromLeft ? -10 : cv.width + 10,
+            y: cv.height * (0.3 + Math.random() * 0.32),
+            vx: (fromLeft ? 1 : -1) * (260 + Math.random() * 240),
+            vy: (Math.random() - 0.5) * 90 + 20,
+            life: 0.9, c: Math.random() < 0.5 ? "255,182,72" : "88,200,216"
+          });
+        }
+      }
+      for (let i = parts.length - 1; i >= 0; i--) {
+        const p = parts[i];
+        p.life -= 0.016;
+        if (p.life <= 0) { parts.splice(i, 1); continue; }
+        p.x += p.vx * 0.016; p.vx *= 0.965;
+        p.y += p.vy * 0.016; p.vy += 30 * 0.016; /* 重力で少し下に流れる */
+        ctx.fillStyle = "rgba(" + p.c + "," + (p.life * 0.4) + ")";
+        ctx.beginPath(); ctx.arc(p.x, p.y, 2 + (1 - p.life) * 7, 0, 6.29); ctx.fill();
+      }
+    }
+    const titleEl = document.getElementById("stitle");
+    if (t > 1.0 && titleEl) titleEl.classList.add("painted"); /* ロゴが塗り上がる */
+    if (t > 1.45) {
+      const tapeEl = document.getElementById("tape");
+      const subEl = document.getElementById("ssub");
+      const skipEl = document.getElementById("sskip");
+      if (tapeEl && !tapeEl.classList.contains("peel")) {
+        tapeEl.classList.add("peel"); /* ペリッと剥がれ飛ぶ */
+        if (!vibed) { vibed = true; vib([16, 30, 10]); }
+      }
+      if (subEl) subEl.classList.add("lit");
+      if (skipEl) skipEl.classList.add("lit");
+    }
+    if (t < 2.6) requestAnimationFrame(frame);
+    else close();
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ===== 背景「ブースの壁に塗り分けが積もる」（#bgfx・2D canvas） ===== */
+(function bgFX() {
+  const cv = document.getElementById("bgfx");
+  if (!cv) return;
+  const ctx = cv.getContext("2d");
+  if (!ctx) return;
+  let W = 0, H = 0;
+  const wall = document.createElement("canvas"); /* 塗られた色が積もる層（超低速フェード） */
+  const wctx = wall.getContext("2d");
+  function build() {
+    W = cv.width = Math.max(4, innerWidth);
+    H = cv.height = Math.max(4, innerHeight);
+    wall.width = W; wall.height = H;
+  }
+  build();
+  window.addEventListener("resize", build);
+
+  const BAND_COLORS = ["88,200,216", "255,182,72", "150,160,175", "126,196,140", "228,120,105", "170,140,220"];
+  let ci = 0;
+  let job = null, nextJob = performance.now() + 700;
+  function newJob() {
+    if (!W || !H) return;
+    const ang = (Math.random() * 50 - 25) * Math.PI / 180;
+    const cx = Math.random() * W, cy = Math.random() * H;
+    const wdt = 60 + Math.random() * 90;
+    job = { ang, cx, cy, wdt, phase: 0, t: 0, col: BAND_COLORS[ci++ % BAND_COLORS.length], mist: [] };
+  }
+  /* 常時ふわふわ漂う微細ミスト（重力でゆっくり下に流れて消える） */
+  const ambient = [];
+  function seedAmbient() {
+    if (!W || !H) return;
+    while (ambient.length < 9) {
+      ambient.push({ x: Math.random() * W, y: Math.random() * H, r: 6 + Math.random() * 10, life: 2 + Math.random() * 3, c: BAND_COLORS[(Math.random() * BAND_COLORS.length) | 0] });
+    }
+  }
+
+  let last = performance.now();
+  (function draw(now) {
+    requestAnimationFrame(draw);
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    if (!W || !H) return;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "#15181d";
+    ctx.fillRect(0, 0, W, H);
+
+    /* 壁に積もった塗り分け（毎フレーム極薄くフェードして重ね塗り） */
+    wctx.fillStyle = "rgba(21,24,29,0.0022)";
+    wctx.fillRect(0, 0, W, H);
+    ctx.drawImage(wall, 0, 0);
+
+    if (!job && now > nextJob) newJob();
+    if (job) {
+      job.t += dt;
+      const { ang, cx, cy, wdt, col } = job;
+      if (isFinite(ang) && isFinite(cx) && isFinite(cy)) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(ang);
+        /* ①マスキングテープ2本が斜めに伸びて貼られる（0.8s） */
+        const grow = Math.min(1, job.t / 0.8);
+        const len = 900 * grow;
+        if (job.phase < 2) {
+          ctx.fillStyle = "rgba(207,195,154,0.85)";
+          ctx.fillRect(-len / 2, -wdt / 2 - 14, len, 12);
+          ctx.fillRect(-len / 2, wdt / 2 + 2, len, 12);
+        }
+        ctx.restore();
+      }
+      if (job.phase === 0 && job.t > 0.8) job.phase = 1;
+      /* ②間の帯にミスト粒が吹かれ色が積もる（1.4s） */
+      if (job.phase === 1) {
+        const pt = (job.t - 0.8) / 1.4;
+        for (let k = 0; k < 10; k++) {
+          const along = (Math.random() * 2 - 1) * 420 * Math.min(1, pt + 0.15);
+          const across = (Math.random() * 2 - 1) * (wdt / 2) * 0.95;
+          const x = cx + Math.cos(ang) * along - Math.sin(ang) * across;
+          const y = cy + Math.sin(ang) * along + Math.cos(ang) * across;
+          if (isFinite(x) && isFinite(y)) {
+            wctx.fillStyle = "rgba(" + col + ",0.05)";
+            wctx.beginPath(); wctx.arc(x, y, 9 + Math.random() * 12, 0, 6.29); wctx.fill();
+            if (Math.random() < 0.35) job.mist.push({ x, y, life: 0.5 });
+          }
+        }
+        if (pt >= 1) { job.phase = 2; job.t = 0; }
+      }
+      for (let i = job.mist.length - 1; i >= 0; i--) {
+        const m = job.mist[i];
+        m.life -= dt;
+        if (m.life <= 0) { job.mist.splice(i, 1); continue; }
+        ctx.fillStyle = "rgba(" + col + "," + (m.life * 0.25) + ")";
+        ctx.beginPath(); ctx.arc(m.x, m.y + (0.5 - m.life) * 20, 5, 0, 6.29); ctx.fill(); /* 重力で下へ */
+      }
+      /* ③テープが消えて（剥がれて）くっきり色帯が残る */
+      if (job.phase === 2 && job.t > 0.5) { job = null; nextJob = now + 2400 + Math.random() * 2600; }
+    }
+
+    seedAmbient();
+    for (let i = ambient.length - 1; i >= 0; i--) {
+      const a = ambient[i];
+      a.life -= dt;
+      a.y += dt * 6; /* 重力で少し下に流れる */
+      if (a.life <= 0 || a.y > H + 20) { ambient.splice(i, 1); continue; }
+      const al = Math.min(0.16, a.life * 0.08);
+      if (isFinite(a.x) && isFinite(a.y) && al > 0) {
+        ctx.fillStyle = "rgba(" + a.c + "," + al + ")";
+        ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.29); ctx.fill();
+      }
+    }
+  })(last);
+})();
+
+function vib(p) {
+  try {
+    /* ユーザー操作（タップ）由来でない自動再生時の振動は、ブラウザにブロックされ
+       コンソールにエラーが残るため、userActivationが取れている時だけ発火する。
+       APIが無いブラウザでは従来どおり素通しでtry/catchに委ねる（対応時のみ）。 */
+    if (navigator.vibrate && (!navigator.userActivation || navigator.userActivation.isActive)) {
+      navigator.vibrate(p);
+    }
+  } catch (e) {}
+}
+
+/* ================================================================
+   レッスンデータ（DESIGN.md §4 全文・1字も略さず実装）
+================================================================ */
+const LESSONS = [
+  {
+    id: "l1", tag: "L1", label: "原理", title: "塗装ってなに？",
+    mission: {
+      no: "MISSION 01",
+      q: "塗装のいちばん大事な仕事はどれ？",
+      opts: ["見た目をカッコよくする", "錆（さび）から守る", "部品を軽くする"], ans: 1,
+      ansLine: "正解は<b>錆から守る</b>。色はおまけ、本体は<b>守り（防錆・耐候）</b>。塗装がないと鉄は空気と水でどんどん錆びる。"
+    },
+    sliderLabel: "時間", val: (v) => Math.round(v * 12) + "ヶ月", grabAxis: "x", springBack: false,
+    note: "左が裸の鉄、右が塗装した鉄。時間を進めてみろ。",
+    legend: ["🟠 錆＝鉄＋水＋酸素", "🛡 塗膜＝バリア", "⏱ スライダー＝時間"],
+    cards: [
+      "<b>塗膜は雨がっぱ</b><br><br>塗膜（とまく＝塗料が固まった膜）は、水と酸素をブロックするバリア。鉄は「水＋酸素」が揃うと錆びる。かっぱを着せて濡らさない。それが塗装の本業。",
+      "<b>色は情報</b><br><br>赤いボタン＝非常停止、黄色＝注意、緑＝起動。色は飾りじゃなく<b>一瞬で伝わる情報</b>。製品の顔（意匠）も、安全の合図も、色の仕事。",
+      "<b>塗装は設計項目</b><br><br>図面に書かなければ、現場は塗れない。<b>何色（番号）・どの艶・どこまで塗るか</b>は設計者が決める仕様。「塗装よろしく」は指示じゃない。"
+    ],
+    quiz: {
+      q: "図面に塗装指示を書き忘れた。現場はどうなる？",
+      opts: ["いい感じに塗ってくれる", "塗れない（判断できず止まる）", "自動で標準色になる"], ans: 1,
+      exp: "塗装は設計項目。色番号・艶・範囲は図面に書かれて初めて現場が動ける。書かなければ判断できず、現場は止まる。"
+    },
+    teaser: "次回: 塗料の中身は3人組。乾くと1人消える──誰だ？"
+  },
+  {
+    id: "l2", tag: "L2", label: "乾燥", title: "塗料の正体と乾燥",
+    mission: {
+      no: "MISSION 02",
+      q: "乾いた塗膜の中に<b>残らない</b>のはどれ？",
+      opts: ["顔料（色の粉）", "樹脂（固まるのり）", "溶剤（運び屋の液体）"], ans: 2,
+      ansLine: "正解は<b>溶剤</b>。塗料＝顔料＋樹脂＋溶剤の3人組。溶剤は塗りやすくする運び屋で、乾くと蒸発して消える。残るのは顔料と樹脂だけ。"
+    },
+    sliderLabel: "乾燥時間", val: (v) => Math.round(v * 30) + "分", grabAxis: "x", springBack: false,
+    note: "濡れた膜がどう「塗膜」になるか、時間を進めて見ろ。",
+    legend: ["🎨 顔料＝色の粉", "🧴 樹脂＝固まるのり", "💨 溶剤＝蒸発して消える"],
+    cards: [
+      "<b>3人組の役割分担</b><br><br><b>顔料</b>＝色と隠す力。<b>樹脂</b>＝固まって膜になる本体（メラミン・ウレタン・エポキシは樹脂の名前）。<b>溶剤</b>＝サラサラにして塗りやすくする運び屋。塗料の性能は<b>樹脂で決まる</b>。",
+      "<b>乾燥は3方式</b><br><br>①<b>自然乾燥</b>（常温で溶剤が飛ぶ・ラッカー等）②<b>焼付け</b>（炉で約130℃×20分・メラミン焼付けが機械の定番）③<b>2液反応</b>（主剤＋硬化剤を混ぜて化学反応・ウレタン等、混ぜたら使い切り）。",
+      "<b>焼付けは熱との勝負</b><br><br>130℃の炉に<b>ゴム・樹脂部品・銘板を付けたまま入れると溶ける・剥がれる</b>。順番は「塗装→あとから組付け」。炉のサイズも設計の制約──大物は入らない。"
+    ],
+    quiz: {
+      q: "メラミン焼付け塗装の標準条件はどれ？",
+      opts: ["約60℃×5分", "約130℃×20分", "約300℃×1時間"], ans: 1,
+      exp: "メラミン焼付けは約130℃×20分が標準。低すぎると硬化不足、高すぎたり長すぎると部品や樹脂パーツを傷める。"
+    },
+    teaser: "次回: ブシューッの物理。タレとゆず肌の犯人を捕まえる。"
+  },
+  {
+    id: "l3", tag: "L3", label: "吹き", title: "スプレーの物理",
+    mission: {
+      no: "MISSION 03",
+      q: "塗料が垂れる「タレ」の犯人はどれ？",
+      opts: ["ガンが近い・動きが遅い（付きすぎ）", "ガンが遠すぎる", "塗料の色が濃い"], ans: 0,
+      ansLine: "正解は<b>近い・遅い＝1ヶ所に付きすぎ</b>。厚く付いた濡れ膜は重力に負けて垂れる。逆に遠い・速いはザラザラ（ゆず肌・ドライ）になる。"
+    },
+    sliderLabel: "ガン距離", val: (v) => Math.round(100 + v * 300) + "mm", grabAxis: "y", springBack: false,
+    note: "距離を変えて吹け。近すぎ・遠すぎで何が起きる？",
+    legend: ["📏 適正≈200mm", "💧 近い→タレ", "🍊 遠い→ゆず肌"],
+    cards: [
+      "<b>霧化──空気が塗料を粉々にする</b><br><br>スプレーガンは、圧縮空気で塗料の液柱を<b>引きちぎって霧</b>にする（霧化）。細かい霧ほど肌がなめらか。エア圧が低いと粒が粗く、肌も粗くなる。",
+      "<b>タレとゆず肌──失敗の二大巨頭</b><br><br><b>タレ</b>＝厚塗りで濡れ膜が重力に負ける。<b>ゆず肌</b>＝霧の粒が均されずデコボコのまま固まる（レベリング不足・距離遠すぎ・乾きすぎ）。どちらも再研磨・再塗装＝コスト。",
+      "<b>重ねは半分ずらし</b><br><br>スプレーの扇は<b>端が薄い</b>。だから各パスを<b>前のパスに50%重ねる</b>と均一になる。重ねゼロだと縞々のムラ。ロボット塗装もこのルールで動く。"
+    ],
+    quiz: {
+      q: "エアスプレーのガンとパネルの適正距離は約？",
+      opts: ["約50mm", "約200mm", "約500mm"], ans: 1,
+      exp: "適正距離の目安は約200mm。近すぎるとタレ、遠すぎるとゆず肌になる。"
+    },
+    teaser: "次回: 「白っぽく塗って」で現場が凍る。色は番号で頼め。"
+  },
+  {
+    id: "l4", tag: "L4", label: "色艶", title: "色と艶の指示",
+    mission: {
+      no: "MISSION 04",
+      q: "図面の色指示、プロとして正しいのはどれ？",
+      opts: ["白っぽいグレーで", "マンセル5Y7/1 半ツヤ", "現場のいい感じで"], ans: 1,
+      ansLine: "正解は<b>番号＋艶</b>。マンセル値（色を数字で表すJISの物差し）や日塗工番号なら、誰が塗っても同じ色になる。「白っぽく」は人によって別の色。"
+    },
+    sliderLabel: "艶（グロス値）", val: (v) => "グロス " + Math.round(v * 90), grabAxis: "any", springBack: false,
+    note: "艶を上げ下げして、映り込みの変化を見ろ。",
+    legend: ["✨ 艶あり=グロス80↑", "🌗 半ツヤ=30〜60", "🌑 ツヤ消し=10↓"],
+    cards: [
+      "<b>色は番号──マンセルと日塗工</b><br><br><b>マンセル値</b>（例: 5Y7/1）＝色相・明度・彩度の3つの数字。<b>日塗工番号</b>＝日本塗料工業会の色見本帳の番号。図面には「色番号＋艶＋塗装種類」の3点セットで書く。",
+      "<b>艶は数字（60°グロス）</b><br><br>艶は感覚じゃなく<b>測れる</b>。60°の角度で光を当てて反射を測るのがグロス値。目安: <b>艶あり80以上／半ツヤ30〜60／ツヤ消し10以下</b>。図面には「半ツヤ」または「G60=40±10」のように書く。",
+      "<b>現物合わせの罠</b><br><br>「この現物と同じ色で」は危険。①現物は<b>経年で黄変・退色</b>している ②光源で見え方が変わる（<b>メタメリズム</b>: 蛍光灯では同じ、太陽では違う）。現物は測色して<b>番号に落としてから</b>指示する。"
+    ],
+    quiz: {
+      q: "「半ツヤ」のグロス値の目安は？",
+      opts: ["80以上", "30〜60", "10以下"], ans: 1,
+      exp: "半ツヤはグロス30〜60が目安。艶あり80以上、ツヤ消し10以下と合わせて覚える。"
+    },
+    teaser: "次回: 髪の毛より薄い世界。塗膜の厚さはμm（ミクロン）。"
+  },
+  {
+    id: "l5", tag: "L5", label: "膜厚", title: "膜厚と下地",
+    mission: {
+      no: "MISSION 05",
+      q: "塗装の密着（剥がれにくさ）を一番決めるのは？",
+      opts: ["上塗り職人の腕", "下地処理（脱脂・化成処理）", "塗料の値段"], ans: 1,
+      ansLine: "正解は<b>下地処理</b>。油ひとつ残っていれば高級塗料でもペリッと剥がれる。脱脂→化成処理（リン酸亜鉛皮膜＝密着と防錆の土台）→塗装。下地が9割。"
+    },
+    sliderLabel: "上塗り膜厚", val: (v) => Math.round(10 + v * 90) + "μm", grabAxis: "y", springBack: false,
+    note: "膜厚を変えろ。薄すぎ・厚すぎで何が起きる？",
+    legend: ["🪒 髪の毛=約80μm", "🎯 適正=40〜60μm(2コート)", "⚠ 厚すぎ→割れ"],
+    cards: [
+      "<b>μm（ミクロン）の世界</b><br><br>塗膜1コートは乾いて<b>約20〜25μm</b>。髪の毛（約80μm）の<b>3分の1</b>、ラップ（約11μm）の2倍。この極薄の膜が10年、鉄を守る。",
+      "<b>下地が9割</b><br><br>工程は<b>脱脂</b>（油を落とす）→<b>化成処理</b>（リン酸亜鉛の極薄皮膜＝塗料が食いつく土台＋防錆）→<b>プライマー</b>→上塗り。スパッタ・黒皮・鋭いエッジも密着と膜厚の敵。",
+      "<b>膜厚は測れる</b><br><br><b>電磁式膜厚計</b>を当てるだけで数字が出る（鉄の上の膜用）。図面に「膜厚60μm以上」と書けば、検査で保証できる。書かなければ誰も測らない。"
+    ],
+    quiz: {
+      q: "焼付け塗装1コートの標準乾燥膜厚は？",
+      opts: ["2〜3μm", "20〜25μm", "200〜250μm"], ans: 1,
+      exp: "1コートの乾燥膜厚は約20〜25μm。髪の毛（約80μm）よりずっと薄い膜が防錆を担っている。"
+    },
+    teaser: "次回: ペリッの快感を設計する──見切り線とマスキング。"
+  },
+  {
+    id: "l6", tag: "L6", label: "見切り", title: "塗り分けとマスキング",
+    mission: {
+      no: "MISSION 06",
+      q: "絶対に塗ってはいけない場所はどれ？",
+      opts: ["製品の外観面", "アース接続面（電気を逃がす面）", "カバーの内側"], ans: 1,
+      ansLine: "正解は<b>アース面</b>。塗膜は電気を通さない（絶縁体）。アース面を塗ると感電・ノイズ対策が全部無効になる。ネジ穴・嵌合面・ラベル貼り面も塗装レス指定。"
+    },
+    sliderLabel: "見切り線の位置", val: (v) => "見切り高さ " + Math.round(v * 100) + "%", grabAxis: "y", springBack: false,
+    note: "見切り線を動かせ。どこで分けると美しい？",
+    legend: ["📏 見切り=色の境界線", "➖ 溝・角に置くと綺麗", "🎭 マスキング=覆って守る"],
+    cards: [
+      "<b>見切りは角と溝に置く</b><br><br>色の境界線（見切り）は<b>角・溝・段差</b>に置く。平面のド真ん中に置くと、わずかなにじみ・ズレが全部見える。設計者が溝を1本掘っておけば、現場は楽で外観は美しい。",
+      "<b>塗装レス指定の場所</b><br><br><b>ネジ穴</b>（塗料が入るとボルトが入らない・トルク異常）／<b>アース面</b>（導通しない）／<b>嵌合面</b>（寸法が膜厚分変わって入らない）／<b>ラベル・銘板貼り面</b>（剥がれる）。守り方はマスキング指示か後加工指示。",
+      "<b>図面での書き方</b><br><br>塗装範囲は<b>ハッチング＋「塗装範囲」注記</b>。塗らない面は<b>「この面塗装禁止」</b>。色・艶・膜厚は表題欄近くに「メラミン焼付 5Y7/1 半ツヤ 膜厚40μm以上」。これで指示は完成。"
+    ],
+    quiz: {
+      q: "M6のネジ穴に塗料が入り込んだ。何が起きる？",
+      opts: ["何も起きない", "ボルトが入らない・トルク異常", "強度が上がる"], ans: 1,
+      exp: "塗膜の厚み分だけ穴が狭くなり、ボルトが入らない・無理に締めるとトルク異常になる。ネジ穴は塗装レス指定が基本。"
+    },
+    teaser: "ボス戦: 塗装係長の最終試験7問。全部Lの知識で解ける。"
+  }
+];
+
+/* BOSS：DESIGN.md §4 L7（7問連続）。exp（解説）はDESIGN表にはq/opts/ansのみのため、
+   各設問に対応するレッスンのansLine/カード内容から実装者が要約して補った（曖昧点は完了報告に明記）。 */
+const BOSS = [
+  { q: "塗装のいちばん大事な仕事は？", opts: ["見た目", "錆から守る", "軽くする"], ans: 1,
+    exp: "正解は錆から守る。色はおまけ、本体は守り（防錆・耐候）。塗装がないと鉄は空気と水でどんどん錆びる。" },
+  { q: "乾いた塗膜に残らない成分は？", opts: ["顔料", "樹脂", "溶剤"], ans: 2,
+    exp: "正解は溶剤。塗料＝顔料＋樹脂＋溶剤の3人組。溶剤は運び屋で、乾くと蒸発して消える。" },
+  { q: "タレの犯人は？", opts: ["近い・遅い（付きすぎ）", "遠すぎ", "色が濃い"], ans: 0,
+    exp: "正解は近い・遅い＝付きすぎ。厚く付いた濡れ膜は重力に負けて垂れる。" },
+  { q: "「半ツヤ」のグロス目安は？", opts: ["80以上", "30〜60", "10以下"], ans: 1,
+    exp: "目安は艶あり80以上／半ツヤ30〜60／ツヤ消し10以下。艶は感覚でなく60°グロス値で測る。" },
+  { q: "密着を一番決めるのは？", opts: ["職人の腕", "下地処理", "塗料の値段"], ans: 1,
+    exp: "正解は下地処理。脱脂→化成処理→塗装。油ひとつ残っていれば高級塗料でもペリッと剥がれる。" },
+  { q: "焼付け炉に入れる前に外すのは？", opts: ["鉄のカバー", "ゴム・樹脂部品", "ボルト"], ans: 1,
+    exp: "約130℃の炉にゴム・樹脂部品・銘板を付けたまま入れると溶ける・剥がれる。塗装してから組付ける。" },
+  { q: "アース面の正しい指示は？", opts: ["厚く塗る", "塗装レス（マスキング）", "艶消しにする"], ans: 1,
+    exp: "正解はアース面＝塗装レス。塗膜は電気を通さない絶縁体。塗ると感電・ノイズ対策が無効になる。" }
+];
+
+/* ---------------- 判断ドリル（別紙A・24問全文） ---------------- */
+const DRILLS = [
+  { id: "iro1", tag: "色艶指示(iro)", situation: "図面に「色: 白」とだけ書いた。", ans: "NG",
+    reason: "白は無数にある。純白・オフ白・アイボリー…人によって違う色になる。", fix: "対策：マンセル値か日塗工番号＋艶＋塗装種類の3点セットで書く。" },
+  { id: "iro2", tag: "色艶指示(iro)", situation: "「メラミン焼付 5Y7/1 半ツヤ」と指示した。", ans: "OK",
+    reason: "色番号＋艶＋塗装種類が揃った完全な指示。誰が塗っても同じ仕上がり。", fix: "この形を自分の標準にする。" },
+  { id: "iro3", tag: "色艶指示(iro)", situation: "客先の10年物の現物を「これと同じ色で」とだけ渡した。", ans: "NG",
+    reason: "現物は経年で黄変・退色済み。光源でも見え方が変わる（メタメリズム）。", fix: "対策：測色して色番号に落とし、番号で指示する。" },
+  { id: "iro4", tag: "色艶指示(iro)", situation: "屋外設置の製品に、室内用と同じメラミン焼付けを指示した。", ans: "NG",
+    reason: "メラミンは耐候性が弱く、屋外では数年でチョーキング（白い粉ふき）・退色する。", fix: "対策：屋外は2液ウレタンやフッ素など耐候塗料を検討する。" },
+  { id: "maku1", tag: "膜厚下地(maku)", situation: "「厚いほど安心」と考えて膜厚100μmを指定した。", ans: "NG",
+    reason: "過剰膜厚はコスト増＋割れ・タレの原因。必要膜厚は環境で決まる。", fix: "対策：室内機械なら2コート40〜60μmが目安。根拠をもって指定する。" },
+  { id: "maku2", tag: "膜厚下地(maku)", situation: "溶接のスパッタとスケールを除去してから塗装工程へ回した。", ans: "OK",
+    reason: "凸凹や黒皮の上の塗膜は密着せず、そこから錆びる。除去は正しい前工程。", fix: "図面に「スパッタ除去のこと」と一言入れるとさらに確実。" },
+  { id: "maku3", tag: "膜厚下地(maku)", situation: "鋭利なエッジ（バリ取りのみ・面取りなし）をそのまま塗装に出した。", ans: "NG",
+    reason: "塗料は表面張力で鋭いエッジから逃げ、エッジの膜厚は極端に薄くなる→エッジから錆びる。", fix: "対策：糸面取り（C0.2〜0.5）を指示して膜をつかせる。" },
+  { id: "maku4", tag: "膜厚下地(maku)", situation: "「見えない裏側だから」と脱脂を省略する指示を出した。", ans: "NG",
+    reason: "見えなくても剥がれ・錆は進行し、製品寿命を削る。防錆は外観でなく機能。", fix: "対策：下地処理は全面。省くなら「塗装なし＋防錆油」など別の守りを設計する。" },
+  { id: "mask1", tag: "マスキング(mask)", situation: "タップ穴に「マスキングまたは塗装後タップさらい」を図面指示した。", ans: "OK",
+    reason: "塗料が入ったタップ穴はボルトが入らない・トルク異常になる。先回りの指示が正解。", fix: "穴数が多い場合はどちらが安いか現場と相談。" },
+  { id: "mask2", tag: "マスキング(mask)", situation: "位置決めピン穴を塗ったまま組立に流した。", ans: "NG",
+    reason: "膜厚分だけ穴が小さくなり、圧入不良・位置ズレを起こす。", fix: "対策：精度穴はマスキング指定。図面に「この穴塗装禁止」。" },
+  { id: "mask3", tag: "マスキング(mask)", situation: "アース端子座面を「塗装レス」指定し、防錆は導電性の表面処理にした。", ans: "OK",
+    reason: "導通と防錆を両立する定石。塗膜は絶縁体だから塗ってはいけない。", fix: "三価クロメート等の導電性処理を仕様に明記。" },
+  { id: "mask4", tag: "マスキング(mask)", situation: "マスキング範囲を電話で口頭説明して済ませた。", ans: "NG",
+    reason: "口頭指示は伝言ゲーム。人が替わったら事故になる。", fix: "対策：図面にハッチングで範囲を明示。「言った」より「描いた」。" },
+  { id: "yaki1", tag: "焼付けと乾燥(yaki)", situation: "樹脂銘板を貼ってから焼付け炉に入れる工程を組んだ。", ans: "NG",
+    reason: "約130℃で銘板は変形・剥離する。", fix: "対策：銘板・ゴム・樹脂は塗装後に組付ける工程順にする。" },
+  { id: "yaki2", tag: "焼付けと乾燥(yaki)", situation: "2液ウレタンの可使時間（ポットライフ）を確認してから調合量を決めた。", ans: "OK",
+    reason: "混ぜた瞬間から硬化が始まる。使い切れる量だけ作るのがプロ。", fix: "余った分は戻せない。段取りで量を決める。" },
+  { id: "yaki3", tag: "焼付けと乾燥(yaki)", situation: "冬の寒い工場で自然乾燥。「規定時間経ったから」と重ね塗りした。", ans: "NG",
+    reason: "乾燥時間は温度で大きく変わる。低温では規定時間でも乾いていない→チヂミ・ワキの原因。", fix: "対策：指触・硬度で確認するか、乾燥炉・ヒーターで温度を確保。" },
+  { id: "yaki4", tag: "焼付けと乾燥(yaki)", situation: "製品が大きく炉に入らない可能性に気づき、設計段階で分割や常温硬化塗料を検討した。", ans: "OK",
+    reason: "炉のサイズは設計制約。気づいた時点で工法ごと考え直すのが設計者。", fix: "塗装協力会社の炉寸法を早めに確認する習慣をつける。" },
+  { id: "fuki1", tag: "吹きの物理(fuki)", situation: "深い箱の内側の隅まで、外から一発で塗れる前提で設計した。", ans: "NG",
+    reason: "霧は深い凹部に届かない（エアが跳ね返る）。隅は必ず薄くなる。", fix: "対策：開口を設ける・分割して塗ってから組む・内面は電着や溶融亜鉛など別工法。" },
+  { id: "fuki2", tag: "吹きの物理(fuki)", situation: "ガンを面に対して常に垂直・等距離で運行した。", ans: "OK",
+    reason: "扇の端は薄い。角度と距離を一定に保つのが均一膜厚のキモ。", fix: "ロボット塗装のティーチングも同じ原理。" },
+  { id: "fuki3", tag: "吹きの物理(fuki)", situation: "工数削減のため1回で厚く吹く指示を出した。", ans: "NG",
+    reason: "一発厚塗りはタレ・ワキ（泡）の温床。手直しで結局遅くなる。", fix: "対策：薄く2〜3回に分けてフラッシュオフ（間の乾き待ち）を挟む。" },
+  { id: "fuki4", tag: "吹きの物理(fuki)", situation: "袋構造の内部は塗れないため、材料を溶融亜鉛めっき鋼板にして守った。", ans: "OK",
+    reason: "塗れない場所は材料側で守る。工法と材料はセットで考える設計判断。", fix: "切断端面の防錆も忘れずに検討。" },
+  { id: "cost1", tag: "設計とコスト(cost)", situation: "室内置きの機械の全面に高級フッ素塗装を指定した。", ans: "NG",
+    reason: "室内にフッ素は過剰品質。コストが跳ね上がるだけ。", fix: "対策：環境に合わせて選ぶ。室内→メラミン焼付けで十分なことが多い。" },
+  { id: "cost2", tag: "設計とコスト(cost)", situation: "塗装色を自社の標準色リストから選んだ。", ans: "OK",
+    reason: "標準色は調色不要・塗料在庫あり・安い・早い。特注色は全部逆。", fix: "どうしても特注色なら最低ロットと納期を先に確認。" },
+  { id: "cost3", tag: "設計とコスト(cost)", situation: "試作1台のために特注調色（最低ロット16kg）を発注した。", ans: "NG",
+    reason: "1台に16kgの塗料はほぼ廃棄。コストと環境の無駄。", fix: "対策：標準色の近似色で承認を取るか、市販の近似色スプレーを検討。" },
+  { id: "cost4", tag: "設計とコスト(cost)", situation: "マスキングだらけになる設計を見直し、「部品単位で塗ってから組む」工程に変えた。", ans: "OK",
+    reason: "マスキング工数は隠れコスト。工程順まで設計するのが本当の設計。", fix: "塗装後組立は傷対策（保護材）もセットで指示。" }
+];
+
+/* ---------------- 進捗（localStorage） ---------------- */
+const STORE_KEY = "coat-forge-v1";
+let progress = { done: {}, streak: { week: "", n: 0 }, broken: 0 };
+try {
+  const raw = localStorage.getItem(STORE_KEY);
+  if (raw) progress = Object.assign(progress, JSON.parse(raw));
+} catch (e) {}
+function saveProgress() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(progress)); } catch (e) {}
+}
+function isoWeek(d) {
+  const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  const day = (t.getUTCDay() + 6) % 7;
+  t.setUTCDate(t.getUTCDate() - day + 3);
+  const firstThu = new Date(Date.UTC(t.getUTCFullYear(), 0, 4));
+  const fday = (firstThu.getUTCDay() + 6) % 7;
+  firstThu.setUTCDate(firstThu.getUTCDate() - fday + 3);
+  return t.getUTCFullYear() + "-W" + String(1 + Math.round((t - firstThu) / 6048e5)).padStart(2, "0");
+}
+function nextWeekOf(wkStr) {
+  const m = wkStr.match(/(\d+)-W(\d+)/);
+  if (!m) return "";
+  const d = new Date(Date.UTC(+m[1], 0, 4));
+  d.setUTCDate(d.getUTCDate() + (+m[2]) * 7);
+  return isoWeek(d);
+}
+function bumpStreak() {
+  const wk = isoWeek(new Date());
+  const s = progress.streak;
+  if (s.week === wk) return;
+  s.n = (s.week && nextWeekOf(s.week) === wk) ? s.n + 1 : 1;
+  s.week = wk;
+}
+
+/* ---------------- 復習キュー（間隔反復・簡略SM-2） ---------------- */
+const RQ_KEY = "coat-forge-rq-v1";
+const RQ_INTERVALS = [1, 3, 7, 18, 45, 112]; // 日
+const RQ_DAY_LIMIT = 5;
+let reviewQueue = [];
+try {
+  const raw = localStorage.getItem(RQ_KEY);
+  if (raw) reviewQueue = JSON.parse(raw) || [];
+} catch (e) {}
+function saveRQ() {
+  try { localStorage.setItem(RQ_KEY, JSON.stringify(reviewQueue)); } catch (e) {}
+}
+function rqUpsert(id, src) {
+  const now = Date.now();
+  let item = reviewQueue.find((r) => r.id === id);
+  if (!item) {
+    item = { id, due: now + 86400000, interval: 1, src };
+    reviewQueue.push(item);
+  } else {
+    item.due = now + 86400000;
+    item.interval = 1;
+    item.src = src;
+  }
+  saveRQ();
+}
+function rqAnswer(item, correct) {
+  if (correct) {
+    const idx = RQ_INTERVALS.indexOf(item.interval);
+    const next = idx >= 0 && idx < RQ_INTERVALS.length - 1 ? RQ_INTERVALS[idx + 1] : Math.round(item.interval * 2.5);
+    item.interval = next;
+  } else {
+    item.interval = 1;
+  }
+  item.due = Date.now() + item.interval * 86400000;
+  saveRQ();
+}
+function rqDueList() {
+  const now = Date.now();
+  return reviewQueue.filter((r) => r.due <= now).slice(0, RQ_DAY_LIMIT);
+}
+/* 復習キューの中身を実データ（クイズ/ボス問題/ドリル）から解決する */
+function rqResolveQuestion(item) {
+  const s = item.src || {};
+  if (s.type === "quiz") {
+    const L = LESSONS.find((x) => x.id === s.lessonId);
+    if (!L) return null;
+    return { q: L.quiz.q, opts: L.quiz.opts, ans: L.quiz.ans, exp: L.quiz.exp };
+  }
+  if (s.type === "boss") {
+    const b = BOSS[s.idx];
+    if (!b) return null;
+    return { q: b.q, opts: b.opts, ans: b.ans, exp: b.exp };
+  }
+  if (s.type === "drill") {
+    const d = DRILLS.find((x) => x.id === s.drillId);
+    if (!d) return null;
+    return { q: d.situation, opts: ["OK", "NG"], ans: d.ans === "OK" ? 0 : 1, exp: d.reason + " " + d.fix, drill: true };
+  }
+  return null;
+}
+
+/* ---------------- ドリル成績 ---------------- */
+const DRILL_STORE_KEY = "coat-forge-drill-v1";
+let drillStats = { seen: {}, wrong: {}, correctCount: 0, totalCount: 0 };
+try {
+  const raw = localStorage.getItem(DRILL_STORE_KEY);
+  if (raw) drillStats = Object.assign(drillStats, JSON.parse(raw));
+} catch (e) {}
+function saveDrillStats() {
+  try { localStorage.setItem(DRILL_STORE_KEY, JSON.stringify(drillStats)); } catch (e) {}
+}
+function pickDrillSet(n) {
+  const unseen = DRILLS.filter((d) => !drillStats.seen[d.id]);
+  const wrongIds = Object.keys(drillStats.wrong).filter((id) => drillStats.wrong[id] > 0);
+  const wrongPool = DRILLS.filter((d) => wrongIds.includes(d.id));
+  const pool = [];
+  const pushUnique = (arr) => { arr.forEach((d) => { if (!pool.find((p) => p.id === d.id)) pool.push(d); }); };
+  pushUnique(shuffleArr(unseen.slice()));
+  pushUnique(shuffleArr(wrongPool.slice()));
+  pushUnique(shuffleArr(DRILLS.slice()));
+  return pool.slice(0, n);
+}
+function shuffleArr(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/* ---------------- 画面切りかえ ---------------- */
+const $ = (id) => document.getElementById(id);
+function showView(name) {
+  ["viewHome", "viewLesson", "viewBoss", "viewDrill", "viewReview", "viewMap"].forEach((v) => { $(v).style.display = v === name ? "block" : "none"; });
+  window.scrollTo(0, 0);
+}
+function setPhase(name) {
+  ["phMission", "phExp", "phReveal", "phQuiz", "phClear"].forEach((p) => { $(p).style.display = p === name ? "block" : "none"; });
+  const sw = $("stageWrap");
+  if (name === "phExp") { sw.style.display = "block"; sw.classList.remove("mini"); }
+  else if (name === "phReveal") { sw.style.display = "block"; sw.classList.add("mini"); }
+  else sw.style.display = "none";
+  if (ST && !ST.fake) requestAnimationFrame(() => ST.resize());
+  window.scrollTo(0, 0);
+}
+
+/* ---------------- ホーム描画 ---------------- */
+function lessonState(i) {
+  const isBoss = i >= LESSONS.length;
+  const id = isBoss ? "l7" : LESSONS[i].id;
+  if (progress.done[id]) return "done";
+  const prevDone = i === 0 ? true : (!isBoss ? !!progress.done[LESSONS[i - 1].id] : LESSONS.every((L) => progress.done[L.id]));
+  return prevDone ? "now" : "lock";
+}
+const PROG_KEYS = LESSONS.map((L) => L.id).concat(["l7"]);
+function clearedCount() {
+  return PROG_KEYS.filter((k) => progress.done[k]).length;
+}
+function renderHome() {
+  const wrap = $("nodes1");
+  wrap.innerHTML = "";
+  const labels = LESSONS.map((L) => L.label).concat(["ボス"]);
+  for (let i = 0; i < labels.length; i++) {
+    const st = lessonState(i);
+    const b = document.createElement("button");
+    b.className = "node " + st;
+    const face = i < LESSONS.length ? LESSONS[i].tag.replace("L", "") : "★";
+    b.innerHTML = '<div class="dot">' + (st === "done" ? "✓" : face) + '</div><div class="lbl">' + labels[i] + "</div>";
+    if (st !== "lock") b.addEventListener("click", () => (i < LESSONS.length ? openLesson(i) : openBoss()));
+    wrap.appendChild(b);
+  }
+  const count = clearedCount();
+  $("progText").textContent = count + "/" + PROG_KEYS.length;
+  $("progFill").style.width = Math.round((count / PROG_KEYS.length) * 100) + "%";
+  const next = LESSONS.map((_, i) => i).find((i) => lessonState(i) === "now");
+  const btn = $("btnResume");
+  if (count === PROG_KEYS.length) {
+    btn.innerHTML = "🏆 第1章 全クリ！<small>ボス戦にもう一度挑める／第2章は次のアップデートで配信</small>";
+    btn.onclick = openBoss;
+  } else if (next === undefined) {
+    btn.innerHTML = "▶ ボス戦へ<small>L7 塗装係長の最終試験（7問）</small>";
+    btn.onclick = openBoss;
+  } else {
+    const L = LESSONS[next];
+    btn.innerHTML = (count === 0 ? "▶ はじめる" : "▶ つづきから") + "<small>" + L.tag + " " + L.title + "</small>";
+    btn.onclick = () => openLesson(next);
+  }
+  const s = progress.streak;
+  $("streakLine").textContent = (s.n > 0 ? "🔥 " + s.n + "週れんぞく" : "🔥 今週から積み上げ開始") + "／破綻させたパネル " + (progress.broken || 0) + "枚";
+
+  /* 復習キューカード（due時のみ・最上段に表示） */
+  const due = rqDueList();
+  const rqBtn = $("btnRQ");
+  if (due.length > 0) {
+    rqBtn.style.display = "flex";
+    $("rqTitle").textContent = "⚡ 今日の復習 " + due.length + "問";
+    rqBtn.onclick = openReview;
+  } else {
+    rqBtn.style.display = "none";
+  }
+
+  renderPaintHero(count);
+  renderPassport();
+}
+
+/* ================================================================
+   🛂 FORGE PASSPORT（兄弟5アプリの進捗を1画面に・本作のFableの一手）
+   全アプリが同一オリジン（pasarinobuhito0409-droid.github.io）配下なので
+   localStorageが共有される。totalの根拠（読み取りのみ・変更なし）：
+     各アプリの index.html に共通して
+       const PROG_KEYS = LESSONS.map((L) => L.id).concat(["l7"]);
+     という定義があり、LESSONS配列はどの兄弟アプリも l1〜l6 の6個。
+     つまり done に書き込まれるキーは 6+1(ボスl7)=7個。
+     ARC:  arc-forge/index.html  736-851行に l1〜l6 定義（6個）＋1101行 PROG_KEYS
+     FORCE:force-forge/index.html 458-573行に l1〜l6 定義（6個）＋698行 PROG_KEYS
+     VOLT: volt-forge/index.html  461-601行に l1〜l6 定義（6個）＋708行 PROG_KEYS
+     BEND: bend-forge/index.html  439-554行に l1〜l6 定義（6個）＋655行 PROG_KEYS
+     GEAR: gear-forge/index.html  710-848行に l1〜l6 定義（6個）＋1070行 PROG_KEYS
+   （2026-07-09、各アプリの実ソースを読み取って確認。total=7で固定値化）
+================================================================ */
+const PASSPORT_APPS = [
+  { key: "arc",   emoji: "⚡", name: "ARC",   store: "arc-forge-v2",   total: 7, url: "https://pasarinobuhito0409-droid.github.io/arc-forge/" },
+  { key: "force", emoji: "🔧", name: "FORCE", store: "force-forge-v1", total: 7, url: "https://pasarinobuhito0409-droid.github.io/force-forge/" },
+  { key: "volt",  emoji: "💡", name: "VOLT",  store: "volt-forge-v1",  total: 7, url: "https://pasarinobuhito0409-droid.github.io/volt-forge/" },
+  { key: "bend",  emoji: "📐", name: "BEND",  store: "bend-forge-v1",  total: 7, url: "https://pasarinobuhito0409-droid.github.io/bend-forge/" },
+  { key: "gear",  emoji: "⚙",  name: "GEAR",  store: "gear-forge-v1",  total: 7, url: "https://pasarinobuhito0409-droid.github.io/gear-forge/" }
+];
+function passportReadPct(app) {
+  try {
+    const raw = localStorage.getItem(app.store);
+    if (!raw) return null;
+    const obj = JSON.parse(raw);
+    const done = obj && obj.done ? obj.done : null;
+    if (!done || typeof done !== "object") return null;
+    const n = Object.keys(done).filter((k) => done[k]).length;
+    return Math.max(0, Math.min(100, Math.round((n / app.total) * 100)));
+  } catch (e) {
+    return null;
+  }
+}
+function renderPassport() {
+  const wrap = $("passportBadges");
+  if (!wrap) return;
+  wrap.innerHTML = "";
+  PASSPORT_APPS.forEach((app) => {
+    let pct = null;
+    try { pct = passportReadPct(app); } catch (e) { pct = null; }
+    const a = document.createElement("a");
+    a.className = "pbadge";
+    a.href = app.url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    const pctText = pct === null ? "—" : pct + "%";
+    a.innerHTML =
+      '<div class="pbemoji">' + app.emoji + '</div>' +
+      '<div class="pbname">' + app.name + '</div>' +
+      '<div class="pbpct">' + pctText + '</div>' +
+      '<div class="pbbar"><div style="width:' + (pct || 0) + '%"></div></div>';
+    wrap.appendChild(a);
+  });
+}
+
+/* ================================================================
+   共有ヘルパー：環境（HDRI）・素材（鋼PBR／ブースの床）
+================================================================ */
+let GLOBAL_STEEL = {};
+let _brushTexCache = null;
+function brushTex() {
+  if (typeof THREE === "undefined") return null;
+  if (_brushTexCache) return _brushTexCache;
+  const cv = document.createElement("canvas");
+  cv.width = 512; cv.height = 512;
+  const ctx = cv.getContext("2d");
+  ctx.fillStyle = "#9a9a9a"; ctx.fillRect(0, 0, 512, 512);
+  for (let i = 0; i < 2600; i++) {
+    const y = Math.random() * 512, x = Math.random() * 512;
+    const len = 30 + Math.random() * 220;
+    ctx.strokeStyle = Math.random() < 0.5
+      ? "rgba(255,255,255," + (0.03 + Math.random() * 0.06) + ")"
+      : "rgba(0,0,0," + (0.03 + Math.random() * 0.06) + ")";
+    ctx.lineWidth = 0.5 + Math.random();
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + len, y + (Math.random() - 0.5) * 2); ctx.stroke();
+  }
+  const tex = new THREE.CanvasTexture(cv);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  _brushTexCache = tex;
+  return tex;
+}
+function boothFloorTexOf() {
+  const cv = document.createElement("canvas");
+  cv.width = 512; cv.height = 512;
+  const ctx = cv.getContext("2d");
+  ctx.fillStyle = "#3a3e45"; ctx.fillRect(0, 0, 512, 512);
+  /* 排気グレーチング（塗装ブース床のスリット） */
+  ctx.strokeStyle = "rgba(0,0,0,0.35)"; ctx.lineWidth = 3;
+  for (let x = 14; x < 512; x += 28) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 512); ctx.stroke(); }
+  ctx.strokeStyle = "rgba(255,255,255,0.05)"; ctx.lineWidth = 1;
+  for (let x = 22; x < 512; x += 28) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 512); ctx.stroke(); }
+  /* オーバースプレーの乾いた粉じん（塗装ブース床の特徴） */
+  const flecks = ["136,200,210", "255,190,110", "180,185,195"];
+  for (let i = 0; i < 900; i++) {
+    const c = flecks[(Math.random() * flecks.length) | 0];
+    ctx.fillStyle = "rgba(" + c + "," + (0.03 + Math.random() * 0.07) + ")";
+    ctx.beginPath(); ctx.arc(Math.random() * 512, Math.random() * 512, 0.6 + Math.random() * 1.8, 0, 6.29); ctx.fill();
+  }
+  const tex = new THREE.CanvasTexture(cv);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(2, 1.5);
+  return tex;
+}
+function loadGlobalSteel() {
+  if (typeof THREE === "undefined") return;
+  const loader = new THREE.TextureLoader();
+  [["col", "assets/steel_col.jpg", true], ["rough", "assets/steel_rough.jpg", false], ["nrm", "assets/steel_nrm.jpg", false]].forEach((it) => {
+    loader.load(it[1], (t) => {
+      t.wrapS = t.wrapT = THREE.RepeatWrapping;
+      if (it[2]) t.encoding = THREE.sRGBEncoding;
+      GLOBAL_STEEL[it[0]] = t;
+    }, undefined, () => { /* 失敗時はsteelMaps()がbrushTex()フォールバックへ */ });
+  });
+}
+loadGlobalSteel();
+function steelMaps(extra) {
+  const s = GLOBAL_STEEL;
+  const base = (s && s.col)
+    ? { color: 0xd8dde2, metalness: 0.9, roughness: 1.0,
+        map: s.col, roughnessMap: s.rough, normalMap: s.nrm,
+        normalScale: new THREE.Vector2(0.6, 0.6), envMapIntensity: 1.25 }
+    : { color: 0xb0b6bd, metalness: 0.85, roughness: 0.36,
+        roughnessMap: brushTex(), bumpMap: brushTex(), bumpScale: 0.012, envMapIntensity: 1.2 };
+  return Object.assign(base, extra || {});
+}
+function steelMatOf(extra) { return new THREE.MeshStandardMaterial(steelMaps(extra)); }
+function brassMatOf(extra) { return new THREE.MeshStandardMaterial(Object.assign({ color: 0xc9a86a, metalness: 0.85, roughness: 0.32, envMapIntensity: 1.2 }, extra || {})); }
+const _tmpC = { c: null };
+function tc() { if (!_tmpC.c && typeof THREE !== "undefined") _tmpC.c = new THREE.Color(); return _tmpC.c; }
+function setExtraHTML(html) { $("extraCtrls").innerHTML = html || ""; }
+function setChips(html) { $("stageChips").innerHTML = html || ""; }
+/* HDRI環境。読み込み失敗時は手作りパネル環境へフォールバック（gear-forgeのsteelMaps()方式を踏襲） */
+function applyEnvironment(renderer, scene) {
+  try {
+    const es = new THREE.Scene();
+    const box = new THREE.BoxGeometry(1, 1, 1);
+    function panel(x, y, z, sx, sy, color) {
+      const m = new THREE.Mesh(box, new THREE.MeshBasicMaterial({ color }));
+      m.position.set(x, y, z); m.scale.set(sx, sy, 0.1); m.lookAt(0, 0, 0); es.add(m);
+    }
+    es.add(new THREE.Mesh(new THREE.SphereGeometry(20, 8, 8), new THREE.MeshBasicMaterial({ color: 0x14161a, side: THREE.BackSide })));
+    panel(0, 6, 1, 7, 3.5, 0xffffff);
+    panel(-6, 2, 2, 2, 4, 0x58c8d8);
+    panel(6, 1.5, -1, 1.5, 4, 0xffb648);
+    panel(0, 0.8, 6, 5, 2.2, 0x6f7a86);
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(es, 0.02).texture;
+  } catch (e) {}
+  try {
+    if (THREE.RGBELoader) {
+      new THREE.RGBELoader().load("assets/env.hdr", (hdr) => {
+        try {
+          const pm = new THREE.PMREMGenerator(renderer);
+          scene.environment = pm.fromEquirectangular(hdr).texture;
+          hdr.dispose();
+          pm.dispose();
+        } catch (e2) {}
+      }, undefined, () => { /* 失敗時は手作り環境のまま維持 */ });
+    }
+  } catch (e) {}
+}
+
+/* ================================================================
+   ★育つ塗装パネル（ホームヒーロー・本物Three.js・ドラッグ回転）
+   クリア数（0〜7）で8工程が進む。全クリでスプレーガン＋ミスト＋
+   鏡面ハイライト掃引の自動ループ演出。
+================================================================ */
+const PANEL_STATES = [
+  { name: "素地（黒皮のまま）",       color: 0x2a2d33, metalness: 0.8,  roughness: 0.75 },
+  { name: "脱脂（油を落とす）",       color: 0x3a3e45, metalness: 0.8,  roughness: 0.6  },
+  { name: "プライマー（防錆の下地）", color: 0x8a8f96, metalness: 0.2,  roughness: 0.7  },
+  { name: "パテ研ぎ（面を整える）",   color: 0x9aa0a8, metalness: 0.1,  roughness: 0.8  },
+  { name: "サフェーサー",             color: 0xb9bec6, metalness: 0.1,  roughness: 0.6  },
+  { name: "ベースカラー",             color: 0x58c8d8, metalness: 0.15, roughness: 0.45 },
+  { name: "クリア（艶が生まれる）",   color: 0x58c8d8, metalness: 0.25, roughness: 0.12 },
+  { name: "磨き＝鏡面完成✨",         color: 0x58c8d8, metalness: 0.45, roughness: 0.03 }
+];
+let PH = null;
+function paintStateFor(cleared) { return Math.max(0, Math.min(7, cleared | 0)); }
+function ensurePaintHero() {
+  if (PH) return PH;
+  const host = $("paintStage");
+  if (!host) return null;
+  if (typeof THREE === "undefined") {
+    host.insertAdjacentHTML("beforeend", '<div class="pfallback">3D表示にはネット接続が必要です<br>（工程 1/8）</div>');
+    PH = { fake: true };
+    return PH;
+  }
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
+  catch (e) {
+    host.insertAdjacentHTML("beforeend", '<div class="pfallback">3D表示ができません</div>');
+    PH = { fake: true };
+    return PH;
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 3));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  const w0 = Math.max(1, host.clientWidth), h0 = Math.max(1, host.clientHeight);
+  renderer.setSize(w0, h0);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  host.insertBefore(renderer.domElement, host.firstChild);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(36, w0 / h0, 0.1, 60);
+  camera.position.set(0.4, 0.5, 4.1);
+  camera.lookAt(0, -0.05, 0);
+  scene.add(new THREE.HemisphereLight(0xcfd8e2, 0x1c1812, 0.45));
+  const key = new THREE.DirectionalLight(0xfff4e6, 1.0);
+  key.position.set(2.6, 4, 2.4);
+  key.castShadow = true;
+  key.shadow.mapSize.set(1024, 1024);
+  scene.add(key);
+  const rimA = new THREE.PointLight(0x58c8d8, 0.8, 14); rimA.position.set(-3, 1.4, -2); scene.add(rimA);
+  const rimB = new THREE.PointLight(0xffb648, 0.55, 14); rimB.position.set(3, 0.8, -2.4); scene.add(rimB);
+  const group = new THREE.Group();
+  scene.add(group);
+  applyEnvironment(renderer, scene);
+
+  const floor = new THREE.Mesh(new THREE.CylinderGeometry(1.9, 2.05, 0.12, 28), new THREE.MeshStandardMaterial(steelMaps({ color: 0x2a2f36 })));
+  floor.position.y = -0.85;
+  floor.receiveShadow = true;
+  group.add(floor);
+  const jig = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.5, 0.24), steelMatOf({ color: 0x50565f }));
+  jig.position.set(0, -0.6, 0);
+  jig.castShadow = true;
+  group.add(jig);
+
+  const shape = new THREE.Shape();
+  const w = 1.5, h = 0.95, r = 0.16;
+  shape.moveTo(-w / 2 + r, -h / 2);
+  shape.lineTo(w / 2 - r, -h / 2); shape.quadraticCurveTo(w / 2, -h / 2, w / 2, -h / 2 + r);
+  shape.lineTo(w / 2, h / 2 - r); shape.quadraticCurveTo(w / 2, h / 2, w / 2 - r, h / 2);
+  shape.lineTo(-w / 2 + r, h / 2); shape.quadraticCurveTo(-w / 2, h / 2, -w / 2, h / 2 - r);
+  shape.lineTo(-w / 2, -h / 2 + r); shape.quadraticCurveTo(-w / 2, -h / 2, -w / 2 + r, -h / 2);
+  const geo = new THREE.ExtrudeGeometry(shape, { depth: 0.11, bevelEnabled: true, bevelThickness: 0.025, bevelSize: 0.025, bevelSegments: 4, curveSegments: 20 });
+  geo.center();
+  const mat = new THREE.MeshStandardMaterial({ color: PANEL_STATES[0].color, metalness: PANEL_STATES[0].metalness, roughness: PANEL_STATES[0].roughness, envMapIntensity: 1.2 });
+  const panel = new THREE.Mesh(geo, mat);
+  panel.castShadow = true;
+  panel.position.y = -0.08;
+  panel.scale.set(0.001, 0.001, 0.001);
+  group.add(panel);
+
+  /* 全クリ特別演出用：スプレーガン＋ミスト＋ハイライト掃引（平時は非表示） */
+  const gun = new THREE.Group();
+  gun.add(new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.24, 0.34), new THREE.MeshStandardMaterial({ color: 0x3c434c, metalness: 0.7, roughness: 0.4 })));
+  const nozzle = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.04, 0.13, 12), new THREE.MeshStandardMaterial({ color: 0xc9cfd6, metalness: 0.85, roughness: 0.3 }));
+  nozzle.rotation.x = Math.PI / 2;
+  nozzle.position.set(0, 0.05, 0.22);
+  gun.add(nozzle);
+  gun.visible = false;
+  group.add(gun);
+  const MIST_N = 90;
+  const mistGeo = new THREE.BufferGeometry();
+  const mistPos = new Float32Array(MIST_N * 3);
+  mistGeo.setAttribute("position", new THREE.BufferAttribute(mistPos, 3));
+  const mist = new THREE.Points(mistGeo, new THREE.PointsMaterial({ color: 0x8fe2ee, size: 0.035, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending, depthWrite: false }));
+  mist.visible = false;
+  group.add(mist);
+  const mistParts = [];
+  for (let i = 0; i < MIST_N; i++) mistParts.push({ on: false, x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, life: 0 });
+  const sweep = new THREE.Mesh(new THREE.PlaneGeometry(0.1, 1.1), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false }));
+  sweep.position.set(0, -0.08, 0.09);
+  group.add(sweep);
+
+  let vel = 0, dragging = false, px = 0, autoY = -0.4;
+  const el = renderer.domElement;
+  el.style.cursor = "grab";
+  el.addEventListener("pointerdown", (e) => { dragging = true; px = e.clientX; el.style.cursor = "grabbing"; try { el.setPointerCapture(e.pointerId); } catch (er) {} });
+  el.addEventListener("pointermove", (e) => { if (!dragging) return; vel += (e.clientX - px) * 0.01; px = e.clientX; });
+  el.addEventListener("pointerup", () => { dragging = false; el.style.cursor = "grab"; vib(8); });
+  window.addEventListener("resize", () => {
+    const w = host.clientWidth, h = host.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  });
+
+  let curState = 0, tAll = 0, lastT = performance.now();
+  function loop(now) {
+    requestAnimationFrame(loop);
+    const dt = Math.min(0.05, (now - lastT) / 1000);
+    lastT = now;
+    vel *= 0.94;
+    autoY += vel * dt * 0.6 + dt * 0.06;
+    group.rotation.y = autoY;
+    if (panel.scale.x < 1) { const s = Math.min(1, panel.scale.x + dt * 2.2); panel.scale.set(s, s, s); }
+    const target = PANEL_STATES[curState];
+    mat.color.lerp(tc().setHex(target.color), 0.05);
+    mat.metalness += (target.metalness - mat.metalness) * 0.05;
+    mat.roughness += (target.roughness - mat.roughness) * 0.05;
+
+    if (PH.allDone) {
+      tAll += dt;
+      gun.visible = true;
+      mist.visible = true;
+      const gx = Math.sin(tAll * 0.6) * 0.62;
+      gun.position.set(gx, 0.05, 0.62);
+      gun.rotation.y = Math.PI + Math.sin(tAll * 0.6) * -0.1;
+      for (let k = 0; k < 2; k++) {
+        const p = mistParts.find((q) => !q.on);
+        if (!p) break;
+        p.on = true; p.x = gx; p.y = 0.05; p.z = 0.5;
+        p.vx = (Math.random() - 0.5) * 0.3;
+        p.vy = -0.15 + (Math.random() - 0.5) * 0.15; /* 重力で少し下に流れる */
+        p.vz = -1.4 - Math.random() * 0.4;
+        p.life = 1;
+      }
+      for (const p of mistParts) {
+        if (!p.on) continue;
+        p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt;
+        p.life -= dt * 1.2;
+        if (p.life <= 0 || p.z < 0.05) p.on = false;
+      }
+      let mi = 0;
+      for (const p of mistParts) { mistPos[mi * 3] = p.on ? p.x : 9999; mistPos[mi * 3 + 1] = p.on ? p.y : 9999; mistPos[mi * 3 + 2] = p.on ? p.z : 9999; mi++; }
+      mistGeo.attributes.position.needsUpdate = true;
+      sweep.material.opacity = 0.16 + Math.sin(tAll * 2.2) * 0.12;
+      sweep.position.x = Math.sin(tAll * 0.9) * 0.6;
+      rimA.intensity = 0.8 + Math.sin(tAll * 1.6) * 0.4;
+    } else {
+      gun.visible = false; mist.visible = false; sweep.material.opacity = 0;
+    }
+    const w = host.clientWidth, h = host.clientHeight;
+    if (w > 0 && h > 0 && isFinite(group.rotation.y)) renderer.render(scene, camera);
+  }
+  PH = { fake: false, allDone: false, setState(n) { curState = paintStateFor(n); } };
+  requestAnimationFrame(loop);
+  return PH;
+}
+function renderPaintHero(cleared) {
+  const n = paintStateFor(cleared);
+  const st = PANEL_STATES[n];
+  const titleEl = $("paintTitle"), barEl = $("paintBar");
+  if (titleEl) titleEl.innerHTML = "工程 " + (n + 1) + "/8：" + st.name;
+  if (barEl) barEl.style.width = Math.round(((n + 1) / 8) * 100) + "%";
+  const ph = ensurePaintHero();
+  if (!ph || ph.fake) return;
+  ph.allDone = cleared >= 7;
+  ph.setState(cleared);
+}
+
+/* ================================================================
+   3Dリアル塗装ブース・ステージ（FORGE共通エンジン踏襲）
+================================================================ */
+const FLOOR_Y = -1.18;
+let ST = null;
+
+function ensureStage() {
+  if (ST) { ST.resize(); return; }
+  const host = $("stage3d");
+  if (typeof THREE === "undefined") {
+    host.insertAdjacentHTML("beforeend", '<div style="color:#8a97a5;font-size:12px;text-align:center;padding-top:100px">3D表示にはネット接続が必要です</div>');
+    ST = { fake: true, resize(){}, clearScene(){}, group: null };
+    return;
+  }
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 3));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  host.insertBefore(renderer.domElement, host.firstChild);
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x15181d);
+  scene.fog = new THREE.Fog(0x15181d, 8, 16);
+  const camera = new THREE.PerspectiveCamera(33, 1, 0.1, 60);
+  camera.position.set(0, 0.9, 5.6);
+  camera.lookAt(0, -0.15, 0);
+
+  const group = new THREE.Group();
+  scene.add(group);
+  applyEnvironment(renderer, scene);
+
+  const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+  scene.add(new THREE.HemisphereLight(0xcfd8e2, 0x201f2b, 0.35));
+  const key = new THREE.DirectionalLight(0xfff4e6, 1.05);
+  key.position.set(3, 5, 2.5);
+  key.castShadow = true;
+  key.shadow.mapSize.set(isMobile ? 1024 : 2048, isMobile ? 1024 : 2048);
+  key.shadow.camera.left = -3.5; key.shadow.camera.right = 3.5;
+  key.shadow.camera.top = 3.5; key.shadow.camera.bottom = -3.5;
+  key.shadow.bias = -0.0004;
+  scene.add(key);
+  const rim = new THREE.PointLight(0x58c8d8, 0.24, 16); rim.position.set(-3.4, 1.6, -2.6); scene.add(rim);
+
+  const floor = new THREE.Mesh(
+    new THREE.BoxGeometry(7, 0.35, 5),
+    new THREE.MeshStandardMaterial({ map: boothFloorTexOf(), metalness: 0.15, roughness: 0.85, envMapIntensity: 1.0 })
+  );
+  floor.position.y = FLOOR_Y - 0.175;
+  floor.receiveShadow = true;
+  floor.userData.keep = true;
+  group.add(floor);
+
+  const blobCv = document.createElement("canvas");
+  blobCv.width = 256; blobCv.height = 256;
+  (function () {
+    const c2 = blobCv.getContext("2d");
+    const g = c2.createRadialGradient(128, 128, 10, 128, 128, 125);
+    g.addColorStop(0, "rgba(0,0,0,0.55)");
+    g.addColorStop(1, "rgba(0,0,0,0)");
+    c2.fillStyle = g;
+    c2.fillRect(0, 0, 256, 256);
+  })();
+  const blob = new THREE.Mesh(
+    new THREE.PlaneGeometry(4.4, 2.8),
+    new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(blobCv), transparent: true, opacity: 0.5, depthWrite: false })
+  );
+  blob.rotation.x = -Math.PI / 2;
+  blob.position.y = FLOOR_Y + 0.002;
+  blob.userData.keep = true;
+  group.add(blob);
+
+  let rotY = -0.5, rotX = 0.12, zT = 5.6, dragging = false, px = 0, py = 0;
+  let mode = "orbit", startX = 0, startY = 0, startLoad = 0, downTime = 0, movedPx = 0;
+  const ray = new THREE.Raycaster();
+  const ndc = new THREE.Vector2();
+  const el = renderer.domElement;
+
+  function hitProxy(e) {
+    const sc = ST.sceneApi;
+    if (!sc || !sc.proxy) return false;
+    const r = el.getBoundingClientRect();
+    ndc.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+    ndc.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+    camera.updateMatrixWorld();
+    group.updateMatrixWorld(true);
+    ray.setFromCamera(ndc, camera);
+    const list = Array.isArray(sc.proxy) ? sc.proxy : [sc.proxy];
+    return ray.intersectObjects(list, false).length > 0;
+  }
+  el.addEventListener("pointerdown", (e) => {
+    $("btnToReveal").disabled = false;
+    if (ST.broken) { rebuildScene(); return; }
+    dragging = true; px = e.clientX; py = e.clientY;
+    downTime = performance.now(); movedPx = 0;
+    ST.springing = false;
+    if (hitProxy(e)) {
+      mode = "pull";
+      startX = e.clientX; startY = e.clientY;
+      startLoad = +$("loadRange").value;
+      el.style.cursor = "grabbing";
+    } else mode = "orbit";
+    try { el.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  el.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    movedPx += Math.abs(e.clientX - px) + Math.abs(e.clientY - py);
+    const sc = ST.sceneApi;
+    if (mode === "pull" && sc) {
+      let dv = 0;
+      if (sc.grabAxis === "x") dv = (e.clientX - startX) / Math.max(1, el.clientWidth) * 170;
+      else if (sc.grabAxis === "y") dv = (e.clientY - startY) / Math.max(1, el.clientHeight) * 220;
+      else dv = (Math.abs(e.clientX - startX) + Math.abs(e.clientY - startY)) / Math.max(1, el.clientWidth) * 150;
+      $("loadRange").value = Math.max(0, Math.min(100, startLoad + dv));
+      onLoadInput();
+    } else {
+      rotY += (e.clientX - px) * 0.011;
+      rotX = Math.max(-0.5, Math.min(0.95, rotX + (e.clientY - py) * 0.008));
+    }
+    px = e.clientX; py = e.clientY;
+  });
+  el.addEventListener("pointerup", () => {
+    if (!dragging) return;
+    dragging = false;
+    el.style.cursor = "grab";
+    const sc = ST.sceneApi;
+    if (mode === "pull" && sc) {
+      if (performance.now() - downTime < 220 && movedPx < 10 && sc.poke) sc.poke();
+      if (!ST.broken && sc.springBack) ST.springing = true;
+      mode = "orbit";
+    }
+  });
+  el.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    zT = Math.max(3.0, Math.min(8.5, zT + e.deltaY * 0.004));
+  }, { passive: false });
+
+  function resize() {
+    const w = host.clientWidth, h = host.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  ST = {
+    group, camera,
+    sceneApi: null, broken: false, springing: false, timeScale: 1, shake: 0,
+    resize,
+    resetView() { rotY = -0.5; rotX = 0.12; zT = 5.6; },
+    setView(ry, rx, z) {
+      if (ry !== undefined) rotY = ry;
+      if (rx !== undefined) rotX = rx;
+      if (z !== undefined) zT = z;
+    },
+    clearScene() {
+      for (let i = group.children.length - 1; i >= 0; i--) {
+        const c = group.children[i];
+        if (c.userData && c.userData.keep) continue;
+        group.remove(c);
+        c.traverse && c.traverse((o) => {
+          if (o.geometry) o.geometry.dispose();
+          if (o.material && o.material !== null) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => { if (m.dispose) m.dispose(); });
+        });
+      }
+      ST.sceneApi = null; ST.broken = false; ST.springing = false; ST.timeScale = 1; ST.shake = 0;
+      $("stageChips").innerHTML = "";
+      setBoom(false, "");
+    },
+    breakFX(label) {
+      ST.broken = true; ST.timeScale = 0.18; ST.shake = 0.06;
+      progress.broken = (progress.broken || 0) + 1;
+      saveProgress();
+      vib([90, 40, 140]);
+      const flash = $("flash");
+      flash.style.transition = "none"; flash.style.opacity = 0.65;
+      requestAnimationFrame(() => { flash.style.transition = "opacity 0.45s"; flash.style.opacity = 0; });
+      setBoom(true, label || "パリッ!!");
+    }
+  };
+
+  let last = performance.now();
+  function loop(now) {
+    requestAnimationFrame(loop);
+    let dt = Math.min(0.05, (now - last) / 1000); last = now;
+    ST.timeScale += (1 - ST.timeScale) * 0.03;
+    dt *= ST.timeScale;
+    rotY += 0.0015;
+    group.rotation.y += (rotY - group.rotation.y) * 0.12;
+    group.rotation.x += (rotX - group.rotation.x) * 0.12;
+    camera.position.z += (zT - camera.position.z) * 0.09;
+
+    if (ST.springing && !ST.broken) {
+      const v = +$("loadRange").value;
+      const nv = v * 0.85 - 1.2;
+      if (nv <= 0) { $("loadRange").value = 0; ST.springing = false; } else $("loadRange").value = nv;
+      onLoadInput();
+    }
+    const sc = ST.sceneApi;
+    if (sc && sc.tick) sc.tick(dt, now);
+
+    ST.shake = Math.max(0, ST.shake - dt * 0.14);
+    group.position.x = (Math.random() - 0.5) * ST.shake;
+    group.position.y = (Math.random() - 0.5) * ST.shake;
+    if (isFinite(group.rotation.x) && isFinite(group.rotation.y) && isFinite(camera.position.z)) {
+      renderer.render(scene, camera);
+    }
+  }
+  requestAnimationFrame(loop);
+}
+
+function setBoom(on, label) {
+  $("boom").className = on ? "boom show" : "boom";
+  if (label) $("boomText").textContent = label;
+}
+
+/* ================================================================
+   実験シーン（L1〜L6・塗装オリジナル）
+================================================================ */
+
+/* L1：錆の時間旅行（裸の鉄 vs 塗装済み・canvasテクスチャに錆が育つ） */
+function buildL1() {
+  const rustCv = document.createElement("canvas");
+  rustCv.width = rustCv.height = 128;
+  const rctx = rustCv.getContext("2d");
+  const rustSpots = [];
+  for (let i = 0; i < 22; i++) {
+    rustSpots.push({ cx: Math.random(), cy: Math.random(), maxR: 6 + Math.random() * 16, start: Math.random() * 0.65 });
+  }
+  function drawRust(v) {
+    rctx.fillStyle = "#7d838c"; rctx.fillRect(0, 0, 128, 128);
+    rctx.fillStyle = "rgba(0,0,0,0.06)";
+    for (let i = 0; i < 40; i++) rctx.fillRect(Math.random() * 128, Math.random() * 128, 2, 2);
+    rustSpots.forEach((s) => {
+      const p = v <= s.start ? 0 : Math.min(1, (v - s.start) / Math.max(0.05, 1 - s.start));
+      if (p <= 0) return;
+      const r = Math.max(0.1, s.maxR * p);
+      const g = rctx.createRadialGradient(s.cx * 128, s.cy * 128, 0, s.cx * 128, s.cy * 128, r);
+      g.addColorStop(0, "rgba(150,70,20,0.9)");
+      g.addColorStop(0.6, "rgba(150,80,30,0.55)");
+      g.addColorStop(1, "rgba(150,80,30,0)");
+      rctx.fillStyle = g;
+      rctx.beginPath(); rctx.arc(s.cx * 128, s.cy * 128, r, 0, 6.29); rctx.fill();
+    });
+  }
+  drawRust(0);
+  const rustTex = new THREE.CanvasTexture(rustCv);
+  const leftPanel = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.5, 0.08), new THREE.MeshStandardMaterial({ map: rustTex, metalness: 0.6, roughness: 0.6 }));
+  leftPanel.position.set(-0.85, 0, 0);
+  leftPanel.castShadow = true;
+  ST.group.add(leftPanel);
+  const rightPanel = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.5, 0.08), new THREE.MeshStandardMaterial({ color: 0x58c8d8, metalness: 0.15, roughness: 0.4 }));
+  rightPanel.position.set(0.85, 0, 0);
+  rightPanel.castShadow = true;
+  ST.group.add(rightPanel);
+
+  setChips('<div class="chip" id="csChip" style="left:8%; top:10%">左＝裸の鉄／右＝塗装済み</div>');
+  ST.setView(0, 0.08, 5.4);
+  const proxy = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.7, 0.6), new THREE.MeshBasicMaterial({ visible: false }));
+  ST.group.add(proxy);
+  setExtraHTML('<div class="readout" id="l1read"></div>');
+
+  const DN = 30;
+  const dustGeo = new THREE.BufferGeometry();
+  const dustPos = new Float32Array(DN * 3);
+  dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
+  const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ color: 0x9a5a28, size: 0.03, transparent: true, opacity: 0.85 }));
+  ST.group.add(dust);
+  const dustParts = [];
+  for (let i = 0; i < DN; i++) dustParts.push({ on: false, x: 0, y: 0, z: 0, vy: 0, life: 0 });
+
+  let curV = 0;
+  function apply(v) {
+    curV = v;
+    drawRust(v);
+    rustTex.needsUpdate = true;
+    const chip = $("csChip");
+    const r = $("l1read");
+    const months = Math.round(v * 12);
+    if (chip) chip.textContent = v < 0.03 ? "左＝裸の鉄／右＝塗装済み" : "経過 " + months + "ヶ月：左だけ錆びていく";
+    if (r) r.innerHTML = v < 0.03 ? "まだ錆びていない" : "裸の鉄＝<b>錆が拡大中</b>／塗装済み＝<b>無傷</b>";
+  }
+  apply(0);
+  ST.sceneApi = {
+    proxy, grabAxis: "x", springBack: false,
+    update(v) { apply(v); },
+    poke() {
+      if (curV < 0.15) return;
+      for (let k = 0; k < 10; k++) {
+        const p = dustParts.find((q) => !q.on);
+        if (!p) break;
+        p.on = true;
+        p.x = -0.85 + (Math.random() - 0.5) * 1.0;
+        p.y = (Math.random() - 0.5) * 1.4;
+        p.z = 0.05 + Math.random() * 0.1;
+        p.vy = -0.4 - Math.random() * 0.5; /* 重力で落ちる */
+        p.life = 1;
+      }
+    },
+    tick(dt) {
+      let any = false;
+      for (const p of dustParts) {
+        if (!p.on) continue;
+        any = true;
+        p.y += p.vy * dt;
+        p.life -= dt * 0.7;
+        if (p.life <= 0 || p.y < -1.2) p.on = false;
+      }
+      if (any) {
+        let i = 0;
+        for (const p of dustParts) { dustPos[i * 3] = p.on ? p.x : 9999; dustPos[i * 3 + 1] = p.on ? p.y : 9999; dustPos[i * 3 + 2] = p.on ? p.z : 9999; i++; }
+        dustGeo.attributes.position.needsUpdate = true;
+      }
+    }
+  };
+}
+
+/* L2：乾燥タイムラプス断面（濡れ膜→溶剤が飛んで痩せる→艶が生まれる） */
+function buildL2() {
+  const steel = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.14, 0.9), steelMatOf({ color: 0x767d86 }));
+  steel.position.y = -0.5;
+  steel.castShadow = true;
+  ST.group.add(steel);
+
+  const filmMat = new THREE.MeshStandardMaterial({ color: 0x8fd6e0, transparent: true, opacity: 0.55, roughness: 0.9, metalness: 0.05, emissive: 0x2a8a98, emissiveIntensity: 0 });
+  const film = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.5, 0.85), filmMat);
+  film.position.y = -0.16;
+  ST.group.add(film);
+
+  const pigColors = [0x58c8d8, 0xffb648, 0xe8ecef, 0x50565f];
+  for (let i = 0; i < 10; i++) {
+    const s = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 6), new THREE.MeshStandardMaterial({ color: pigColors[i % pigColors.length], roughness: 0.5 }));
+    s.position.set((Math.random() - 0.5) * 1.3, (Math.random() - 0.5) * 0.3, (Math.random() - 0.5) * 0.6);
+    film.add(s);
+  }
+  const solv = [];
+  const SN = 14;
+  for (let i = 0; i < SN; i++) {
+    const s = new THREE.Mesh(new THREE.SphereGeometry(0.028, 8, 6), new THREE.MeshStandardMaterial({ color: 0xdfffff, emissive: 0x4fb8c8, emissiveIntensity: 0.6, transparent: true }));
+    const baseY = (Math.random() - 0.5) * 0.3;
+    s.position.set((Math.random() - 0.5) * 1.3, baseY, (Math.random() - 0.5) * 0.6);
+    film.add(s);
+    solv.push({ mesh: s, baseY, leaveAt: (i / SN) * 0.85 + Math.random() * 0.1 });
+  }
+
+  setChips('<div class="chip" id="csChip" style="left:10%; top:12%">濡れ膜：0分</div>');
+  ST.setView(-0.2, 0.16, 4.6);
+  const proxy = new THREE.Mesh(new THREE.BoxGeometry(2.0, 1.0, 1.0), new THREE.MeshBasicMaterial({ visible: false }));
+  proxy.position.y = -0.2;
+  ST.group.add(proxy);
+  setExtraHTML('<div class="readout" id="l2read"></div>');
+
+  let wobbleT = -1, flashT = -1;
+  function apply(v) {
+    const shrink = 1 - v * 0.42;
+    film.scale.y = shrink;
+    film.position.y = -0.16 - (1 - shrink) * 0.18;
+    filmMat.opacity = 0.55 - v * 0.15;
+    filmMat.roughness = 0.9 - v * 0.75;
+    solv.forEach((s) => {
+      const p = v <= s.leaveAt ? 0 : Math.min(1, (v - s.leaveAt) / Math.max(0.05, 1 - s.leaveAt));
+      s.mesh.position.y = s.baseY + p * 0.9;
+      s.mesh.material.opacity = 1 - p;
+      s.mesh.visible = p < 1;
+    });
+    const chip = $("csChip");
+    const r = $("l2read");
+    const mins = Math.round(v * 30);
+    if (chip) chip.textContent = v < 0.05 ? "濡れ膜：0分" : v < 0.9 ? "乾燥中…" + mins + "分" : "硬化完了：" + mins + "分（艶が出た）";
+    if (r) r.innerHTML = v < 0.9 ? "溶剤が<b>抜けていく</b>＝膜が痩せる" : "残るのは<b>顔料＋樹脂だけ</b>";
+  }
+  apply(0);
+  ST.sceneApi = {
+    proxy, grabAxis: "x", springBack: false,
+    update(v) { apply(v); },
+    poke() {
+      const v = +$("loadRange").value / 100;
+      if (v < 0.85) wobbleT = 0; else flashT = 0;
+    },
+    tick(dt) {
+      if (wobbleT >= 0) {
+        wobbleT += dt;
+        const k = Math.max(0, 1 - wobbleT / 0.5);
+        film.rotation.z = Math.sin(wobbleT * 40) * 0.03 * k;
+        film.scale.x = 1 + Math.sin(wobbleT * 34) * 0.025 * k;
+        if (wobbleT > 0.5) { wobbleT = -1; film.rotation.z = 0; film.scale.x = 1; }
+      }
+      if (flashT >= 0) {
+        flashT += dt;
+        filmMat.emissiveIntensity = Math.max(0, 0.8 - flashT * 4);
+        if (flashT > 0.25) { flashT = -1; filmMat.emissiveIntensity = 0; }
+      }
+    }
+  };
+}
+
+/* L3：ガン距離実験（自動往復スプレー・canvasテクスチャに色が本当に積もる） */
+function buildL3() {
+  const pcv = document.createElement("canvas");
+  pcv.width = pcv.height = 256;
+  const pctx = pcv.getContext("2d");
+  pctx.fillStyle = "#9aa0a8";
+  pctx.fillRect(0, 0, 256, 256);
+  const ptex = new THREE.CanvasTexture(pcv);
+  const panel = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.4, 0.08), new THREE.MeshStandardMaterial({ map: ptex, metalness: 0.12, roughness: 0.55 }));
+  panel.castShadow = true;
+  ST.group.add(panel);
+
+  const gun = new THREE.Group();
+  gun.add(new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.3, 0.42), new THREE.MeshStandardMaterial({ color: 0x3c434c, metalness: 0.7, roughness: 0.4 })));
+  const nozzle = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.05, 0.16, 12), new THREE.MeshStandardMaterial({ color: 0xc9cfd6, metalness: 0.85, roughness: 0.3 }));
+  nozzle.rotation.x = Math.PI / 2;
+  nozzle.position.set(0, 0.06, 0.26);
+  gun.add(nozzle);
+  const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.09, 0.22, 14), new THREE.MeshStandardMaterial({ color: 0x58c8d8, metalness: 0.2, roughness: 0.35, transparent: true, opacity: 0.85 }));
+  cup.position.set(0, 0.28, 0.1);
+  gun.add(cup);
+  ST.group.add(gun);
+
+  const MN = 220;
+  const mistGeo = new THREE.BufferGeometry();
+  const mistPos = new Float32Array(MN * 3);
+  mistGeo.setAttribute("position", new THREE.BufferAttribute(mistPos, 3));
+  const mist = new THREE.Points(mistGeo, new THREE.PointsMaterial({ color: 0x8fe2ee, size: 0.045, transparent: true, opacity: 0.75, blending: THREE.AdditiveBlending, depthWrite: false }));
+  ST.group.add(mist);
+  const mistParts = [];
+  for (let i = 0; i < MN; i++) mistParts.push({ on: false, x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, life: 0 });
+
+  setChips('<div class="chip" id="csChip" style="left:8%; top:10%">距離 100mm</div>');
+  ST.setView(0, 0.05, 5.0);
+  const proxy = new THREE.Mesh(new THREE.BoxGeometry(2.6, 1.6, 1.6), new THREE.MeshBasicMaterial({ visible: false }));
+  ST.group.add(proxy);
+  setExtraHTML('<div class="readout" id="l3read"></div>');
+
+  let v = 0, t2 = 0, burstT = -1;
+  function zoneOf(distMm) {
+    if (distMm <= 155) return "near";
+    if (distMm >= 175 && distMm <= 255) return "ok";
+    if (distMm >= 295) return "far";
+    return "mid";
+  }
+  function apply(vv) {
+    v = vv;
+    const dist = Math.round(100 + v * 300);
+    const zone = zoneOf(dist);
+    const chip = $("csChip");
+    const r = $("l3read");
+    if (chip) {
+      chip.className = "chip" + (zone === "near" ? " ng" : zone === "far" ? " ng" : zone === "ok" ? " ok" : "");
+      chip.textContent = "距離 " + dist + "mm" + (zone === "near" ? "（近すぎ→タレ）" : zone === "ok" ? "（適正）" : zone === "far" ? "（遠すぎ→ゆず肌）" : "");
+    }
+    if (r) r.innerHTML = zone === "near" ? "1ヶ所に付きすぎ＝<b>タレが伸びる</b>" : zone === "ok" ? "<b>均一に乗る</b>（OK）" : zone === "far" ? "霧が拡散＝<b>ザラつく</b>（ゆず肌）" : "距離を調整中…";
+  }
+  apply(0);
+  function paintAt(u, vv2, zone) {
+    if (u < 0 || u > 1 || vv2 < 0 || vv2 > 1) return;
+    const px = u * 256, py = vv2 * 256;
+    if (zone === "near") {
+      const dripLen = 18 + Math.random() * 34;
+      const g = pctx.createLinearGradient(px, py, px, py + dripLen);
+      g.addColorStop(0, "rgba(88,200,216,0.28)");
+      g.addColorStop(1, "rgba(88,200,216,0)");
+      pctx.fillStyle = g;
+      pctx.beginPath(); pctx.ellipse(px, py + dripLen * 0.5, 4, dripLen * 0.5, 0, 0, 6.29); pctx.fill();
+      pctx.fillStyle = "rgba(88,200,216,0.3)";
+      pctx.beginPath(); pctx.arc(px, py, 5, 0, 6.29); pctx.fill();
+    } else if (zone === "far") {
+      pctx.fillStyle = "rgba(88,200,216,0.05)";
+      pctx.beginPath(); pctx.arc(px + (Math.random() - 0.5) * 30, py + (Math.random() - 0.5) * 30, 3 + Math.random() * 8, 0, 6.29); pctx.fill();
+    } else {
+      pctx.fillStyle = "rgba(88,200,216,0.09)";
+      pctx.beginPath(); pctx.arc(px, py, 7 + Math.random() * 5, 0, 6.29); pctx.fill();
+    }
+    ptex.needsUpdate = true;
+  }
+  function spray(gx, gz, rate) {
+    for (let k = 0; k < rate; k++) {
+      const p = mistParts.find((q) => !q.on);
+      if (!p) break;
+      const dist = 100 + v * 300;
+      const spread = 0.3 + (dist - 100) / 300 * 0.7;
+      p.on = true;
+      p.x = gx; p.y = 0.06; p.z = gz - 0.16;
+      p.vx = (Math.random() - 0.5) * spread;
+      p.vy = -0.1 + (Math.random() - 0.5) * spread * 0.7; /* 重力で少し下に流れる */
+      p.vz = -2.4 - Math.random() * 0.6;
+      p.life = 1;
+    }
+  }
+  ST.sceneApi = {
+    proxy, grabAxis: "y", springBack: false,
+    update(vv) { apply(vv); },
+    poke() { burstT = 0; },
+    tick(dt) {
+      t2 += dt;
+      const gx = Math.sin(t2 * 0.85) * 0.92;
+      const dist = 100 + v * 300;
+      const gz = 0.5 + ((dist - 100) / 300) * 0.9;
+      gun.position.set(gx, 0.02, gz);
+      gun.rotation.y = Math.PI + Math.sin(t2 * 0.85) * -0.14;
+      const zone = zoneOf(Math.round(dist));
+      const rate = zone === "near" ? 5 : zone === "far" ? 4 : 3;
+      spray(gx, gz, rate);
+      if (burstT >= 0) { burstT += dt; spray(gx, gz, 8); if (burstT > 0.3) burstT = -1; }
+      for (const p of mistParts) {
+        if (!p.on) continue;
+        p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt;
+        p.life -= dt * 1.3;
+        if (p.z <= 0.05) {
+          const u = (p.x + 1.1) / 2.2, vv2 = 1 - (p.y + 0.7) / 1.4;
+          paintAt(u, vv2, zone);
+          p.on = false;
+        }
+        if (p.life <= 0) p.on = false;
+      }
+      let i = 0;
+      for (const p of mistParts) { mistPos[i * 3] = p.on ? p.x : 9999; mistPos[i * 3 + 1] = p.on ? p.y : 9999; mistPos[i * 3 + 2] = p.on ? p.z : 9999; i++; }
+      mistGeo.attributes.position.needsUpdate = true;
+    }
+  };
+}
+
+/* L4：艶スライダー（roughness連動＋色見本帳ポケ切替） */
+function buildL4() {
+  const panel = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.0, 0.1), new THREE.MeshStandardMaterial({ color: 0x58c8d8, metalness: 0.15, roughness: 0.95, envMapIntensity: 1.3 }));
+  panel.castShadow = true;
+  ST.group.add(panel);
+
+  const COLORS = [
+    { hex: 0xe7ddb8, label: "5Y7/1 アイボリー" },
+    { hex: 0x9aa0a8, label: "N7 グレー" },
+    { hex: 0x8fb8d8, label: "2.5PB 淡青" },
+    { hex: 0x2a2d33, label: "黒" }
+  ];
+  const swatchGroup = new THREE.Group();
+  swatchGroup.position.set(1.05, 0.55, 0.3);
+  ST.group.add(swatchGroup);
+  const swatches = COLORS.map((c, i) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.16, 0.015), new THREE.MeshStandardMaterial({ color: c.hex, roughness: 0.5 }));
+    m.position.set(0, -i * 0.02, -i * 0.02);
+    swatchGroup.add(m);
+    return m;
+  });
+
+  setChips('<div class="chip" id="csChip" style="left:8%; top:10%">グロス 0（ツヤ消し）</div>');
+  ST.setView(-0.3, 0.1, 4.6);
+  const proxy = new THREE.Mesh(new THREE.BoxGeometry(1.9, 1.4, 0.6), new THREE.MeshBasicMaterial({ visible: false }));
+  ST.group.add(proxy);
+  setExtraHTML('<div class="readout" id="l4read"></div>');
+
+  let colorIdx = 0, flipT = -1;
+  function apply(v) {
+    panel.material.roughness = 0.95 - v * 0.9;
+    const chip = $("csChip");
+    const r = $("l4read");
+    const gloss = Math.round(v * 90);
+    const zone = gloss >= 80 ? "艶あり" : gloss >= 30 ? "半ツヤ" : "ツヤ消し";
+    if (chip) chip.textContent = "グロス " + gloss + "（" + zone + "）";
+    if (r) r.innerHTML = "映り込み：" + (v > 0.75 ? "<b>くっきり鮮明</b>" : v > 0.3 ? "うっすら映る" : "ほぼ映らない") + "／色：<b>" + COLORS[colorIdx].label + "</b>";
+  }
+  apply(0);
+  ST.sceneApi = {
+    proxy, grabAxis: "any", springBack: false,
+    update(v) { apply(v); },
+    poke() {
+      colorIdx = (colorIdx + 1) % COLORS.length;
+      panel.material.color.setHex(COLORS[colorIdx].hex);
+      flipT = 0;
+      apply(+$("loadRange").value / 100);
+    },
+    tick(dt) {
+      if (flipT >= 0) {
+        flipT += dt;
+        swatches.forEach((s, i) => { s.rotation.x = Math.sin(Math.max(0, flipT * 10 - i)) * 1.4 * Math.max(0, 1 - flipT); });
+        if (flipT > 0.5) { flipT = -1; swatches.forEach((s) => (s.rotation.x = 0)); }
+      }
+    }
+  };
+}
+
+/* L5：断面ミルフィーユ（膜厚スライダー・薄すぎ→透け錆／厚すぎ→割れ） */
+function buildL5() {
+  const steel = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.3, 0.7), steelMatOf({ color: 0x767d86 }));
+  steel.position.y = -0.5;
+  steel.castShadow = true;
+  ST.group.add(steel);
+  const conv = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.02, 0.7), new THREE.MeshStandardMaterial({ color: 0xb8c2a0, metalness: 0.3, roughness: 0.6 }));
+  conv.position.y = -0.34;
+  ST.group.add(conv);
+  const prime = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.05, 0.7), new THREE.MeshStandardMaterial({ color: 0x8a8f96, roughness: 0.7 }));
+  prime.position.y = -0.30;
+  ST.group.add(prime);
+  const topMat = new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.35, transparent: true, opacity: 1 });
+  const topcoat = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.08, 0.7), topMat);
+  topcoat.position.y = -0.26;
+  ST.group.add(topcoat);
+
+  const cracks = [];
+  for (let i = 0; i < 4; i++) {
+    const c = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.09, 0.5), new THREE.MeshBasicMaterial({ color: 0x14171c, transparent: true, opacity: 0 }));
+    c.position.set(-0.6 + i * 0.4, -0.24, 0);
+    c.rotation.y = (Math.random() - 0.5) * 0.6;
+    ST.group.add(c);
+    cracks.push(c);
+  }
+  const rustDot = new THREE.Mesh(new THREE.CircleGeometry(0.06, 16), new THREE.MeshBasicMaterial({ color: 0xa85a28, transparent: true, opacity: 0 }));
+  rustDot.rotation.x = -Math.PI / 2;
+  rustDot.position.set(0.2, -0.215, 0.1);
+  ST.group.add(rustDot);
+
+  const hair = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1.0, 8), new THREE.MeshStandardMaterial({ color: 0x3a2c20, roughness: 0.6 }));
+  hair.rotation.z = Math.PI / 2;
+  hair.position.set(0, 0.35, 0);
+  ST.group.add(hair);
+
+  const probe = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.5, 12), steelMatOf({ color: 0x9aa0a8 }));
+  probe.position.set(0.55, 0.6, 0);
+  probe.visible = false;
+  ST.group.add(probe);
+
+  setChips(
+    '<div class="chip" id="csChip" style="left:8%; top:8%">上塗り 10μm</div>' +
+    '<div class="chip" style="right:6%; top:8%">🪒 髪の毛 約80μm</div>'
+  );
+  ST.setView(-0.15, 0.14, 4.6);
+  const proxy = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1.1, 0.9), new THREE.MeshBasicMaterial({ visible: false }));
+  proxy.position.y = -0.3;
+  ST.group.add(proxy);
+  setExtraHTML('<div class="readout" id="l5read"></div>');
+
+  let probeT = -1;
+  function apply(v) {
+    const um = Math.round(10 + v * 90);
+    const h = 0.03 + v * 0.22;
+    topcoat.scale.y = h / 0.08;
+    topcoat.position.y = -0.30 + h / 2 + 0.04;
+    const thin = um <= 22, ok = um >= 40 && um <= 60, thick = um >= 82;
+    rustDot.material.opacity = thin ? 0.85 : 0;
+    topMat.opacity = thin ? 0.55 : 1;
+    cracks.forEach((c) => { c.material.opacity = thick ? 0.8 : 0; });
+    const chip = $("csChip");
+    const r = $("l5read");
+    if (chip) {
+      chip.className = "chip" + (thin ? " ng" : thick ? " ng" : ok ? " ok" : "");
+      chip.textContent = "上塗り " + um + "μm" + (thin ? "（薄すぎ→透け錆）" : ok ? "（適正）" : thick ? "（厚すぎ→割れ）" : "");
+    }
+    if (r) r.innerHTML = thin ? "下地が透けて<b>錆が発生</b>" : ok ? "<b>OK</b>：密着も防錆も安定" : thick ? "内部応力で<b>クラック</b>が入る" : "厚みを調整中…";
+  }
+  apply(0);
+  ST.sceneApi = {
+    proxy, grabAxis: "y", springBack: false,
+    update(v) { apply(v); },
+    poke() { probeT = 0; probe.visible = true; },
+    tick(dt) {
+      if (probeT >= 0) {
+        probeT += dt;
+        probe.position.y = 0.6 - Math.min(1, probeT / 0.5) * 0.85;
+        if (probeT > 1.1) { probeT = -1; probe.visible = false; }
+      }
+    }
+  };
+}
+
+/* L6：見切り実験（見切り線が溝に一致でOK・poke→マスキング→ミスト→剥がしの一連演出） */
+function buildL6() {
+  const boxW = 1.5, boxH = 1.5, boxD = 1.0;
+  const bodyMatTop = new THREE.MeshStandardMaterial({ color: 0x58c8d8, metalness: 0.15, roughness: 0.4 });
+  const bodyMatBot = new THREE.MeshStandardMaterial({ color: 0x50565f, metalness: 0.4, roughness: 0.55 });
+  const grooveY = 0.08;
+
+  const boxGroup = new THREE.Group();
+  ST.group.add(boxGroup);
+  const upper = new THREE.Mesh(new THREE.BoxGeometry(boxW, boxH, boxD), bodyMatTop);
+  const lower = new THREE.Mesh(new THREE.BoxGeometry(boxW, boxH, boxD), bodyMatBot);
+  boxGroup.add(upper); boxGroup.add(lower);
+  const groove = new THREE.Mesh(new THREE.BoxGeometry(boxW + 0.02, 0.035, boxD + 0.02), new THREE.MeshStandardMaterial({ color: 0x14171c, metalness: 0.3, roughness: 0.6 }));
+  groove.position.y = grooveY;
+  boxGroup.add(groove);
+  const seam = new THREE.Mesh(new THREE.BoxGeometry(boxW + 0.03, 0.02, boxD + 0.03), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 }));
+  boxGroup.add(seam);
+
+  const tapeTop = new THREE.Mesh(new THREE.BoxGeometry(boxW + 0.05, 0.05, 0.14), new THREE.MeshStandardMaterial({ color: 0xcfc39a, roughness: 0.9, transparent: true }));
+  const tapeBot = tapeTop.clone();
+  tapeTop.visible = false; tapeBot.visible = false;
+  boxGroup.add(tapeTop); boxGroup.add(tapeBot);
+  const MN2 = 60;
+  const mg = new THREE.BufferGeometry();
+  const mp = new Float32Array(MN2 * 3);
+  mg.setAttribute("position", new THREE.BufferAttribute(mp, 3));
+  const seqMist = new THREE.Points(mg, new THREE.PointsMaterial({ color: 0x8fe2ee, size: 0.03, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending, depthWrite: false }));
+  boxGroup.add(seqMist);
+  const seqParts = [];
+  for (let i = 0; i < MN2; i++) seqParts.push({ on: false, x: 0, y: 0, z: 0, life: 0 });
+
+  setChips('<div class="chip" id="csChip" style="left:8%; top:10%">見切り高さ 0%</div>');
+  ST.setView(-0.3, 0.14, 4.8);
+  const proxy = new THREE.Mesh(new THREE.BoxGeometry(boxW + 0.4, boxH + 0.3, boxD + 0.4), new THREE.MeshBasicMaterial({ visible: false }));
+  ST.group.add(proxy);
+  setExtraHTML('<div class="readout" id="l6read"></div>');
+
+  let curV = 0, seqT = -1;
+  function apply(v) {
+    curV = v;
+    const yLocal = -boxH / 2 + v * boxH;
+    const upH = Math.max(0.001, Math.min(boxH, boxH / 2 - yLocal));
+    const loH = Math.max(0.001, Math.min(boxH, boxH / 2 + yLocal));
+    upper.scale.y = upH / boxH;
+    upper.position.y = boxH / 2 - upH / 2;
+    lower.scale.y = loH / boxH;
+    lower.position.y = -boxH / 2 + loH / 2;
+    seam.position.y = yLocal;
+    const distToGroove = Math.abs(yLocal - grooveY);
+    const aligned = distToGroove < 0.035;
+    seam.material.opacity = aligned ? 0.95 : 0.45;
+    seam.position.x = aligned ? 0 : (Math.random() - 0.5) * 0.02 * Math.min(1, distToGroove * 14);
+    const chip = $("csChip");
+    const r = $("l6read");
+    const pct = Math.round(v * 100);
+    if (chip) {
+      chip.className = "chip" + (aligned ? " ok" : "");
+      chip.textContent = "見切り高さ " + pct + "%" + (aligned ? "（溝に一致：ビシッ）" : "");
+    }
+    if (r) r.innerHTML = aligned ? "<b>OK</b>：角・溝に置くと美しい" : "平面の途中＝<b>にじんでガタガタ</b>に見える";
+  }
+  apply(0);
+  ST.sceneApi = {
+    proxy, grabAxis: "y", springBack: false,
+    update(v) { apply(v); },
+    poke() {
+      seqT = 0;
+      tapeTop.visible = true; tapeBot.visible = true;
+      tapeTop.material.opacity = 1; tapeBot.material.opacity = 1;
+      tapeTop.position.x = 0; tapeBot.position.x = 0;
+    },
+    tick(dt) {
+      const yLocal = -boxH / 2 + curV * boxH;
+      if (seqT < 0) { tapeTop.position.y = yLocal + 0.09; tapeBot.position.y = yLocal - 0.09; }
+      if (seqT >= 0) {
+        seqT += dt;
+        tapeTop.position.y = yLocal + 0.09; tapeBot.position.y = yLocal - 0.09;
+        if (seqT < 0.9) {
+          for (let k = 0; k < 2; k++) {
+            const p = seqParts.find((q) => !q.on);
+            if (!p) break;
+            p.on = true; p.x = (Math.random() - 0.5) * boxW; p.y = yLocal + (Math.random() - 0.5) * 0.14; p.z = 0.5 + Math.random() * 0.2; p.life = 0.6;
+          }
+        } else if (seqT < 1.3) {
+          const k = (seqT - 0.9) / 0.4;
+          tapeTop.material.opacity = 1 - k;
+          tapeBot.material.opacity = 1 - k;
+          tapeTop.position.x = k * 0.3;
+          tapeBot.position.x = -k * 0.3;
+        } else {
+          tapeTop.visible = false; tapeBot.visible = false;
+          seqT = -1;
+        }
+      }
+      for (const p of seqParts) {
+        if (!p.on) continue;
+        p.life -= dt;
+        p.z -= dt * 0.3;
+        if (p.life <= 0) p.on = false;
+      }
+      let i = 0;
+      for (const p of seqParts) { mp[i * 3] = p.on ? p.x : 9999; mp[i * 3 + 1] = p.on ? p.y : 9999; mp[i * 3 + 2] = p.on ? p.z : 9999; i++; }
+      mg.attributes.position.needsUpdate = true;
+    }
+  };
+}
+
+const BUILDERS = { l1: buildL1, l2: buildL2, l3: buildL3, l4: buildL4, l5: buildL5, l6: buildL6 };
+
+/* ================================================================
+   🔬「膜の目」サブビュー（塗膜断面のミクロ世界・標準1シーン＋モードフラグ）
+================================================================ */
+function buildMicroScene(lessonId) {
+  const steel = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.3, 0.9), steelMatOf({ color: 0x767d86 }));
+  steel.position.y = -0.55;
+  steel.castShadow = true;
+  ST.group.add(steel);
+  const conv = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.02, 0.9), new THREE.MeshStandardMaterial({ color: 0xb8c2a0, metalness: 0.3, roughness: 0.6 }));
+  conv.position.y = -0.39;
+  ST.group.add(conv);
+  const prime = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.06, 0.9), new THREE.MeshStandardMaterial({ color: 0x8a8f96, roughness: 0.7 }));
+  prime.position.y = -0.35;
+  ST.group.add(prime);
+  const base = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.09, 0.9), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
+  base.position.y = -0.29;
+  ST.group.add(base);
+  const pigColors = [0xffffff, 0x2a2d33, 0xffb648];
+  for (let i = 0; i < 8; i++) {
+    const s = new THREE.Mesh(new THREE.SphereGeometry(0.02, 6, 5), new THREE.MeshStandardMaterial({ color: pigColors[i % pigColors.length] }));
+    s.position.set((Math.random() - 0.5) * 1.6, -0.29 + (Math.random() - 0.5) * 0.06, (Math.random() - 0.5) * 0.8);
+    ST.group.add(s);
+  }
+  const clear = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.05, 0.9), new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.25, roughness: 0.08, metalness: 0.1 }));
+  clear.position.y = -0.235;
+  ST.group.add(clear);
+
+  const layers = [
+    { top: 10, label: "鋼素地" },
+    { top: 26, label: "化成処理（極薄）" },
+    { top: 42, label: "プライマー" },
+    { top: 58, label: "ベース（顔料粒）" },
+    { top: 74, label: "クリア（艶）" }
+  ];
+  let chipsHtml = "";
+  layers.forEach((L) => { chipsHtml += '<div class="chip" style="left:6%; top:' + L.top + '%">' + L.label + "</div>"; });
+
+  const solv = [];
+  if (lessonId === "l2") {
+    for (let i = 0; i < 8; i++) {
+      const s = new THREE.Mesh(new THREE.SphereGeometry(0.02, 6, 5), new THREE.MeshStandardMaterial({ color: 0xdfffff, emissive: 0x4fb8c8, emissiveIntensity: 0.6, transparent: true }));
+      s.position.set((Math.random() - 0.5) * 1.6, -0.29, (Math.random() - 0.5) * 0.8);
+      ST.group.add(s);
+      solv.push({ mesh: s, baseY: -0.29, phase: Math.random() * 6.28 });
+    }
+    chipsHtml += '<div class="chip" style="right:5%; top:90%">💨 溶剤が蒸発していく</div>';
+  }
+  if (lessonId === "l5") {
+    for (let i = 0; i < 5; i++) {
+      const tickMesh = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.02, 0.9), new THREE.MeshBasicMaterial({ color: 0xffe9a3 }));
+      tickMesh.position.set(-0.98, -0.55 + i * 0.08, 0);
+      ST.group.add(tickMesh);
+    }
+    chipsHtml += '<div class="chip" style="right:5%; top:90%">📏 μm定規（1目盛≈16μm）</div>';
+  }
+  setChips(chipsHtml);
+  ST.setView(0, 0.1, 4.4);
+  let t2 = 0;
+  ST.sceneApi = {
+    tick(dt) {
+      t2 += dt;
+      ST.setView(Math.sin(t2 * 0.12) * 0.35, 0.1 + Math.sin(t2 * 0.08) * 0.05, 4.4 - Math.sin(t2 * 0.1) * 0.3);
+      solv.forEach((s) => {
+        const p = Math.sin(t2 * 0.8 + s.phase) * 0.5 + 0.5;
+        s.mesh.position.y = s.baseY + p * 0.4;
+        s.mesh.material.opacity = 1 - p;
+      });
+    }
+  };
+}
+
+/* ================================================================
+   🎬 カード専用3D（1カード＝専用シーン1本・全18本）
+================================================================ */
+const CARD_SCENES = {
+  /* ===== L1 塗装ってなに？ ===== */
+  l1: [
+    /* ①塗膜は雨がっぱ：断面に水/酸素の粒が降り、塗膜側は跳ね返り・裸側は錆点に */
+    function () {
+      const bar = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.22, 0.5), steelMatOf({ color: 0x767d86 }));
+      bar.position.y = -0.3;
+      bar.castShadow = true;
+      ST.group.add(bar);
+      const coat = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.05, 0.5), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.35 }));
+      coat.position.set(-0.45, -0.16, 0);
+      ST.group.add(coat);
+      const rustSpots = [];
+      for (let i = 0; i < 6; i++) {
+        const d = new THREE.Mesh(new THREE.CircleGeometry(0.035, 10), new THREE.MeshBasicMaterial({ color: 0xa85a28, transparent: true, opacity: 0 }));
+        d.rotation.x = -Math.PI / 2;
+        d.position.set(0.15 + Math.random() * 0.7, -0.185, (Math.random() - 0.5) * 0.4);
+        ST.group.add(d);
+        rustSpots.push(d);
+      }
+      const DN = 14;
+      const drops = [];
+      for (let i = 0; i < DN; i++) {
+        const dm = new THREE.Mesh(new THREE.SphereGeometry(0.025, 8, 6), new THREE.MeshStandardMaterial({ color: 0x8fd8ee, transparent: true, opacity: 0.85 }));
+        ST.group.add(dm);
+        const isLeft = i % 2 === 0;
+        drops.push({ mesh: dm, x: isLeft ? -0.75 + Math.random() * 0.5 : 0.1 + Math.random() * 0.7, isLeft, delay: Math.random() * 2.6, rustIdx: (i / 2) | 0 });
+      }
+      setChips('<div class="chip" style="left:8%; top:10%">左＝塗膜あり／右＝裸の鉄</div>');
+      ST.setView(0, 0.06, 4.2);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 3.2;
+        if (cycle < dt) rustSpots.forEach((d) => (d.material.opacity = 0));
+        drops.forEach((d) => {
+          const local = cycle - d.delay;
+          if (local < 0 || local > 1.1) { d.mesh.visible = false; return; }
+          d.mesh.visible = true;
+          const fallY = 0.55 - local * 0.85;
+          if (d.isLeft) {
+            d.mesh.position.set(d.x, fallY > -0.1 ? fallY : -0.1 + Math.abs(Math.sin(local * 20)) * 0.06, 0);
+            if (fallY <= -0.1) d.mesh.visible = local < 0.9;
+          } else {
+            d.mesh.position.set(d.x, Math.max(fallY, -0.2), 0);
+            if (fallY <= -0.19 && rustSpots[d.rustIdx]) rustSpots[d.rustIdx].material.opacity = Math.min(0.85, (local - 0.7) * 3);
+          }
+        });
+      } };
+    },
+    /* ②色は情報：制御盤ボタン3個がグレー→赤/黄/緑の順で点灯 */
+    function () {
+      const panelBody = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.9, 0.15), steelMatOf({ color: 0x50565f }));
+      panelBody.castShadow = true;
+      ST.group.add(panelBody);
+      const btnGeo = new THREE.CylinderGeometry(0.14, 0.14, 0.1, 20);
+      const btns = [0xe45048, 0xffb648, 0x7ec48c].map((hex, i) => {
+        const m = new THREE.Mesh(btnGeo, new THREE.MeshStandardMaterial({ color: 0x6a7078, roughness: 0.5, emissive: 0x000000, emissiveIntensity: 0 }));
+        m.rotation.x = Math.PI / 2;
+        m.position.set(-0.35 + i * 0.35, 0.05, 0.12);
+        ST.group.add(m);
+        return { mesh: m, hex };
+      });
+      const labels = ["🔴 非常停止", "🟡 注意", "🟢 起動"];
+      setChips('<div class="chip" id="csChip" style="left:10%; top:10%">どれが非常停止？</div>');
+      ST.setView(0, 0.05, 3.6);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 5;
+        const idx = cycle < 1 ? -1 : Math.min(2, Math.floor((cycle - 1) / 1.2));
+        btns.forEach((b, i) => {
+          const lit = idx >= 0 && i <= idx;
+          b.mesh.material.color.setHex(lit ? b.hex : 0x6a7078);
+          b.mesh.material.emissive.setHex(lit ? b.hex : 0x000000);
+          b.mesh.material.emissiveIntensity = lit ? 0.6 : 0;
+        });
+        const chip = $("csChip");
+        if (chip) chip.textContent = idx < 0 ? "どれが非常停止？" : labels[idx];
+      } };
+    },
+    /* ③塗装は設計項目：図面ふきだしから光が飛び、指示テキストが2種交互に切替 */
+    function () {
+      const panel = new THREE.Mesh(new THREE.BoxGeometry(0.9, 1.1, 0.1), new THREE.MeshStandardMaterial({ color: 0xe7ddb8, roughness: 0.5 }));
+      panel.position.x = 0.5;
+      panel.castShadow = true;
+      ST.group.add(panel);
+      const noteCv = document.createElement("canvas");
+      noteCv.width = noteCv.height = 128;
+      const nctx = noteCv.getContext("2d");
+      nctx.fillStyle = "#f3ecd6"; nctx.fillRect(0, 0, 128, 128);
+      nctx.strokeStyle = "rgba(60,50,30,0.25)";
+      for (let i = 20; i < 128; i += 18) { nctx.beginPath(); nctx.moveTo(8, i); nctx.lineTo(120, i); nctx.stroke(); }
+      const noteTex = new THREE.CanvasTexture(noteCv);
+      const note = new THREE.Mesh(new THREE.PlaneGeometry(0.7, 0.7), new THREE.MeshStandardMaterial({ map: noteTex, roughness: 0.9 }));
+      note.position.set(-0.55, 0.15, 0.2);
+      ST.group.add(note);
+      const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.05, 1.0, 8, 1, true), new THREE.MeshBasicMaterial({ color: 0x8fe2ee, transparent: true, opacity: 0.35, side: THREE.DoubleSide }));
+      beam.rotation.z = Math.PI / 2;
+      beam.position.set(-0.05, 0.15, 0.1);
+      ST.group.add(beam);
+      const INSTR = [
+        { color: 0xe7ddb8, rough: 0.55, label: "アイボリー半艶 5Y7/1" },
+        { color: 0x2a2d33, rough: 0.85, label: "黒ツヤ消し" }
+      ];
+      setChips('<div class="chip" id="csChip" style="left:6%; top:8%">アイボリー半艶 5Y7/1</div>');
+      ST.setView(-0.15, 0.08, 3.9);
+      let t2 = 0, idx = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        beam.material.opacity = 0.2 + Math.sin(t2 * 6) * 0.15;
+        const cycle = t2 % 3;
+        const newIdx = cycle < 1.5 ? 0 : 1;
+        if (newIdx !== idx) {
+          idx = newIdx;
+          panel.material.color.setHex(INSTR[idx].color);
+          panel.material.roughness = INSTR[idx].rough;
+          const chip = $("csChip");
+          if (chip) chip.textContent = INSTR[idx].label;
+        }
+      } };
+    }
+  ],
+
+  /* ===== L2 塗料の正体と乾燥 ===== */
+  l2: [
+    /* ①3人組の役割分担：透明タンクに顔料/樹脂/溶剤が注がれ、攪拌→1滴垂れる */
+    function () {
+      const tank = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.4, 0.9, 20, 1, true), new THREE.MeshStandardMaterial({ color: 0xbfe6ee, transparent: true, opacity: 0.25, side: THREE.DoubleSide, roughness: 0.15 }));
+      tank.position.y = 0.1;
+      ST.group.add(tank);
+      const kinds = [{ color: 0x58c8d8, count: 10 }, { color: 0xc9a86a, count: 8 }, { color: 0xdfffff, count: 10 }];
+      const grains = [];
+      kinds.forEach((k, ki) => {
+        for (let i = 0; i < k.count; i++) {
+          const g = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 6), new THREE.MeshStandardMaterial({ color: k.color, roughness: 0.4 }));
+          g.visible = false;
+          ST.group.add(g);
+          grains.push({ mesh: g, tx: (Math.random() - 0.5) * 0.5, tz: (Math.random() - 0.5) * 0.5, ty: -0.1 + Math.random() * 0.5, delay: ki * 0.8 + Math.random() * 0.6 });
+        }
+      });
+      const blade = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.04, 0.05), new THREE.MeshStandardMaterial({ color: 0x9aa0a8, metalness: 0.7, roughness: 0.4 }));
+      blade.position.y = -0.2;
+      ST.group.add(blade);
+      const drop = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.3 }));
+      drop.position.set(0, -0.55, 0);
+      drop.visible = false;
+      ST.group.add(drop);
+      setChips('<div class="chip" id="csChip" style="left:8%; top:8%">注入中…</div>');
+      ST.setView(0, 0.1, 3.9);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 4.5;
+        const chip = $("csChip");
+        grains.forEach((g) => {
+          const local = cycle - g.delay;
+          g.mesh.visible = local > 0 && local < 3.2;
+          if (g.mesh.visible) g.mesh.position.set(g.tx, Math.max(g.ty - local * 0.15, -0.15), g.tz);
+        });
+        if (cycle < 2.4) { if (chip) chip.textContent = "注入中…顔料＋樹脂＋溶剤"; drop.visible = false; }
+        else if (cycle < 3.6) { blade.rotation.y += dt * 8; if (chip) chip.textContent = "攪拌中…3人組が混ざる"; }
+        else { if (chip) chip.textContent = "ノズルから1滴"; drop.visible = true; drop.position.y = -0.55 - ((cycle - 3.6) / 0.9) * 0.5; }
+        if (cycle >= 4.4) drop.visible = false;
+      } };
+    },
+    /* ②乾燥は3方式：自然乾燥/焼付け炉/2液反応を順にスポット */
+    function () {
+      const belt = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.04, 0.4), new THREE.MeshStandardMaterial({ color: 0x2a2d33, roughness: 0.8 }));
+      belt.position.y = -0.45;
+      ST.group.add(belt);
+      const fan = new THREE.Mesh(new THREE.TorusGeometry(0.09, 0.015, 6, 16), new THREE.MeshStandardMaterial({ color: 0x9aa0a8, metalness: 0.6 }));
+      fan.position.set(-0.75, 0.05, 0);
+      ST.group.add(fan);
+      const furnace = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.4, 16, 1, true), new THREE.MeshStandardMaterial({ color: 0xff7a3c, emissive: 0xff5a20, emissiveIntensity: 0.7, side: THREE.DoubleSide, transparent: true, opacity: 0.55 }));
+      furnace.rotation.z = Math.PI / 2;
+      furnace.position.set(0, -0.1, 0);
+      ST.group.add(furnace);
+      const bottleA = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.25, 10), new THREE.MeshStandardMaterial({ color: 0x8fd8ee, transparent: true, opacity: 0.7 }));
+      const bottleB = bottleA.clone();
+      bottleA.position.set(0.68, 0.05, 0.08); bottleB.position.set(0.82, 0.05, -0.08);
+      ST.group.add(bottleA); ST.group.add(bottleB);
+      setChips('<div class="chip" id="csChip" style="left:8%; top:8%">①自然乾燥（常温・扇風機）</div>');
+      ST.setView(0, 0.1, 4.4);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        fan.rotation.x += dt * 6;
+        const cycle = t2 % 4.5;
+        const chip = $("csChip");
+        if (cycle < 1.5) { if (chip) chip.textContent = "①自然乾燥（常温・扇風機）"; }
+        else if (cycle < 3) { furnace.material.opacity = 0.55 + Math.sin(t2 * 4) * 0.2; if (chip) chip.textContent = "②焼付け（約130℃×20分）"; }
+        else {
+          const k = (cycle - 3) * 3;
+          bottleA.position.x = 0.68 + Math.sin(k) * 0.05;
+          bottleB.position.x = 0.82 - Math.sin(k) * 0.05;
+          if (chip) chip.textContent = "③2液反応（混ぜたら使い切り）";
+        }
+      } };
+    },
+    /* ③焼付けは熱との勝負：ゴム/樹脂ノブ付きで炉へ→溶ける(NG)→巻き戻し→箱だけ→組付け(OK) */
+    function () {
+      const furnaceBody = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 1.2, 20, 1, true), new THREE.MeshStandardMaterial({ color: 0xff5a20, emissive: 0xff3c10, emissiveIntensity: 0.5, side: THREE.DoubleSide, transparent: true, opacity: 0.4 }));
+      furnaceBody.rotation.z = Math.PI / 2;
+      ST.group.add(furnaceBody);
+      const box = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.3, 0.3), steelMatOf({ color: 0x8a8f96 }));
+      ST.group.add(box);
+      const gasket = new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.03, 8, 20), new THREE.MeshStandardMaterial({ color: 0x2a2d33, roughness: 0.6 }));
+      gasket.position.set(0, 0.2, 0);
+      ST.group.add(gasket);
+      const knob = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.1, 12), new THREE.MeshStandardMaterial({ color: 0xffb648, roughness: 0.5 }));
+      knob.position.set(0.2, 0.05, 0.2);
+      ST.group.add(knob);
+      setChips('<div class="chip ng" id="csChip" style="left:8%; top:8%">NG：付けたまま炉へ</div>');
+      ST.setView(0, 0.1, 4.2);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 6;
+        const chip = $("csChip");
+        if (cycle < 3) {
+          const k = Math.min(1, cycle / 2.4);
+          gasket.visible = true; knob.visible = true;
+          gasket.scale.set(1, 1 - k * 0.7, 1); gasket.position.y = 0.2 - k * 0.15;
+          knob.scale.set(1, 1 - k * 0.8, 1); knob.position.y = 0.05 - k * 0.04;
+          if (chip) { chip.className = "chip ng"; chip.textContent = "NG：ゴム・ノブが溶けて垂れる"; }
+        } else if (cycle < 4.5) {
+          gasket.visible = false; knob.visible = false;
+          if (chip) { chip.className = "chip ok"; chip.textContent = "OK：箱だけ炉へ"; }
+        } else {
+          gasket.visible = true; knob.visible = true;
+          gasket.scale.set(1, 1, 1); gasket.position.y = 0.2;
+          knob.scale.set(1, 1, 1); knob.position.y = 0.05;
+          if (chip) { chip.className = "chip ok"; chip.textContent = "OK：出てから部品を組付け"; }
+        }
+      } };
+    }
+  ],
+
+  /* ===== L3 スプレーの物理 ===== */
+  l3: [
+    /* ①霧化：空気噴流が液柱を引きちぎり霧の扇に割れる（スロー再生） */
+    function () {
+      const nozzleBody = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.3, 16), new THREE.MeshStandardMaterial({ color: 0xc9cfd6, metalness: 0.85, roughness: 0.25 }));
+      nozzleBody.rotation.x = Math.PI / 2;
+      nozzleBody.position.z = -0.3;
+      ST.group.add(nozzleBody);
+      const jetLines = [];
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        const l = new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.006, 0.6, 6), new THREE.MeshBasicMaterial({ color: 0xdfeff5, transparent: true, opacity: 0.5 }));
+        l.rotation.x = Math.PI / 2;
+        l.position.set(Math.cos(a) * 0.1, Math.sin(a) * 0.1, -0.05);
+        ST.group.add(l);
+        jetLines.push(l);
+      }
+      const MN = 90;
+      const mg = new THREE.BufferGeometry();
+      const mp = new Float32Array(MN * 3);
+      mg.setAttribute("position", new THREE.BufferAttribute(mp, 3));
+      const mist = new THREE.Points(mg, new THREE.PointsMaterial({ color: 0x8fe2ee, size: 0.03, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending, depthWrite: false }));
+      ST.group.add(mist);
+      const parts = [];
+      for (let i = 0; i < MN; i++) parts.push({ x: 0, y: 0, z: -0.3, vx: 0, vy: 0, vz: 0, life: 0 });
+      setChips('<div class="chip" style="left:8%; top:8%">霧化：空気が液柱を引きちぎる</div>');
+      ST.setView(0, 0.02, 2.6);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt * 0.5;
+        jetLines.forEach((l, i) => { l.material.opacity = 0.35 + Math.sin(t2 * 4 + i) * 0.15; });
+        const cycle = t2 % 1.4;
+        if (cycle < dt * 0.5) {
+          parts.forEach((p) => {
+            const a = Math.random() * Math.PI * 2;
+            const r = Math.random() * 0.35;
+            p.x = 0; p.y = 0; p.z = -0.3;
+            p.vx = Math.cos(a) * r; p.vy = Math.sin(a) * r; p.vz = 1.2 + Math.random() * 0.4;
+            p.life = 1;
+          });
+        }
+        let i = 0;
+        for (const p of parts) {
+          if (p.life > 0) {
+            p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt;
+            p.vy -= dt * 0.15;
+            p.life -= dt * 0.7;
+          }
+          mp[i * 3] = p.life > 0 ? p.x : 9999; mp[i * 3 + 1] = p.life > 0 ? p.y : 9999; mp[i * 3 + 2] = p.life > 0 ? p.z : 9999;
+          i++;
+        }
+        mg.attributes.position.needsUpdate = true;
+      } };
+    },
+    /* ②タレとゆず肌：左は涙型のタレが下方向に成長／右はデコボコが盛り上がる */
+    function () {
+      const leftP = new THREE.Mesh(new THREE.BoxGeometry(0.85, 1.3, 0.08), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
+      leftP.position.x = -0.5;
+      ST.group.add(leftP);
+      const rightP = new THREE.Mesh(new THREE.BoxGeometry(0.85, 1.3, 0.08), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.6 }));
+      rightP.position.x = 0.5;
+      ST.group.add(rightP);
+      const drip = new THREE.Mesh(new THREE.ConeGeometry(0.045, 0.1, 10), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.25 }));
+      drip.rotation.x = Math.PI;
+      drip.position.set(-0.5, 0.3, 0.05);
+      drip.scale.y = 0.1;
+      ST.group.add(drip);
+      const bumps = [];
+      for (let i = 0; i < 14; i++) {
+        const b = new THREE.Mesh(new THREE.SphereGeometry(0.05 + Math.random() * 0.03, 8, 6), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.65 }));
+        b.position.set(0.5 + (Math.random() - 0.5) * 0.7, (Math.random() - 0.5) * 1.1, 0.06);
+        b.scale.set(1, 1, 0.001);
+        ST.group.add(b);
+        bumps.push(b);
+      }
+      setChips('<div class="chip" id="csChip" style="left:8%; top:8%">左：タレ</div>');
+      ST.setView(0, 0.06, 4.0);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 3.6;
+        const chip = $("csChip");
+        if (cycle < 1.8) {
+          const k = cycle / 1.8;
+          drip.scale.y = 0.1 + k * 2.2;
+          drip.position.y = 0.3 - drip.scale.y * 0.05;
+          if (chip) chip.textContent = "左：タレ──重力に負けて伸びる";
+          bumps.forEach((b) => (b.scale.z = 0.001));
+        } else {
+          drip.scale.y = 0.1; drip.position.y = 0.3;
+          const k = (cycle - 1.8) / 1.8;
+          bumps.forEach((b, i) => (b.scale.z = Math.min(1, k * 3 - i * 0.05)));
+          if (chip) chip.textContent = "右：ゆず肌──デコボコのまま固まる";
+        }
+      } };
+    },
+    /* ③重ねは半分ずらし：50%オーバーラップ=均一／重ねゼロ=縞々ムラ */
+    function () {
+      const pcv = document.createElement("canvas");
+      pcv.width = pcv.height = 256;
+      const pctx = pcv.getContext("2d");
+      pctx.fillStyle = "#9aa0a8"; pctx.fillRect(0, 0, 256, 256);
+      const ptex = new THREE.CanvasTexture(pcv);
+      const panel = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1.1, 0.08), new THREE.MeshStandardMaterial({ map: ptex, roughness: 0.5 }));
+      ST.group.add(panel);
+      const gun = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.2, 0.3), new THREE.MeshStandardMaterial({ color: 0x3c434c, metalness: 0.7, roughness: 0.4 }));
+      ST.group.add(gun);
+      setChips('<div class="chip ok" id="csChip" style="left:8%; top:8%">50%重ね＝均一</div>');
+      ST.setView(0, 0.04, 4.4);
+      let t2 = 0, mode = 0, lastPass = -1;
+      function reset() { pctx.fillStyle = "#9aa0a8"; pctx.fillRect(0, 0, 256, 256); ptex.needsUpdate = true; }
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 6;
+        if (cycle < dt) {
+          mode = mode === 0 ? 1 : 0; reset(); lastPass = -1;
+          const c = $("csChip");
+          if (c) { c.className = "chip" + (mode === 0 ? " ok" : " ng"); c.textContent = mode === 0 ? "50%重ね＝均一" : "重ねゼロ＝縞々ムラ"; }
+        }
+        const passGap = mode === 0 ? 30 : 60;
+        const passW = 60;
+        const gx = ((cycle % 3) / 3) * 300 - 20;
+        gun.position.set(gx / 128 - 1.0, 0, 0.5);
+        const passIdx = Math.floor(gx / passGap);
+        if (passIdx !== lastPass && passIdx >= 0) {
+          lastPass = passIdx;
+          pctx.fillStyle = "rgba(88,200,216,0.35)";
+          pctx.fillRect(passIdx * passGap, 0, passW, 256);
+          ptex.needsUpdate = true;
+        }
+      } };
+    }
+  ],
+
+  /* ===== L4 色と艶の指示 ===== */
+  l4: [
+    /* ①色は番号：色見本帳から選ばれたチップの光がパネルに飛んで塗わる */
+    function () {
+      const panel = new THREE.Mesh(new THREE.BoxGeometry(0.9, 1.1, 0.1), new THREE.MeshStandardMaterial({ color: 0xe7ddb8, roughness: 0.5 }));
+      panel.position.x = 0.6;
+      ST.group.add(panel);
+      const book = new THREE.Group();
+      book.position.set(-0.65, 0, 0.2);
+      ST.group.add(book);
+      const CH = [{ hex: 0xe7ddb8, label: "5Y7/1" }, { hex: 0x9aa0a8, label: "N7" }, { hex: 0x8fb8d8, label: "2.5PB" }];
+      const chips3d = CH.map((c, i) => {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.55, 0.02), new THREE.MeshStandardMaterial({ color: c.hex, roughness: 0.5 }));
+        m.position.set(0, 0, -i * 0.03);
+        book.add(m);
+        return m;
+      });
+      const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.12, 1.2, 8, 1, true), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, side: THREE.DoubleSide }));
+      beam.rotation.z = Math.PI / 2;
+      beam.position.set(0, 0, 0.1);
+      ST.group.add(beam);
+      setChips('<div class="chip" id="csChip" style="left:8%; top:8%">5Y7/1</div>');
+      ST.setView(0, 0.06, 4.0);
+      let t2 = 0, idx = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 2.2;
+        if (cycle < dt) {
+          idx = (idx + 1) % CH.length;
+          panel.material.color.setHex(CH[idx].hex);
+          const c = $("csChip"); if (c) c.textContent = CH[idx].label;
+        }
+        chips3d.forEach((m, i) => { m.rotation.x = i === idx ? Math.sin(cycle * 8) * 0.15 : 0; });
+        beam.material.opacity = cycle < 0.3 ? (0.3 - cycle) * 1.2 : 0;
+      } };
+    },
+    /* ②艶は数字：3パネル(グロス85/45/8)を光源が円軌道で回り映り込みの差を見せる */
+    function () {
+      const glossVals = [85, 45, 8];
+      const roughVals = [0.05, 0.45, 0.9];
+      glossVals.forEach((g, i) => {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.85, 0.08), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: roughVals[i], envMapIntensity: 1.3 }));
+        m.position.x = -0.75 + i * 0.75;
+        ST.group.add(m);
+      });
+      const orbLight = new THREE.PointLight(0xffffff, 1.4, 8);
+      ST.group.add(orbLight);
+      const ray = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 1.2, 6), new THREE.MeshBasicMaterial({ color: 0xffe9a3, transparent: true, opacity: 0.6 }));
+      ST.group.add(ray);
+      setChips(
+        '<div class="chip" style="left:5%; top:82%">グロス85</div>' +
+        '<div class="chip" style="left:40%; top:82%">グロス45</div>' +
+        '<div class="chip" style="right:5%; top:82%">グロス8</div>'
+      );
+      ST.setView(0, 0.1, 3.8);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const a = t2 * 0.7;
+        orbLight.position.set(Math.cos(a) * 1.4, 0.9, Math.sin(a) * 1.4 + 0.6);
+        ray.position.set(0, 0.9 - Math.sin(a) * 0.1, 0.3);
+        ray.rotation.z = Math.PI / 3;
+        ray.rotation.y = a;
+      } };
+    },
+    /* ③現物合わせの罠：白色光=同色→電球色に切替で色差が浮かぶ＋見本が黄変 */
+    function () {
+      const ref = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.9, 0.08), new THREE.MeshStandardMaterial({ color: 0xe7ddb8, roughness: 0.4 }));
+      ref.position.x = -0.42;
+      ST.group.add(ref);
+      const repro = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.9, 0.08), new THREE.MeshStandardMaterial({ color: 0xe7ddb8, roughness: 0.4 }));
+      repro.position.x = 0.42;
+      ST.group.add(repro);
+      const light = new THREE.PointLight(0xffffff, 1.2, 10);
+      light.position.set(0, 1.2, 1.4);
+      ST.group.add(light);
+      setChips('<div class="chip" id="csChip" style="left:10%; top:8%">見本／再現：同じ色</div>');
+      ST.setView(0, 0.08, 3.9);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 5;
+        const chip = $("csChip");
+        if (cycle < 2) {
+          light.color.setHex(0xffffff);
+          const yellow = Math.min(1, cycle / 2) * 0.15;
+          ref.material.color.setRGB(0.906 + yellow * 0.05, 0.867 - yellow * 0.1, 0.722 - yellow * 0.25);
+          if (chip) chip.textContent = "白色光：ほぼ同じ色に見える";
+        } else {
+          const k = Math.min(1, (cycle - 2) / 1.5);
+          light.color.setRGB(1, 0.75 - k * 0.1, 0.45 - k * 0.15);
+          if (chip) chip.textContent = "電球色に変えると…色差が浮かぶ（メタメリズム）";
+        }
+        if (cycle > 4.2 && chip) chip.textContent = "見本は経年で黄変している";
+      } };
+    }
+  ],
+
+  /* ===== L5 膜厚と下地 ===== */
+  l5: [
+    /* ①μmの世界：髪の毛/ラップ/塗膜のスケール比較＋定規が伸びる */
+    function () {
+      const hair = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.8, 12), new THREE.MeshStandardMaterial({ color: 0x3a2c20, roughness: 0.6 }));
+      hair.rotation.z = Math.PI / 2;
+      hair.position.set(-0.8, 0.35, 0);
+      ST.group.add(hair);
+      const wrap = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.008, 0.5), new THREE.MeshStandardMaterial({ color: 0xdfeff5, transparent: true, opacity: 0.5, roughness: 0.2 }));
+      wrap.position.set(-0.8, 0, 0);
+      ST.group.add(wrap);
+      const paintBar = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.02, 0.5), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.3 }));
+      paintBar.position.set(-0.8, -0.35, 0);
+      ST.group.add(paintBar);
+      const rulerTicks = [];
+      for (let i = 0; i < 6; i++) {
+        const t = new THREE.Mesh(new THREE.BoxGeometry(0.015, 0.9, 0.015), new THREE.MeshBasicMaterial({ color: 0xffe9a3 }));
+        t.position.set(0.3 + i * 0.12, 0, 0);
+        t.visible = false;
+        ST.group.add(t);
+        rulerTicks.push(t);
+      }
+      setChips(
+        '<div class="chip" style="left:4%; top:18%">髪の毛 約80μm</div>' +
+        '<div class="chip" style="left:4%; top:46%">ラップ 約11μm</div>' +
+        '<div class="chip" style="left:4%; top:74%">塗膜 約25μm</div>'
+      );
+      ST.setView(0, 0.1, 4.4);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const k = Math.min(1, t2 / 1.2);
+        rulerTicks.forEach((t, i) => (t.visible = k * 6 > i));
+        ST.setView(Math.sin(t2 * 0.2) * 0.2, 0.1, 4.4 - Math.sin(t2 * 0.15) * 0.4);
+      } };
+    },
+    /* ②下地が9割：油膜残り=碁盤目テープでペリッ(NG)／脱脂済み=剥がれない(OK) */
+    function () {
+      const leftP = new THREE.Mesh(new THREE.BoxGeometry(0.8, 1.0, 0.08), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
+      leftP.position.x = -0.5;
+      ST.group.add(leftP);
+      const oilFilm = new THREE.Mesh(new THREE.PlaneGeometry(0.78, 0.98), new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.3, roughness: 0.12, metalness: 0.4 }));
+      oilFilm.position.set(-0.5, 0, 0.045);
+      ST.group.add(oilFilm);
+      const rightP = new THREE.Mesh(new THREE.BoxGeometry(0.8, 1.0, 0.08), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
+      rightP.position.x = 0.5;
+      ST.group.add(rightP);
+      const tape = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.3), new THREE.MeshStandardMaterial({ color: 0xcfc39a, transparent: true, opacity: 0.9 }));
+      tape.position.set(-0.5, 0, 0.2);
+      ST.group.add(tape);
+      const flakes = [];
+      for (let i = 0; i < 8; i++) {
+        const f = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.06, 0.005), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
+        f.visible = false;
+        ST.group.add(f);
+        flakes.push(f);
+      }
+      setChips('<div class="chip ng" id="csChip" style="left:10%; top:8%">左：油膜残り</div>');
+      ST.setView(0, 0.06, 4.0);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 4;
+        const chip = $("csChip");
+        if (cycle < dt) flakes.forEach((f) => { f.position.set(-0.5 + (Math.random() - 0.5) * 0.6, (Math.random() - 0.5) * 0.8, 0.05); });
+        tape.position.x = cycle < 2 ? -0.5 : 0.5;
+        tape.material.opacity = cycle < 1.6 || (cycle >= 2 && cycle < 3.6) ? 0.9 : 0.15;
+        if (cycle < 2) {
+          const k = Math.min(1, cycle / 1.6);
+          flakes.forEach((f, i) => { f.visible = k > i / 8; if (f.visible) f.position.y += dt * 0.15; });
+          if (chip) { chip.className = "chip ng"; chip.textContent = "NG：碁盤目テープ試験でペリッと剥がれる"; }
+        } else {
+          flakes.forEach((f) => (f.visible = false));
+          if (chip) { chip.className = "chip ok"; chip.textContent = "OK：脱脂＋化成処理で剥がれない"; }
+        }
+      } };
+    },
+    /* ③膜厚は測れる：ゲージが点々と測定→数値チップ→薄い箇所だけ再スプレー */
+    function () {
+      const panel = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.0, 0.08), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
+      ST.group.add(panel);
+      const points = [[-0.5, 0.25], [-0.15, -0.1], [0.2, 0.3], [0.5, -0.2]];
+      const vals = [23, 25, 18, 24];
+      const probe = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.5, 12), steelMatOf({ color: 0x9aa0a8 }));
+      ST.group.add(probe);
+      const dots = points.map((p) => {
+        const d = new THREE.Mesh(new THREE.CircleGeometry(0.04, 12), new THREE.MeshBasicMaterial({ color: 0xffe9a3, transparent: true, opacity: 0 }));
+        d.position.set(p[0], p[1], 0.045);
+        ST.group.add(d);
+        return d;
+      });
+      setChips('<div class="chip" id="csChip" style="left:8%; top:8%">膜厚計で点々と測定</div>');
+      ST.setView(0, 0.06, 4.2);
+      let t2 = 0, respray = false;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 6;
+        const idx = Math.min(points.length - 1, Math.floor(cycle / 1.3));
+        const local = cycle - idx * 1.3;
+        const p = points[idx];
+        probe.position.set(p[0], p[1] + 0.5 - Math.min(1, local / 0.4) * 0.5, 0.15);
+        const chip = $("csChip");
+        if (local > 0.4 && local < 1.2) {
+          dots[idx].material.opacity = 0.9;
+          const isThin = idx === 2;
+          dots[idx].material.color.setHex(isThin && !respray ? 0xe47869 : 0x7ec48c);
+          if (chip) chip.textContent = vals[idx] + "μm" + (isThin && !respray ? "（薄い！再スプレーへ）" : "");
+        }
+        if (cycle > 5.6) { respray = true; }
+        if (cycle > 5.9) { respray = false; dots.forEach((d) => (d.material.opacity = 0)); }
+      } };
+    }
+  ],
+
+  /* ===== L6 塗り分けとマスキング ===== */
+  l6: [
+    /* ①見切りは角と溝に置く：溝=ビシッ／平面=にじんでガタガタ */
+    function () {
+      const leftBox = new THREE.Group();
+      leftBox.position.x = -0.55;
+      ST.group.add(leftBox);
+      const lUp = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.55, 0.6), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
+      lUp.position.y = 0.28;
+      const lLo = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.55, 0.6), new THREE.MeshStandardMaterial({ color: 0x50565f, roughness: 0.5 }));
+      lLo.position.y = -0.28;
+      const lGroove = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.03, 0.62), new THREE.MeshStandardMaterial({ color: 0x14171c }));
+      leftBox.add(lUp); leftBox.add(lLo); leftBox.add(lGroove);
+      const rightBox = new THREE.Group();
+      rightBox.position.x = 0.55;
+      ST.group.add(rightBox);
+      const rUp = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.55, 0.6), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
+      rUp.position.y = 0.28;
+      const rLo = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.55, 0.6), new THREE.MeshStandardMaterial({ color: 0x50565f, roughness: 0.5 }));
+      rLo.position.y = -0.28;
+      const rSeam = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.02, 0.62), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8 }));
+      rightBox.add(rUp); rightBox.add(rLo); rightBox.add(rSeam);
+      setChips(
+        '<div class="chip ok" style="left:4%; top:8%">溝：ビシッ</div>' +
+        '<div class="chip ng" style="right:4%; top:8%">平面：ガタガタ</div>'
+      );
+      ST.setView(0, 0.08, 3.8);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        rSeam.position.x = (Math.random() - 0.5) * 0.015;
+        rSeam.rotation.z = (Math.random() - 0.5) * 0.02;
+        ST.setView(Math.sin(t2 * 0.3) * 0.15, 0.08, 3.8 - Math.sin(t2 * 0.2) * 0.3);
+      } };
+    },
+    /* ②塗装レス指定の場所：ネジ穴/アース面/嵌合部品が巡回で点灯→マスキングで解決 */
+    function () {
+      const body = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.9, 0.8), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
+      ST.group.add(body);
+      const bolt = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.3, 10), steelMatOf({ color: 0x9aa0a8 }));
+      bolt.position.set(-0.4, 0.55, 0.2);
+      bolt.visible = false;
+      ST.group.add(bolt);
+      const matePart = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.25, 0.1), steelMatOf({ color: 0x9aa0a8 }));
+      matePart.position.set(0.45, 0.7, 0.2);
+      ST.group.add(matePart);
+      const tapes = [-0.4, 0, 0.45].map((x, i) => {
+        const t = new THREE.Mesh(new THREE.CircleGeometry(0.1, 14), new THREE.MeshStandardMaterial({ color: 0xcfc39a, transparent: true, opacity: 0 }));
+        t.rotation.x = -Math.PI / 2;
+        t.position.set(x, 0.455, i === 1 ? 0.25 : 0.2);
+        ST.group.add(t);
+        return t;
+      });
+      setChips('<div class="chip" id="csChip" style="left:8%; top:8%">ネジ穴：ボルトが入らない</div>');
+      ST.setView(0, 0.15, 4.0);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 6;
+        const chip = $("csChip");
+        tapes.forEach((t) => (t.material.opacity = 0));
+        bolt.visible = false;
+        if (cycle < 1.5) {
+          bolt.visible = true;
+          bolt.position.x = -0.4 + Math.sin(t2 * 10) * 0.03;
+          if (chip) chip.textContent = "ネジ穴：ボルトが入らずガタガタ";
+        } else if (cycle < 3) {
+          if (chip) chip.textContent = "アース端子：塗膜で電気が流れない×";
+        } else if (cycle < 4.5) {
+          matePart.position.x = 0.45 + Math.sin(t2 * 6) * 0.02;
+          if (chip) chip.textContent = "嵌合部品：入らない";
+        } else {
+          tapes.forEach((t) => (t.material.opacity = 0.85));
+          if (chip) { chip.className = "chip ok"; chip.textContent = "マスキングで解決（OK）"; }
+        }
+      } };
+    },
+    /* ③図面での書き方：ハッチング範囲が光り、対応する3D面が同色でハイライト同期 */
+    function () {
+      const box = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.8, 0.8), new THREE.MeshStandardMaterial({ color: 0x58c8d8, roughness: 0.4 }));
+      box.position.x = 0.5;
+      ST.group.add(box);
+      const faceHi = new THREE.Mesh(new THREE.PlaneGeometry(1.02, 0.82), new THREE.MeshBasicMaterial({ color: 0xffe9a3, transparent: true, opacity: 0 }));
+      faceHi.position.set(0.5, 0, 0.41);
+      ST.group.add(faceHi);
+      const noteCv = document.createElement("canvas");
+      noteCv.width = noteCv.height = 128;
+      const nctx = noteCv.getContext("2d");
+      nctx.fillStyle = "#f3ecd6"; nctx.fillRect(0, 0, 128, 128);
+      nctx.fillStyle = "rgba(255,182,72,0.4)";
+      for (let i = 0; i < 128; i += 8) { nctx.fillRect(i, 0, 2, 128); }
+      const noteTex = new THREE.CanvasTexture(noteCv);
+      const note = new THREE.Mesh(new THREE.PlaneGeometry(0.7, 0.7), new THREE.MeshStandardMaterial({ map: noteTex, roughness: 0.9 }));
+      note.position.set(-0.55, 0, 0.2);
+      ST.group.add(note);
+      setChips('<div class="chip" id="csChip" style="left:6%; top:80%">塗装範囲＝ハッチング</div>');
+      ST.setView(0, 0.08, 4.0);
+      let t2 = 0;
+      ST.sceneApi = { tick(dt) {
+        t2 += dt;
+        const cycle = t2 % 3;
+        const chip = $("csChip");
+        if (cycle < 1.5) {
+          faceHi.material.opacity = 0.15 + Math.sin(t2 * 5) * 0.1;
+          note.material.color.setHex(0xffffff);
+          if (chip) chip.textContent = "塗装範囲＝ハッチング";
+        } else {
+          faceHi.material.opacity = 0;
+          note.material.color.setHex(0xffb648);
+          if (chip) chip.textContent = "この面塗装禁止＝別注記";
+        }
+      } };
+    }
+  ]
+};
+
+function buildCardScene(id, i) {
+  if (!ST || ST.fake) return;
+  ST.clearScene();
+  ST.resetView();
+  const f = CARD_SCENES[id] && CARD_SCENES[id][i];
+  if (f) f(); else BUILDERS[id]();
+  requestAnimationFrame(() => ST.resize());
+}
+
+/* ================================================================
+   レッスンの流れ（phMission→phExp→phReveal→カード→phQuiz→phClear）
+================================================================ */
+let curIdx = 0, cur = null, missionPick = -1, cardIdx = 0, microActive = false;
+
+function openLesson(i) {
+  curIdx = i;
+  cur = LESSONS[i];
+  missionPick = -1;
+  microActive = false;
+  $("btnMicro").textContent = "🔬 膜の目";
+  $("phExp").classList.remove("micro-on");
+  showView("viewLesson");
+  $("lsTag").textContent = cur.tag;
+  $("lsTitle").textContent = cur.title;
+  $("msNo").innerHTML = cur.mission.no;
+  $("msQ").innerHTML = cur.mission.q;
+  const wrap = $("msOpts");
+  wrap.innerHTML = "";
+  cur.mission.opts.forEach((o, idx) => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.textContent = (idx + 1) + ". " + o;
+    b.addEventListener("click", () => { missionPick = idx; startExp(); });
+    wrap.appendChild(b);
+  });
+  setPhase("phMission");
+}
+
+function rebuildScene() {
+  if (!ST || ST.fake) return;
+  ST.clearScene();
+  $("loadRange").value = 0;
+  $("loadVal").textContent = cur.val(0);
+  setExtraHTML("");
+  BUILDERS[cur.id]();
+  onLoadInput();
+}
+
+function startExp() {
+  setPhase("phExp");
+  $("guessLine").textContent = "きみの予想：「" + cur.mission.opts[missionPick] + "」── 実験で確かめよう";
+  $("sliderLabel").textContent = cur.sliderLabel;
+  $("expLegend").innerHTML = cur.legend.map((x) => "<span>" + x + "</span>").join("");
+  $("expNote").innerHTML = cur.note;
+  setExtraHTML("");
+  $("loadRange").value = 0;
+  $("loadVal").textContent = cur.val(0);
+  microActive = false;
+  $("btnMicro").textContent = "🔬 膜の目";
+  $("phExp").classList.remove("micro-on");
+  const btn = $("btnToReveal");
+  btn.disabled = true;
+  ensureStage();
+  if (ST.fake) { btn.disabled = false; return; }
+  ST.clearScene();
+  ST.resetView();
+  BUILDERS[cur.id]();
+  ST.resize();
+}
+
+/* 🔬膜の目：実験3Dを塗膜断面のミクロ世界に丸ごと差し替えるトグル */
+$("btnMicro").addEventListener("click", () => {
+  if (!ST || ST.fake || !cur) return;
+  vib(10);
+  microActive = !microActive;
+  const btn = $("btnMicro");
+  if (microActive) {
+    btn.textContent = "🔬 実験にもどる";
+    $("phExp").classList.add("micro-on");
+    ST.clearScene();
+    ST.resetView();
+    buildMicroScene(cur.id);
+    ST.resize();
+  } else {
+    btn.textContent = "🔬 膜の目";
+    $("phExp").classList.remove("micro-on");
+    ST.clearScene();
+    ST.resetView();
+    BUILDERS[cur.id]();
+    onLoadInput();
+    ST.resize();
+  }
+});
+
+function onLoadInput() {
+  const v = +$("loadRange").value;
+  /* 鉄の掟6：val()もsceneApi.update()も同じ0〜1のvで統一する（スケール混同厳禁） */
+  $("loadVal").textContent = cur ? cur.val(v / 100) : v;
+  if (ST && !ST.fake && !microActive && ST.sceneApi && ST.sceneApi.update) ST.sceneApi.update(v / 100);
+  $("btnToReveal").disabled = false;
+}
+$("loadRange").addEventListener("input", onLoadInput);
+
+$("btnToReveal").addEventListener("click", () => {
+  microActive = false;
+  $("btnMicro").textContent = "🔬 膜の目";
+  $("phExp").classList.remove("micro-on");
+  const m = cur.mission;
+  const hit = missionPick === m.ans;
+  $("rvBanner").innerHTML = (hit ? "🎯 予想的中！" : "💡 実験で見えたね！") + "<small>こたえ：" + m.ansLine + "</small>";
+  cardIdx = 0;
+  setPhase("phReveal");
+  renderCard();
+});
+
+function renderCard() {
+  $("rvCard").innerHTML = "<div>" + cur.cards[cardIdx] + "</div>";
+  $("rvDots").innerHTML = cur.cards.map((_, i) => (i <= cardIdx ? "<span>●</span>" : "○")).join("");
+  $("btnCardNext").textContent = cardIdx < cur.cards.length - 1 ? "つぎ →" : "ミニクイズへ →";
+  buildCardScene(cur.id, cardIdx);
+}
+$("btnCardNext").addEventListener("click", () => {
+  if (cardIdx < cur.cards.length - 1) { cardIdx++; renderCard(); }
+  else startQuiz();
+});
+
+function startQuiz() {
+  setPhase("phQuiz");
+  const qz = cur.quiz;
+  $("qzQ").textContent = qz.q;
+  $("qzExp").style.display = "none";
+  $("btnQuizDone").style.display = "none";
+  const wrap = $("qzOpts");
+  wrap.innerHTML = "";
+  let answered = false;
+  qz.opts.forEach((o, idx) => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.textContent = (idx + 1) + ". " + o;
+    b.addEventListener("click", () => {
+      if (answered) return;
+      answered = true;
+      const correct = idx === qz.ans;
+      wrap.querySelectorAll(".opt").forEach((x, xi) => {
+        if (xi === qz.ans) x.classList.add("correct");
+        else if (xi === idx) x.classList.add("wrong");
+        else x.classList.add("dim");
+      });
+      $("qzExp").innerHTML = qz.exp;
+      $("qzExp").style.display = "block";
+      $("btnQuizDone").style.display = "block";
+      if (!correct) rqUpsert("quiz-" + cur.id, { type: "quiz", lessonId: cur.id });
+    });
+    wrap.appendChild(b);
+  });
+}
+
+$("btnQuizDone").addEventListener("click", () => {
+  progress.done[cur.id] = true;
+  bumpStreak();
+  saveProgress();
+  $("clearStamp").innerHTML = cur.tag + " CLEAR!<small>今朝の15分 完了</small>";
+  $("teaserBox").innerHTML = "🔮 <b>これが分かると…</b><br>" + (cur.teaser || "");
+  const s = progress.streak;
+  $("clearMsg").innerHTML = "🔥 " + s.n + "週れんぞく<br>" + (curIdx < LESSONS.length - 1 ? "次回：" + LESSONS[curIdx + 1].tag + " " + LESSONS[curIdx + 1].title : "次回：塗装係長の最終試験！");
+  setPhase("phClear");
+});
+
+$("btnGoHome").addEventListener("click", () => { renderHome(); showView("viewHome"); });
+$("btnBack").addEventListener("click", () => { renderHome(); showView("viewHome"); });
+
+/* ================================================================
+   ボス戦（塗装係長の最終試験・7問）
+================================================================ */
+let bIdx = 0, bScore = 0;
+function openBoss() {
+  bIdx = 0; bScore = 0;
+  showView("viewBoss");
+  $("bossPlay").style.display = "block";
+  $("bossResult").style.display = "none";
+  renderBossQ();
+}
+function renderBossQ() {
+  const q = BOSS[bIdx];
+  $("bsProgress").textContent = "第" + (bIdx + 1) + "問 ／ 7問中 ── 正解 " + bScore;
+  $("bsQ").textContent = q.q;
+  $("bsExp").style.display = "none";
+  $("btnBossNext").style.display = "none";
+  const wrap = $("bsOpts");
+  wrap.innerHTML = "";
+  let answered = false;
+  q.opts.forEach((o, idx) => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.textContent = (idx + 1) + ". " + o;
+    b.addEventListener("click", () => {
+      if (answered) return;
+      answered = true;
+      const correct = idx === q.ans;
+      if (correct) { bScore++; vib([16, 30, 10]); }
+      else rqUpsert("boss-" + bIdx, { type: "boss", idx: bIdx });
+      wrap.querySelectorAll(".opt").forEach((x, xi) => {
+        if (xi === q.ans) x.classList.add("correct");
+        else if (xi === idx) x.classList.add("wrong");
+        else x.classList.add("dim");
+      });
+      $("bsExp").innerHTML = q.exp;
+      $("bsExp").style.display = "block";
+      $("btnBossNext").style.display = "block";
+      $("btnBossNext").textContent = bIdx < BOSS.length - 1 ? "つぎ →" : "結果を見る →";
+    });
+    wrap.appendChild(b);
+  });
+}
+$("btnBossNext").addEventListener("click", () => {
+  if (bIdx < BOSS.length - 1) { bIdx++; renderBossQ(); }
+  else {
+    $("bossPlay").style.display = "none";
+    $("bossResult").style.display = "block";
+    $("bsScore").textContent = bScore + " / 7";
+    if (bScore >= 5) {
+      progress.done["l7"] = true;
+      bumpStreak();
+      saveProgress();
+      $("bsMsg").innerHTML = "🏆 塗装係長 認定！鏡面パネルが完成した✨<br>⚔ 判断ドリルが解放された！<br>第2章「粉体塗装と電着」は次のアップデートで配信。";
+    } else {
+      $("bsMsg").innerHTML = "あと少し！ 5問正解でクリア。<br>まちがえたレッスンを触り直してから再挑戦。";
+    }
+  }
+});
+$("btnBossHome").addEventListener("click", () => { renderHome(); showView("viewHome"); });
+$("btnBackB").addEventListener("click", () => { renderHome(); showView("viewHome"); });
+
+/* ================================================================
+   ⚔ 塗装設計判断ドリル（5問・OK/NG即断）
+================================================================ */
+let dSet = [], dIdx = 0, dScore = 0, dResults = [];
+function openDrill() {
+  dSet = pickDrillSet(5);
+  dIdx = 0; dScore = 0; dResults = [];
+  showView("viewDrill");
+  $("drillPlay").style.display = "block";
+  $("drillResult").style.display = "none";
+  renderDrillQ();
+}
+function renderDrillQ() {
+  const d = dSet[dIdx];
+  $("dqProgress").textContent = "第" + (dIdx + 1) + "問 ／ 5問中 ── 正解 " + dScore;
+  $("dqText").textContent = d.situation;
+  $("dqTag").textContent = "分野：" + d.tag;
+  $("dqExp").style.display = "none";
+  $("btnDrillNext").style.display = "none";
+  const okBtn = $("btnOK"), ngBtn = $("btnNG");
+  okBtn.className = ""; ngBtn.className = "";
+  okBtn.disabled = false; ngBtn.disabled = false;
+  let answered = false;
+  function pick(choice) {
+    if (answered) return;
+    answered = true;
+    okBtn.disabled = true; ngBtn.disabled = true;
+    const correct = choice === d.ans;
+    drillStats.seen[d.id] = true;
+    drillStats.totalCount = (drillStats.totalCount || 0) + 1;
+    if (correct) {
+      drillStats.correctCount = (drillStats.correctCount || 0) + 1;
+      drillStats.wrong[d.id] = 0;
+      dScore++;
+    } else {
+      drillStats.wrong[d.id] = (drillStats.wrong[d.id] || 0) + 1;
+      rqUpsert("drill-" + d.id, { type: "drill", drillId: d.id });
+    }
+    saveDrillStats();
+    dResults.push(correct);
+    const pickBtn = choice === "OK" ? okBtn : ngBtn;
+    const otherBtn = choice === "OK" ? ngBtn : okBtn;
+    pickBtn.classList.add(correct ? "correct" : "wrong");
+    if (d.ans !== choice) {
+      (d.ans === "OK" ? okBtn : ngBtn).classList.add("correct");
+    }
+    otherBtn.classList.add("dim");
+    $("dqExp").innerHTML = "<b>正解：" + d.ans + "</b><br>" + d.reason + "<br>" + d.fix;
+    $("dqExp").style.display = "block";
+    $("btnDrillNext").style.display = "block";
+    $("btnDrillNext").textContent = dIdx < dSet.length - 1 ? "つぎ →" : "結果を見る →";
+    vib(correct ? [20, 20, 40] : 30);
+  }
+  okBtn.onclick = () => pick("OK");
+  ngBtn.onclick = () => pick("NG");
+}
+$("btnDrillNext").addEventListener("click", () => {
+  if (dIdx < dSet.length - 1) { dIdx++; renderDrillQ(); }
+  else {
+    $("drillPlay").style.display = "none";
+    $("drillResult").style.display = "block";
+    $("dResultScore").textContent = dScore + " / 5";
+    $("dResultRow").innerHTML = dResults.map((r) => '<span class="' + (r ? "o" : "x") + '">' + (r ? "○" : "×") + "</span>").join("");
+    const tagCount = {};
+    Object.keys(drillStats.wrong).forEach((id) => {
+      if (drillStats.wrong[id] > 0) {
+        const d = DRILLS.find((x) => x.id === id);
+        if (d) { const t = d.tag.split("(")[0]; tagCount[t] = (tagCount[t] || 0) + drillStats.wrong[id]; }
+      }
+    });
+    const weakSorted = Object.keys(tagCount).sort((a, b) => tagCount[b] - tagCount[a]);
+    const total = drillStats.totalCount || 1;
+    const rate = Math.round(((drillStats.correctCount || 0) / total) * 100);
+    $("dWeak").innerHTML = "通算正答率 <b>" + rate + "%</b>（" + (drillStats.correctCount || 0) + "/" + total + "問）<br>" +
+      (weakSorted.length ? "弱点分野：<b>" + weakSorted.slice(0, 2).join("・") + "</b>（復習キューに登録済み）" : "まだ弱点なし。いいペース！");
+  }
+});
+$("btnDrillResultHome").addEventListener("click", () => { renderHome(); showView("viewHome"); });
+$("btnBackD").addEventListener("click", () => { renderHome(); showView("viewHome"); });
+
+/* ================================================================
+   ⚡ 復習キュー（間隔反復・上限5問）
+================================================================ */
+let rqSet = [], rqIdx = 0, rqScore = 0;
+function openReview() {
+  rqSet = rqDueList().map((item) => ({ item, q: rqResolveQuestion(item) })).filter((x) => x.q);
+  if (!rqSet.length) { renderHome(); showView("viewHome"); return; }
+  rqIdx = 0; rqScore = 0;
+  showView("viewReview");
+  $("reviewPlay").style.display = "block";
+  $("reviewResult").style.display = "none";
+  renderRQQ();
+}
+function renderRQQ() {
+  const { item, q } = rqSet[rqIdx];
+  $("rqProgress").textContent = "第" + (rqIdx + 1) + "問 ／ " + rqSet.length + "問中（忘れかけた頃の再登場）";
+  $("rqText").textContent = q.q;
+  $("rqExp").style.display = "none";
+  $("btnRQNext").style.display = "none";
+  const wrap = $("rqOpts");
+  wrap.innerHTML = "";
+  let answered = false;
+  q.opts.forEach((o, idx) => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.textContent = q.drill ? o : (idx + 1) + ". " + o;
+    b.addEventListener("click", () => {
+      if (answered) return;
+      answered = true;
+      const correct = idx === q.ans;
+      if (correct) rqScore++;
+      rqAnswer(item, correct);
+      wrap.querySelectorAll(".opt").forEach((x, xi) => {
+        if (xi === q.ans) x.classList.add("correct");
+        else if (xi === idx) x.classList.add("wrong");
+        else x.classList.add("dim");
+      });
+      $("rqExp").innerHTML = q.exp;
+      $("rqExp").style.display = "block";
+      $("btnRQNext").style.display = "block";
+      $("btnRQNext").textContent = rqIdx < rqSet.length - 1 ? "つぎ →" : "結果を見る →";
+    });
+    wrap.appendChild(b);
+  });
+}
+$("btnRQNext").addEventListener("click", () => {
+  if (rqIdx < rqSet.length - 1) { rqIdx++; renderRQQ(); }
+  else {
+    $("reviewPlay").style.display = "none";
+    $("reviewResult").style.display = "block";
+    $("rqResultScore").textContent = rqScore + " / " + rqSet.length;
+    bumpStreak();
+    saveProgress();
+  }
+});
+$("btnRQHome").addEventListener("click", () => { renderHome(); showView("viewHome"); });
+$("btnBackRQ").addEventListener("click", () => { renderHome(); showView("viewHome"); });
+
+/* ================================================================
+   🛣 塗装街道マスターマップ（Stage1=本作／Stage2〜4=次章予告＋兄弟5アプリ）
+================================================================ */
+const MASTER_MAP = [
+  { stage: "Stage1", desc: "第1章（本作・現在地）" },
+  { stage: "Stage2", desc: "第2章 粉体塗装と電着（ラインの世界）" },
+  { stage: "Stage3", desc: "第3章 重防食と高機能塗装" },
+  { stage: "Stage4", desc: "第4章 外観品質と検査のプロ" }
+];
+function renderMap() {
+  const wrap = $("mapStage");
+  wrap.innerHTML = "";
+  MASTER_MAP.forEach((st, si) => {
+    const box = document.createElement("div");
+    box.className = "mapstagebox" + (si === 0 ? " current" : "");
+    const pin = si === 0 ? '<span class="mspin">📍現在地</span>' : "";
+    box.innerHTML = '<div class="msTitle">' + st.stage + " " + pin + '</div><div class="msDesc">' + st.desc + "</div>";
+    const chapsWrap = document.createElement("div");
+    chapsWrap.className = "mapchaps";
+    if (si === 0) {
+      const labels = LESSONS.map((L) => L.tag + " " + L.label).concat(["L7 ボス"]);
+      labels.forEach((lb, i) => {
+        const chip = document.createElement("span");
+        const id = PROG_KEYS[i];
+        const done = !!progress.done[id];
+        const now = !done && lessonState(i) === "now";
+        chip.className = "mapchap" + (done ? " done" : now ? " now" : "");
+        chip.textContent = (done ? "✓ " : "") + lb;
+        chapsWrap.appendChild(chip);
+      });
+    } else {
+      const chip = document.createElement("span");
+      chip.className = "mapchap";
+      chip.textContent = "🔒 次のアップデートで配信";
+      chapsWrap.appendChild(chip);
+    }
+    box.appendChild(chapsWrap);
+    wrap.appendChild(box);
+  });
+}
+$("btnMapHome").addEventListener("click", () => { renderMap(); showView("viewMap"); });
+$("btnBackMap").addEventListener("click", () => { renderHome(); showView("viewHome"); });
+$("btnDrillHome").addEventListener("click", openDrill);
+
+/* ================================================================
+   起動
+================================================================ */
+renderHome();
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,19 @@
+{
+  "name": "COAT FORGE ── 塗装 朝15分道場",
+  "short_name": "COAT",
+  "description": "触って選んで覚える、塗装の3D教科書",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#15181d",
+  "theme_color": "#15181d",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxOTIgMTkyJz48cmVjdCB3aWR0aD0nMTkyJyBoZWlnaHQ9JzE5Micgcng9JzM2JyBmaWxsPScjMTUxODFkJy8+PHJlY3QgeD0nNzgnIHk9JzU0JyB3aWR0aD0nMzYnIGhlaWdodD0nOTInIHJ4PSc4JyBmaWxsPScjM2EzZTQ1JyBzdHJva2U9JyM4YThmOTYnIHN0cm9rZS13aWR0aD0nMycvPjxyZWN0IHg9Jzg2JyB5PSc0MCcgd2lkdGg9JzIwJyBoZWlnaHQ9JzE4JyByeD0nNCcgZmlsbD0nIzhhOGY5NicvPjxyZWN0IHg9JzkyJyB5PScyNCcgd2lkdGg9JzgnIGhlaWdodD0nMTgnIHJ4PSczJyBmaWxsPScjNThjOGQ4Jy8+PGNpcmNsZSBjeD0nOTYnIGN5PScxNTAnIHI9JzQnIGZpbGw9JyNmZmI2NDgnLz48Y2lyY2xlIGN4PScxNDAnIGN5PSc3MCcgcj0nNicgZmlsbD0nIzU4YzhkOCcgb3BhY2l0eT0nMC44NScvPjxjaXJjbGUgY3g9JzE1MicgY3k9JzkwJyByPSc0JyBmaWxsPScjNThjOGQ4JyBvcGFjaXR5PScwLjY1Jy8+PGNpcmNsZSBjeD0nMTQ2JyBjeT0nMTEyJyByPSc1JyBmaWxsPScjZmZiNjQ4JyBvcGFjaXR5PScwLjcnLz48Y2lyY2xlIGN4PScxNjAnIGN5PSc2MCcgcj0nMycgZmlsbD0nIzU4YzhkOCcgb3BhY2l0eT0nMC41Jy8+PC9zdmc+Cg==",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
